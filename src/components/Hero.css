@@ -62,16 +62,16 @@
 
 .hero-description {
   font-size: 1.5rem;
-  color: #fff;
+  color: #080808;
   margin-top: 20px;
   opacity: 0;
   transition: opacity 1s ease-in-out;
   z-index: 2;
   position: absolute;
-  top: 60%;
+  top: 50px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
 }
 
 .hero-description.visible {

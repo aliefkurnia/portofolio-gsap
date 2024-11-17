@@ -15,22 +15,21 @@ const Gallery = () => {
     const scrollText = scrollTextRef.current;
     const initialText = initialTextRef.current;
 
-    const Width = 6000;
-    const horizontalScrollLength = Width - window.innerWidth;
+    const textWidth = scrollText.offsetWidth;
+    const scrollLength = 10000;
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: scrollTextWrapper,
-        start: "top",
-        end: Width,
+        start: "top top",
+        end: scrollLength,
         pin: true,
-        scrub: 0.5,
+        scrub: 1,
         invalidateOnRefresh: true,
       },
     });
 
-    tl.set(scrollText, { x: horizontalScrollLength });
-    tl.to(scrollText, { ease: "Power2.out", scale: 1, x: 0 });
+    tl.to(scrollText, { x: -scrollLength, ease: "Power2.out" });
 
     gsap.fromTo(
       initialText,
@@ -55,21 +54,19 @@ const Gallery = () => {
     <>
       <div className="scrollText-wrapper" ref={scrollTextWrapperRef}>
         <div className="initial-text" ref={initialTextRef}>
-          <h1>Welcome to the Horizontal Scroll Experience!</h1>
+          <h1>Overview</h1>
         </div>
 
         <div className="scroll-text" ref={scrollTextRef}>
-          <h1>This</h1>
-          <h1>is</h1>
-          <h1>an</h1>
-          <h1>example</h1>
-          <h1>of</h1>
-          <h1>horizontal</h1>
-          <h1>scroll</h1>
-          <h1>In</h1>
-          <h1>Gsap</h1>
-          <h1>using</h1>
-          <h1>scrollTrigger.</h1>
+          <h1>I'm a web developer</h1>
+          <h1>with nearly two years of experience</h1>
+          <h1>in .NET Core and JavaScript frameworks</h1>
+          <h1>like React.js and Express.js.</h1>
+          <h1>Passionate about solving complex problems,</h1>
+          <h1>I'm currently exploring Three.js</h1>
+          <h1>to expand my skills.</h1>
+          <h1>Eager to collaborate on innovative projects</h1>
+          <h1>and bring creative ideas to life.</h1>
         </div>
       </div>
     </>

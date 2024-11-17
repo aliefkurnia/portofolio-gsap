@@ -1,6 +1,5 @@
 .scrollText-wrapper {
   width: 100%;
-  overflow: hidden;
   align-items: center;
   justify-items: center;
   padding-top: 100px;
@@ -10,12 +9,11 @@
   display: flex;
   flex-wrap: nowrap;
   white-space: nowrap;
-  width: max-content;
   gap: 15px;
 }
 
 .scroll-text h1 {
-  font-size: 3rem;
+  font-size: 9rem;
   white-space: nowrap;
 }
 

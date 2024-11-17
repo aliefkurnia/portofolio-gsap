@@ -28,7 +28,7 @@ const Hero = ({ showHero }) => {
       const scrambleTimer = setTimeout(() => {
         setShowScramble(true);
         setScrambledText("Muchammad Alief Kurnia Wijaya");
-      }, 1000);
+      }, 1200);
 
       const replayTimer = setTimeout(() => {
         if (!hasReplayed) {
@@ -39,7 +39,7 @@ const Hero = ({ showHero }) => {
       const descriptionTimer = setTimeout(() => {
         setShowDescription(true);
         setShowImage(true);
-      }, 3000);
+      }, 3500);
 
       return () => {
         clearTimeout(scrambleTimer);
