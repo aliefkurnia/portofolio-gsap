@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import Gallery from "./components/Gallery";
+import Overview from "./components/Overview";
 import Footer from "./components/Footer";
 import Loader from "./components/Loader";
 import ScrollProgressBar from "./components/ScrollProgressBar";
@@ -31,7 +31,7 @@ function App() {
       <div className={`hero-wrapper ${showHero ? "open-curtain" : ""}`}>
         <Hero showHero={showHero} />
       </div>
-      <Gallery />
+      <Overview />
       <Footer />
     </div>
   );

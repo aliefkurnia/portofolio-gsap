@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import "./Gallery.css";
+import "./Overview.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Gallery = () => {
+const Overview = () => {
   const scrollTextWrapperRef = useRef(null);
   const scrollTextRef = useRef(null);
   const initialTextRef = useRef(null);
@@ -15,7 +15,7 @@ const Gallery = () => {
     const scrollText = scrollTextRef.current;
     const initialText = initialTextRef.current;
 
-    const textWidth = scrollText.offsetWidth;
+    // const textWidth = scrollText.offsetWidth;
     const scrollLength = 10000;
 
     const tl = gsap.timeline({
@@ -73,4 +73,4 @@ const Gallery = () => {
   );
 };
 
-export default Gallery;
+export default Overview;

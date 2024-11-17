@@ -6,24 +6,6 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-content">
         <p>© 2024 Your Company Name. All Rights Reserved.</p>
-        <p>
-          Follow us on:{" "}
-          <a
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Twitter
-          </a>{" "}
-          |{" "}
-          <a
-            href="https://facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Facebook
-          </a>
-        </p>
       </div>
     </footer>
   );
