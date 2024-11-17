@@ -10,6 +10,7 @@ import "./App.css";
 function App() {
   const [loading, setLoading] = useState(true);
   const [showHero, setShowHero] = useState(false);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
@@ -28,8 +29,8 @@ function App() {
       <ScrollProgressBar />
       <Navbar />
       <div className={`hero-wrapper ${showHero ? "open-curtain" : ""}`}>
-        <Hero />
-      </div>{" "}
+        <Hero showHero={showHero} />
+      </div>
       <Gallery />
       <Footer />
     </div>

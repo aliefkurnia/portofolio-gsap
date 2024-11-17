@@ -8,7 +8,7 @@
 
 .open-curtain {
   transform: translateY(100%);
-  animation: openCurtain 2s forwards ease-out;
+  animation: openCurtain 1.5s forwards ease-in-out;
 }
 
 @keyframes openCurtain {
@@ -23,5 +23,5 @@
 .hero {
   height: 100vh;
   width: 100%;
-  background-color: #f0f0f0;
+  background-color: #d1d1d1;
 }
