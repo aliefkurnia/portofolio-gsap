@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import Gallery from "./components/Gallery";
+import Footer from "./components/Footer";
+import Loader from "./components/Loader";
+import ScrollProgressBar from "./components/ScrollProgressBar";
+import "./App.css";
 
 function App() {
+  const [loading, setLoading] = useState(true);
+  const [showHero, setShowHero] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+      setShowHero(true);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ScrollProgressBar />
+      <Navbar />
+      <div className={`hero-wrapper ${showHero ? "open-curtain" : ""}`}>
+        <Hero />
+      </div>{" "}
+      <Gallery />
+      <Footer />
     </div>
   );
 }

@@ -1,0 +1,30 @@
+.scrollText-wrapper {
+  width: 100%;
+  overflow: hidden;
+  align-items: center;
+  justify-items: center;
+  padding-top: 100px;
+}
+
+.scroll-text {
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  width: max-content;
+  gap: 15px;
+}
+
+.scroll-text h1 {
+  font-size: 3rem;
+  white-space: nowrap;
+}
+
+.initial-text {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
+
+.initial-text h1 {
+  font-size: 5rem;
+  margin: 20px;
+}
