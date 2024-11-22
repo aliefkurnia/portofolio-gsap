@@ -13,9 +13,11 @@
 }
 
 .scroll-text h1 {
-  font-size: 9rem;
+  font-size: 8rem;
   white-space: nowrap;
   margin-bottom: 10vw;
+  user-select: none; 
+
 }
 
 .initial-text {

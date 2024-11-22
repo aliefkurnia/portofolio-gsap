@@ -61,7 +61,7 @@ const Overview = ({ userName }) => {
   return (
     <div className="scrollText-wrapper" ref={scrollTextWrapperRef}>
       <div className="initial-text" ref={initialTextRef}>
-        <h1>Hello, {userName ? userName : "anonimous"}👋</h1>
+        <h1><i>Hello</i>, {userName ? userName : "anonimous"}👋</h1>
       </div>
 
       <div className="scroll-text" ref={scrollTextRef}>

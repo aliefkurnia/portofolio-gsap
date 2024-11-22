@@ -28,8 +28,8 @@ const Hero = ({ showHero }) => {
     if (showHero) {
       const scrambleTimer = setTimeout(() => {
         setShowScramble(true);
-        setScrambledText("Muchammad Alief Kurnia Wijaya");
-      }, 1200);
+        setScrambledText("alief kurnia");
+      }, 500);
 
       const replayTimer = setTimeout(() => {
         if (!hasReplayed) {
@@ -40,7 +40,7 @@ const Hero = ({ showHero }) => {
       const descriptionTimer = setTimeout(() => {
         setShowDescription(true);
         setShowImage(true);
-      }, 3500);
+      }, 1500);
 
       return () => {
         clearTimeout(scrambleTimer);
@@ -56,7 +56,7 @@ const Hero = ({ showHero }) => {
         {showImage && (
           <img
             src={require("./Assets/alief.png")}
-            alt="Muchammad Alief Kurnia Wijaya"
+            alt="alip"
             className={`hero-image ${showImage ? "visible" : ""}`}
           />
         )}
