@@ -16,14 +16,15 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(true);
 
   useEffect(() => {
+    // Mengatur overflow body berdasarkan status modal
     if (isModalOpen) {
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = "";
     }
 
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = "";
     };
   }, [isModalOpen]);
 
@@ -56,7 +57,7 @@ function App() {
       {isModalOpen && <NameInputModal onSubmit={handleNameSubmit} />}
 
       <Overview userName={userName} />
-      <Works/>
+      <Works />
       <Footer />
     </div>
   );
