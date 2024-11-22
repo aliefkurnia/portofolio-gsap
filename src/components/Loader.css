@@ -13,14 +13,14 @@
 }
 
 .loader-image {
-  width: 125px;
-  height: 150px;
-  margin-bottom: 20px;
+  width: 15vw;
+  height: 20vh;
+  margin-bottom: 5vh;
 }
 
 .loader-bar {
-  width: 10%;
-  height: 10px;
+  width: 20%;
+  height: 1vw;
   background-color: #e0e0e0;
   border-radius: 5px;
   overflow: hidden;
@@ -34,4 +34,28 @@
   background-color: #000000;
   border-radius: 5px;
   transition: width 0.5s ease-out;
+}
+
+@media (max-width: 768px) {
+  .loader-image {
+    width: 25vw;
+    height: 25vh;
+  }
+
+  .loader-bar {
+    width: 20%;
+    height: 1vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .loader-image {
+    width: 50vw;
+    height: 30vh;
+  }
+
+  .loader-bar {
+    width: 60%;
+    height: 4vw;
+  }
 }

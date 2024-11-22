@@ -6,6 +6,7 @@
   background-color: #000000;
   overflow: hidden;
   position: relative;
+  padding: 0 20px;
 }
 
 .hero-content {
@@ -19,20 +20,17 @@
 }
 
 .hero-image {
-  width: 300px;
-  height: 300px;
+  width: 30vw;
+  height: 30vw;
+  max-width: 300px;
+  max-height: 300px;
   border-radius: 40%;
   opacity: 0;
   transform: scale(0.9);
   transition: opacity 1s ease-in-out, transform 1s ease-in-out;
   z-index: 2;
   position: absolute;
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.3
-  ); /* Menambahkan background transparan pada gambar */
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .hero-image.visible {
@@ -41,7 +39,7 @@
 }
 
 .hero-title {
-  font-size: 10rem;
+  font-size: 10vw;
   color: #fff;
   margin: 0;
   font-family: "Poppins", sans-serif;
@@ -52,7 +50,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -58%);
   z-index: 1;
 }
 
@@ -61,7 +59,7 @@
 }
 
 .hero-description {
-  font-size: 1.5rem;
+  font-size: 3vw;
   color: #080808;
   margin-top: 20px;
   opacity: 0;
@@ -76,4 +74,41 @@
 
 .hero-description.visible {
   opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .hero-container {
+    height: auto;
+    padding: 0 10px;
+  }
+
+  .hero-title {
+    font-size: 15vw;
+  }
+
+  .hero-description {
+    font-size: 4vw;
+  }
+
+  .hero-image {
+    width: 40vw;
+    height: 40vw;
+    max-width: 250px;
+    max-height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 20vw;
+  }
+
+  .hero-description {
+    font-size: 5vw;
+  }
+
+  .hero-image {
+    width: 50vw;
+    height: 50vw;
+  }
 }
