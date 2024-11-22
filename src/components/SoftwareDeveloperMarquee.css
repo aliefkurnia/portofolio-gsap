@@ -40,4 +40,5 @@
   display: inline-block;
   z-index: 1;
   font-weight: 600;
+  user-select: none;
 }

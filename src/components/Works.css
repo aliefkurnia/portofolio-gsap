@@ -37,7 +37,7 @@
   min-width: 300px;
   max-width: 800px;
   flex-shrink: 0;
-  height: 300px; /* Menetapkan tinggi yang sama untuk setiap card */
+  height: 300px;
   width: 800px;
   justify-content: flex-start;
   align-items: center;
@@ -112,7 +112,7 @@
     padding: 15px;
     flex-direction: column;
     align-items: center;
-    height: auto; /* Pada layar kecil, beri kebebasan tinggi */
+    height: auto;
   }
 
   .experience-header {

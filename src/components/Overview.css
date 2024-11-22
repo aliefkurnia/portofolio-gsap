@@ -29,6 +29,7 @@
   margin: 20px;
   margin-left: 5vw;
   font-weight: 500;
+  user-select: none;
 }
 .initial-text h1 i {
   font-weight: 300;
