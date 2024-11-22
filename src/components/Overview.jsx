@@ -65,7 +65,7 @@ const Overview = ({ userName }) => {
       </div>
 
       <div className="scroll-text" ref={scrollTextRef}>
-        <h1>Welcome to My Portfolio, </h1>
+        <h1>Welcome to My Portfolio {userName}, </h1>
         <h1>Explore My Work and Projects, </h1>
         <h1>Let's Create Something Amazing!</h1>
       </div>

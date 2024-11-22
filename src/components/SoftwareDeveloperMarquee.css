@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+
+body {
+  font-family: 'Archivo Black', sans-serif;
+  margin: 0;
+}
+
+section {
+  display: block;
+}
+
+.cb-tagreel {
+  position: relative;
+}
+
+.cb-tagreel-content {
+  padding: 200px 0;
+}
+
+.cb-tagreel-items {
+  margin: -58px 0;
+  overflow: hidden;
+  cursor: default;
+}
+
+.cb-tagreel-row {
+  display: flex;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.cb-tagreel-item {
+  position: relative;
+  line-height: 100%;
+  font-size: 3.75vw;
+  flex: 0 0 33%;
+  padding: 58px 0;
+  text-transform: uppercase;
+}
+
+.cb-tagreel-item.-stroke {
+  color: transparent;
+  text-shadow: none;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.258);
+}
+
+.cb-tagreel-item span {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+}

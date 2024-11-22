@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Hero.css";
 import { useScramble } from "use-scramble";
+import SoftwareDeveloperMarquee from "./SoftwareDeveloperMarquee";
 
 const Hero = ({ showHero }) => {
   const [showScramble, setShowScramble] = useState(false);
@@ -66,10 +67,9 @@ const Hero = ({ showHero }) => {
           ></p>
         )}
         {showDescription && (
-          <p className={`hero-description ${showDescription ? "visible" : ""}`}>
-            Software Developer
-          </p>
+<SoftwareDeveloperMarquee/>
         )}
+
       </div>
     </div>
   );

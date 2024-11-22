@@ -8,6 +8,8 @@
   flex-wrap: nowrap;
   white-space: nowrap;
   gap: 15px;
+  margin-left: 5vw;
+
 }
 
 .scroll-text h1 {
@@ -25,4 +27,6 @@
   font-size: 3rem;
   padding-top: 40px;
   margin: 20px;
+  margin-left: 5vw;
+
 }

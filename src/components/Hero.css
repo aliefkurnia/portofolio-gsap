@@ -22,8 +22,9 @@
 .hero-image {
   width: 30vw;
   height: 30vw;
-  max-width: 300px;
-  max-height: 300px;
+  max-width: 240px;
+  max-height: 240px;
+  top: 10%;
   border-radius: 40%;
   opacity: 0;
   transform: scale(0.9);
@@ -52,6 +53,7 @@
   left: 50%;
   transform: translate(-50%, -58%);
   z-index: 1;
+  line-height: 2.7;
 }
 
 .hero-title.visible {
@@ -110,5 +112,36 @@
   .hero-image {
     width: 50vw;
     height: 50vw;
+  }
+}
+
+.hero-marquee {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  color: #fff;
+  font-size: 2rem;
+  text-transform: uppercase;
+  padding: 0 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+
+}
+
+.hero-marquee p {
+  display: inline-block;
+  animation: marquee 15s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
   }
 }
