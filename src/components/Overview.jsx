@@ -13,12 +13,10 @@ const Overview = ({ userName }) => {
 
   useEffect(() => {
     const updateScrollLength = () => {
-      // Calculate total width of all <h1> elements
       const totalWidth = Array.from(scrollTextRef.current.children).reduce(
         (acc, child) => acc + child.offsetWidth,
         0
       );
-      console.log(totalWidth); // Log to check the total width calculation
       setScrollLength(totalWidth);
     };
 
@@ -29,7 +27,7 @@ const Overview = ({ userName }) => {
       scrollTrigger: {
         trigger: scrollTextWrapperRef.current,
         start: "top top",
-        end: `+=${scrollLength}`, // Set end based on scrollLength
+        end: `+=${scrollLength}`,
         pin: true,
         scrub: 1,
         invalidateOnRefresh: true,
@@ -61,13 +59,20 @@ const Overview = ({ userName }) => {
   return (
     <div className="scrollText-wrapper" ref={scrollTextWrapperRef}>
       <div className="initial-text" ref={initialTextRef}>
-        <h1><i>Hello</i>, {userName ? userName : "anonimous"}👋</h1>
+        <h1>
+          <i>Hello</i>,{" "}
+          <span className="userName">{userName ? userName : "anonimous"}</span>
+          👋
+        </h1>
       </div>
 
       <div className="scroll-text" ref={scrollTextRef}>
-        <h1>Welcome to My Portfolio {userName}, </h1>
+        <h1>
+          Welcome to My Portfolio{" "}
+          <span className="userName">{userName ? userName : "anonimous"}</span>,{" "}
+        </h1>
         <h1>Explore My Work and Projects, </h1>
-        <h1>Let's Create Something Amazing!</h1>
+        <h1>Let's Create Something Amazing ✨!</h1>
       </div>
     </div>
   );

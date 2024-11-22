@@ -9,15 +9,13 @@
   white-space: nowrap;
   gap: 15px;
   margin-left: 5vw;
-
 }
 
 .scroll-text h1 {
   font-size: 8rem;
   white-space: nowrap;
   margin-bottom: 10vw;
-  user-select: none; 
-
+  user-select: none;
 }
 
 .initial-text {
@@ -27,8 +25,14 @@
 
 .initial-text h1 {
   font-size: 3rem;
-  padding-top: 40px;
+  padding-top: 10vw;
   margin: 20px;
   margin-left: 5vw;
-
+  font-weight: 500;
+}
+.initial-text h1 i {
+  font-weight: 300;
+}
+.userName {
+  color: rgb(72, 117, 201);
 }

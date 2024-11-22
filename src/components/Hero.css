@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 93vh;
+  height: 99vh;
   background-color: #000000;
   overflow: hidden;
   position: relative;
@@ -54,9 +54,9 @@
 .hero-image:hover {
   filter: grayscale(0);
 }
-
-.hero-title {
-  font-size: 5vw;
+.hero-title,
+.hero-title1 {
+  font-size: 6vw;
   color: #fff;
   margin: 0;
   font-family: "Poppins", sans-serif;
@@ -65,43 +65,27 @@
   opacity: 0;
   transition: opacity 1s ease-in-out;
   position: absolute;
-  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
   line-height: 2.7;
-  gap: 30px;
   user-select: none;
   white-space: nowrap;
 }
 
-.hero-title.visible {
-  opacity: 1;
+.hero-title {
+  top: 30%;
 }
 
 .hero-title1 {
-  font-size: 5vw;
-  color: #fff;
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-  letter-spacing: 2px;
-  font-weight: bold;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-  position: absolute;
   top: 70%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  line-height: 2.7;
-  gap: 30px;
-  user-select: none;
-  white-space: nowrap;
 }
 
+.hero-title.visible,
 .hero-title1.visible {
   opacity: 1;
 }
+
 .hero-marquee {
   position: absolute;
   bottom: 10px;

@@ -98,25 +98,16 @@ const technologies = [
 
 const experiences = [
   {
-    title: "Graphic Designer",
-    company_name: "PT.Bifarma Adiluhung (Kalbe)",
-    icon: bifarma,
+    title: "Software Developer",
+    company_name: "PT.Realta Chakradharma",
+    icon: realta,
     iconBg: "#ffffff",
-    date: "Aug 2021 - Jan 2022",
+    date: "May 2023 - Present",
     points: [
-      "Poster, banner, flyer design for social media.",
-      "Edit video for product branding.",
-      "Responsible for making the genme.id website in terms of design and UI/UX.",
-    ],
-  },
-  {
-    title: "Student of Fresh Graduate Academy - Machine Learning Developer",
-    company_name: "Digital Talent Scholarship",
-    icon: digitalent,
-    iconBg: "#ffffff",
-    date: "Oct 2022 - Dec 2022",
-    points: [
-      "I have developed skills in programming and machine learning, including Python application development, image classification with CNNs, and NLP models with TensorFlow. I excel at understanding problems and designing solutions using machine learning and deep learning to achieve effective results.",
+      "Developing enterprise software solutions with C#, .NET Core, and SQL Server.",
+      "Building responsive front-end applications using Blazor and WASM.",
+      "Utilizing Docker and Kubernetes for containerization and orchestration.",
+      "Collaborating with teams to integrate cutting-edge technology.",
     ],
   },
   {
@@ -126,23 +117,35 @@ const experiences = [
     iconBg: "#ffffff",
     date: "Nov 2022 - Apr 2023",
     points: [
-      "Developing and maintaining the master module of the Hotel Realta project, ensuring seamless integration and coordination between various sub-modules.",
-      "Collaborating with cross-functional teams including backend developers, designers, and project managers to deliver a cohesive and efficient solution.",
-      "Implementing backend functionality using C# and SQL Server, focusing on data integrity and performance optimization.",
-      "Creating responsive and interactive front-end interfaces with Blazor, enhancing user experience across different devices.",
+      "Developed and maintained the master module of the Hotel Realta project.",
+      "Collaborated with cross-functional teams for seamless integration.",
+      "Implemented backend functionality with C# and SQL Server.",
+      "Created responsive front-end interfaces using Blazor.",
     ],
   },
   {
-    title: "Software Developer",
-    company_name: "PT.Realta Chakradharma",
-    icon: realta,
+    title: "Machine Learning Developer",
+    company_name:
+      "Student of Fresh Graduate Academy - Digital Talent Scholarship",
+    icon: digitalent,
     iconBg: "#ffffff",
-    date: "May 2023 - Present",
+    date: "Oct 2022 - Dec 2022",
     points: [
-      "Developing and enhancing enterprise-level software solutions using C#, .NET Core, and SQL Server, catering to a wide range of industries across Southeast Asia and Japan.",
-      "Building and maintaining responsive front-end applications with Blazor and WebAssembly (WASM), ensuring high performance and user-friendly interfaces.",
-      "Utilizing Docker and Kubernetes for containerization and orchestration, streamlining the deployment and management of scalable applications.",
-      "Collaborating with cross-functional teams to integrate the latest technology trends, ensuring that solutions remain cutting-edge and aligned with industry best practices.",
+      "Developed skills in Python programming and machine learning.",
+      "Worked on image classification using CNNs.",
+      "Designed NLP models with TensorFlow for real-world applications.",
+    ],
+  },
+  {
+    title: "Graphic Designer",
+    company_name: "PT.Bifarma Adiluhung (Kalbe)",
+    icon: bifarma,
+    iconBg: "#ffffff",
+    date: "Aug 2021 - Jan 2022",
+    points: [
+      "Design posters, banners, and flyers for social media.",
+      "Edit videos for product branding.",
+      "Responsible for UI/UX design of the genme.id website.",
     ],
   },
 ];

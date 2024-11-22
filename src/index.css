@@ -1,12 +1,11 @@
 body {
   background-color: #d1d1d1;
   margin: 0;
-  font-family: "Poppins", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Poppins";
+
   overflow-x: hidden;
 }
 
 code {
-  font-family: "Poppins", monospace;
+  font-family: "Poppins";
 }

@@ -1,14 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
-
-body {
-  font-family: 'Archivo Black', sans-serif;
-  margin: 0;
-}
-
-section {
-  display: block;
-}
-
 .cb-tagreel {
   position: relative;
 }
@@ -43,11 +32,12 @@ section {
 .cb-tagreel-item.-stroke {
   color: transparent;
   text-shadow: none;
-  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.258);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.258);
 }
 
 .cb-tagreel-item span {
   position: relative;
   display: inline-block;
   z-index: 1;
+  font-weight: 600;
 }
