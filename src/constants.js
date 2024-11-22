@@ -23,7 +23,7 @@ import {
   cariin,
   bookingin,
   bookshelf,
-} from "../Assets";
+} from "./components/Assets";
 
 const services = [
   {

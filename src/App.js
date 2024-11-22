@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Loader from "./components/Loader";
 import ScrollProgressBar from "./components/ScrollProgressBar";
 import NameInputModal from "./components/NameInputModal";
+import Works from "./components/Works";
 import "./App.css";
 
 function App() {
@@ -30,7 +31,7 @@ function App() {
     const timer = setTimeout(() => {
       setLoading(false);
       setShowHero(true);
-    }, 2000);
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -55,6 +56,7 @@ function App() {
       {isModalOpen && <NameInputModal onSubmit={handleNameSubmit} />}
 
       <Overview userName={userName} />
+      <Works/>
       <Footer />
     </div>
   );

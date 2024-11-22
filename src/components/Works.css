@@ -1,0 +1,128 @@
+/* Container for the whole works section */
+.works-container {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  /* Header for the Experiences section */
+  .experiences h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  /* Grid or flex layout for experience items */
+  .experience-item {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out; /* Smooth transition for hover effect */
+  }
+  
+  /* Hover effect for experience item */
+  .experience-item:hover {
+    transform: translateY(-5px); /* Slightly lift the item on hover */
+  }
+  
+  /* Header inside each experience item */
+  .experience-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .experience-header img {
+width: 10px;
+height: 10px;
+}
+  
+  /* Experience icon (company logo or icon) */
+  .experience-icon {
+    width: 10px;
+    height: 10px;
+    object-fit: contain;
+    border-radius: 50%;
+  }
+  
+  /* Experience icon hover effect */
+  .experience-item:hover .experience-icon {
+    transform: scale(1.1); /* Slightly scale up the icon when hovered */
+  }
+  
+  /* Experience details (title, company name, and date) */
+  .experience-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .experience-details h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .experience-details h4 {
+    font-size: 1rem;
+    color: #555;
+    margin: 5px 0;
+  }
+  
+  .experience-details p {
+    font-size: 0.9rem;
+    color: #777;
+  }
+  
+  /* List of points (responsibilities, achievements) under each experience */
+  .experience-points {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 10px;
+  }
+  
+  .experience-points li {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 5px;
+  }
+  
+  /* Styling for smaller screens */
+  @media (max-width: 768px) {
+    /* Adjust layout for mobile devices */
+    .experience-item {
+      padding: 15px;
+    }
+  
+    .experience-header {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .experience-icon {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+  
+    /* Adjust text sizes for mobile screens */
+    .experience-details h3 {
+      font-size: 1.1rem;
+    }
+  
+    .experience-details h4 {
+      font-size: 0.9rem;
+    }
+  
+    .experience-details p {
+      font-size: 0.8rem;
+    }
+  
+    .experience-points li {
+      font-size: 0.9rem;
+    }
+  }
+  
