@@ -1,45 +1,81 @@
 .projects-section {
-  padding: 4rem 2rem;
-  background-color: #f8f9fa;
+  padding: 4rem 20rem;
+  background-color: #000;
+  color: white;
+  text-align: center;
 }
 
 .projects-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  display: flex;
+  overflow-x: auto;
   gap: 2rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.projects-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.projects-container::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+}
+
+.projects-container::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.projects-container::-webkit-scrollbar:hover {
+  background-color: rgba(255, 255, 255, 0.11);
 }
 
 .project-card {
-  background-color: white;
-  border-radius: 8px;
-  overflow: hidden;
+  flex: 0 0 auto;
+  width: 100%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s;
-}
-
-.project-card:hover {
-  transform: translateY(-5px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .project-image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
+  height: auto;
+  width: 35vw;
+  object-fit: contain;
+  border-radius: 20px;
+}
+
+.projects-title {
+  font-size: 4rem;
+  padding-top: 3vw;
+  font-weight: 500;
 }
 
 .project-info {
   padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  font-weight: 200;
 }
 
 .project-info h3 {
-  font-size: 1.5rem;
-  color: #333;
+  font-size: 3rem;
+  color: #ffffff;
+  font-weight: 200;
+  margin: 1rem 0;
 }
 
 .project-info p {
   font-size: 1rem;
-  color: #555;
+  color: #ffffff;
   margin: 1rem 0;
+  flex-grow: 1;
+  overflow-y: auto;
+  max-height: 150px;
 }
 
 .project-tags {
@@ -49,11 +85,33 @@
 .project-tags span {
   margin-right: 8px;
   font-size: 0.875rem;
-  color: #555;
+  color: #fff;
 }
 
 .project-links a {
   margin-right: 10px;
+  margin-top: 1rem;
   text-decoration: none;
   color: #007bff;
+  font-weight: bold;
+}
+
+.project-links a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .projects-container {
+    flex-direction: column;
+    padding-left: 0;
+  }
+
+  .project-card {
+    width: 90%;
+    margin-bottom: 2rem;
+  }
+
+  .project-image {
+    width: 80vw;
+  }
 }

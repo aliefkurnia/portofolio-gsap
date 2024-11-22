@@ -1,10 +1,11 @@
 import React from "react";
-import { projects } from "../constants";
+import { projects } from "../constants"; // Pastikan impor data proyek
 import "./Projects.css";
+
 const Projects = () => {
   return (
     <section id="projects" className="projects-section">
-      <h2>My Projects</h2>
+      <h2 className="projects-title">My Projects</h2>
       <div className="projects-container">
         {projects.map((project, index) => (
           <div key={index} className="project-card">
