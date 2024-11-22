@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Overview from "./components/Overview";
-import Footer from "./components/Footer";
-import Loader from "./components/Loader";
-import ScrollProgressBar from "./components/ScrollProgressBar";
-import NameInputModal from "./components/NameInputModal";
-import Works from "./components/Works";
+import {
+  Navbar,
+  Hero,
+  Overview,
+  Footer,
+  Loader,
+  ScrollProgressBar,
+  NameInputModal,
+  Works,
+  Projects,
+} from "./components";
+
 import "./App.css";
 
 function App() {
@@ -16,7 +20,6 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(true);
 
   useEffect(() => {
-    // Mengatur overflow body berdasarkan status modal
     if (isModalOpen) {
       document.body.style.overflow = "hidden";
     } else {
@@ -58,6 +61,7 @@ function App() {
 
       <Overview userName={userName} />
       <Works />
+      <Projects />
       <Footer />
     </div>
   );

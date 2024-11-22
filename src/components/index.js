@@ -1,0 +1,9 @@
+export { default as Navbar } from "./Navbar";
+export { default as Hero } from "./Hero";
+export { default as Overview } from "./Overview";
+export { default as Footer } from "./Footer";
+export { default as Loader } from "./Loader";
+export { default as ScrollProgressBar } from "./ScrollProgressBar";
+export { default as NameInputModal } from "./NameInputModal";
+export { default as Works } from "./Works";
+export { default as Projects } from "./Projects";

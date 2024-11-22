@@ -1,5 +1,4 @@
 import {
-  dotnet,
   javascript,
   html,
   css,
@@ -9,7 +8,6 @@ import {
   git,
   docker,
   threejs,
-  adobeilustrator,
   csharp,
   vb,
   blazor,
@@ -24,22 +22,6 @@ import {
   bookingin,
   bookshelf,
 } from "./components/Assets";
-
-const services = [
-  {
-    title: ".Net Developer",
-    icon: dotnet,
-  },
-  {
-    title: "Javascript Developer",
-    icon: javascript,
-  },
-
-  {
-    title: "Graphic Designer",
-    icon: adobeilustrator,
-  },
-];
 
 const technologies = [
   {
@@ -273,4 +255,4 @@ const projects = [
   },
 ];
 
-export { services, technologies, experiences, projects };
+export { technologies, experiences, projects };
