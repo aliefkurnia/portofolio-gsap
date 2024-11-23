@@ -115,3 +115,23 @@
     width: 80vw;
   }
 }
+.blue-text-gradient {
+  background: linear-gradient(90deg, #007bff, #00c6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.green-text-gradient {
+  background: linear-gradient(90deg, #28a745, #85e085);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.pink-text-gradient {
+  background: linear-gradient(90deg, #e91e63, #ff80ab);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}

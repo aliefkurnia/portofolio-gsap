@@ -21,6 +21,9 @@ import {
   cariin,
   bookingin,
   bookshelf,
+  kubernetes,
+  expres,
+  postgres,
 } from "./components/Assets";
 
 const technologies = [
@@ -73,8 +76,20 @@ const technologies = [
     icon: sqlserver,
   },
   {
-    name: "docker",
+    name: "Docker",
     icon: docker,
+  },
+  {
+    name: "kubernetes",
+    icon: kubernetes,
+  },
+  {
+    name: "Express",
+    icon: expres,
+  },
+  {
+    name: "Postgres",
+    icon: postgres,
   },
 ];
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { technologies } from "../constants";
 import "./Overview.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -73,6 +74,19 @@ const Overview = ({ userName }) => {
         </h1>
         <h1>Explore My Work and Projects, </h1>
         <h1>Let's Create Something Amazing ✨!</h1>
+
+        {/* Section for technologies */}
+        <div className="technologies-section">
+          <h2 className="technologies-title">Tech I Use</h2>
+          <div className="technologies-list">
+            {technologies.slice(0, 20).map((tech, index) => (
+              <div className="technology-card" key={index}>
+                <img src={tech.icon} alt={tech.name} className="tech-icon" />
+                <p>{tech.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

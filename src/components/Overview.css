@@ -37,3 +37,45 @@
 .userName {
   color: rgb(72, 117, 201);
 }
+.technologies-section {
+  text-align: center;
+}
+
+.technologies-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.technologies-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 0 5vw;
+}
+
+.technology-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.technology-card:hover {
+  transform: scale(1.1);
+}
+
+.tech-icon {
+  width: 60px;
+  height: 60px;
+}
+
+.technology-card p {
+  font-size: 0.9rem;
+  color: #333;
+}

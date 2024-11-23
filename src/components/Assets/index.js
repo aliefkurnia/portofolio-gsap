@@ -15,6 +15,8 @@ import adobeilustrator from "./tech/adobeilustrator.png";
 import blazor from "./tech/blazor.png";
 import kubernetes from "./tech/kubernetes.png";
 import sqlserver from "./tech/sqlserver.png";
+import expres from "./tech/express.png";
+import postgres from "./tech/postgres.png";
 import vb from "./tech/vb.png";
 import csharp from "./tech/csharp.png";
 import astrowidget from "./astrowidget.webp";
@@ -63,4 +65,6 @@ export {
   astrowidget,
   instagram,
   linkedin,
+  expres,
+  postgres,
 };
