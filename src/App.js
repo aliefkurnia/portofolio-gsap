@@ -9,6 +9,7 @@ import {
   NameInputModal,
   Works,
   Projects,
+  Contact,
 } from "./components";
 
 import "./App.css";
@@ -62,6 +63,7 @@ function App() {
       <Overview userName={userName} />
       <Works />
       <Projects />
+      <Contact />
       <Footer />
     </div>
   );

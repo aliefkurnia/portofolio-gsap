@@ -7,3 +7,4 @@ export { default as ScrollProgressBar } from "./ScrollProgressBar";
 export { default as NameInputModal } from "./NameInputModal";
 export { default as Works } from "./Works";
 export { default as Projects } from "./Projects";
+export { default as Contact } from "./Contact";
