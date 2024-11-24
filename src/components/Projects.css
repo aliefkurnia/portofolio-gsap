@@ -10,6 +10,7 @@
   overflow-x: auto;
   gap: 2rem;
   padding-bottom: 1rem;
+  margin-bottom: 7vw;
   padding-left: 1rem;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
