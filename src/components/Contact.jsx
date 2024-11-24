@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import "./Contact.css";
 import emailjs from "@emailjs/browser";
 
-const Contact = () => {
+const Contact = ({ userName }) => {
   const formRef = useRef();
   const [form, setForm] = useState({
     name: "",
@@ -13,8 +13,6 @@ const Contact = () => {
   const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
   const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
   const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
-
-  console.log(serviceId, templateId, publicKey);
 
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -76,7 +74,7 @@ const Contact = () => {
           <input
             type="text"
             name="name"
-            value={form.name}
+            value={userName ?? form.name}
             onChange={handleChange}
             placeholder="What's your name?"
             aria-label="Your name"

@@ -1,22 +1,53 @@
 .navbar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  background-color: #000000;
-  color: #fff;
   padding: 10px 20px;
+  background-color: #000;
+  color: #fff;
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
-.navbar-logo {
-  font-size: 1.5rem;
-  font-weight: bold;
+.navbar-left {
+  display: flex;
+  align-items: center;
 }
 
-.navbar-madeby {
-  font-size: 1rem;
-  font-style: italic;
-  font-weight: 100;
+.navbar-logo {
+  font-size: 2.5rem;
+  display: inline-block;
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar-logo:hover {
+  animation: rotateLogo 0.6s infinite ease-in-out;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.github-logo {
+  width: 50px;
+  height: 50px;
+  transition: filter 0.3s infinite ease;
+}
+
+.github-logo:hover {
+  filter: invert(35%) sepia(100%) saturate(1500%) hue-rotate(180deg)
+    brightness(85%) contrast(85%);
+}
+
+@keyframes rotateLogo {
+  0% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(-10deg);
+  }
 }

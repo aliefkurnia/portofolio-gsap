@@ -1,11 +1,10 @@
 import React from "react";
-import "./Footer.css"; // Pastikan untuk membuat file CSS untuk styling
-
+import "./Footer.css";
 const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <p>© 2024 Your Company Name. All Rights Reserved.</p>
+        <p>© 2024 Muchammad Alief Kurnia Wijaya</p>
       </div>
     </footer>
   );

@@ -63,7 +63,7 @@ function App() {
       <Overview userName={userName} />
       <Works />
       <Projects />
-      <Contact />
+      <Contact userName={userName} />
       <Footer />
     </div>
   );
