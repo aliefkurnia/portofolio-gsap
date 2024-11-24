@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" href="%PUBLIC_URL%/icon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="Web site Muchammad Alief Kurnia Wijaya" />
@@ -10,11 +10,22 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-
-    <title>Hi👋</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
+  <script>
+    let titleArray = [
+      "👋 Hi, Welcome!",
+      "🌟 Let's Explore!",
+      "💻 Check Out My Projects!",
+    ];
+    let currentTitle = 0;
+
+    setInterval(function () {
+      document.title = titleArray[currentTitle];
+      currentTitle = (currentTitle + 1) % titleArray.length;
+    }, 2000);
+  </script>
 </html>
