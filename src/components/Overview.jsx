@@ -37,7 +37,6 @@ const Overview = ({ userName }) => {
     updateScrollLength();
     window.addEventListener("resize", updateScrollLength);
 
-    // If it's not mobile, create the scroll effect
     if (!isMobile) {
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -83,13 +82,19 @@ const Overview = ({ userName }) => {
         </h1>
       </div>
 
-      <div className="scroll-text" ref={scrollTextRef}>
+      <div className={`scroll-text ${isMobile ? "mobile-text" : ""}`} ref={scrollTextRef}>
         <h1>
-          Welcome to My Portfolio{" "}
-          <span className="userName">{userName ? userName : "anonimous"}</span>,{" "}
+          {isMobile ? (
+            <>Welcome to My Portfolio{" "}
+              <span className="userName">{userName ? userName : "anonimous"}</span>,{" "}
+              Explore My Work and Projects, Let's Create Something Amazing ✨!</>
+          ) : (
+            <>
+              Welcome to My Portfolio{" "}
+              <span className="userName">{userName ? userName : "anonimous"}</span>,{" "}
+            </>
+          )}
         </h1>
-        <h1>Explore My Work and Projects, </h1>
-        <h1>Let's Create Something Amazing ✨!</h1>
       </div>
     </div>
   );
