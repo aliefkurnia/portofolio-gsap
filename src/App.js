@@ -10,6 +10,7 @@ import {
   Works,
   Projects,
   Contact,
+  Technologies
 } from "./components";
 
 import "./App.css";
@@ -61,6 +62,7 @@ function App() {
       {isModalOpen && <NameInputModal onSubmit={handleNameSubmit} />}
 
       <Overview userName={userName} />
+      <Technologies />
       <Works />
       <Projects />
       <Contact userName={userName} />

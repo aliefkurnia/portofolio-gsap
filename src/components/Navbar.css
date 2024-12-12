@@ -1,12 +1,13 @@
 .navbar {
   display: flex;
   justify-content: space-between;
-  padding: 10px 20px;
+  padding: 3px 20px;
   background-color: #000;
   color: #fff;
   position: sticky;
   top: 0;
   z-index: 1000;
+  flex-wrap: wrap;
 }
 
 .navbar-left {
@@ -18,6 +19,7 @@
   font-size: 2.5rem;
   display: inline-block;
   transition: transform 0.3s ease-in-out;
+  flex-grow: 1;
 }
 
 .navbar-logo:hover {
@@ -27,6 +29,7 @@
 .navbar-right {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .github-logo {
@@ -36,8 +39,7 @@
 }
 
 .github-logo:hover {
-  filter: invert(35%) sepia(100%) saturate(1500%) hue-rotate(180deg)
-    brightness(85%) contrast(85%);
+  filter: invert(35%) sepia(100%) saturate(1500%) hue-rotate(180deg) brightness(85%) contrast(85%);
 }
 
 @keyframes rotateLogo {
@@ -49,5 +51,60 @@
   }
   100% {
     transform: rotate(-10deg);
+  }
+}
+
+@media (max-width: 1200px) {
+  .navbar-logo {
+    font-size: 2rem;
+  }
+
+  .github-logo {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 15px;
+  }
+
+  .navbar-logo {
+    font-size: 1.8rem;
+  }
+
+  .github-logo {
+    width: 35px;
+    height: 35px;
+  }
+
+  .navbar-left,
+  .navbar-right {
+    flex: 1 1 100%;
+    justify-content: center;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-logo {
+    font-size: 1.5rem;
+  }
+
+  .github-logo {
+    width: 30px;
+    height: 30px;
+  }
+
+  .navbar {
+    padding: 10px 10px;
+  }
+
+  .navbar-left,
+  .navbar-right {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 }
