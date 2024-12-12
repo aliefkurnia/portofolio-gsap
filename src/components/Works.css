@@ -72,13 +72,13 @@
   margin: 0;
   font-size: 1.5rem;
   color: #fff;
-  font-weight: 200;
+  font-weight: 600;
 }
 
 .experience-details h4 {
   font-size: 1rem;
   color: #ccc;
-  margin: 5px 0;
+  margin: 1px 0;
   font-weight: 500;
 }
 
@@ -90,7 +90,8 @@
 .experience-points {
   list-style-type: none;
   padding-left: 3px;
-  margin-top: 5px;
+  margin-top: 2px;
+  list-style: inside;
 }
 
 .experience-points li {
