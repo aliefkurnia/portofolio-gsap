@@ -50,7 +50,7 @@
 
 @media (max-width: 480px) {
   .loader-image {
-    width: 50vw;
+    width: 20vw;
     height: 30vh;
   }
 

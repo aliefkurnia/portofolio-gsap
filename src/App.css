@@ -46,10 +46,10 @@
 
 @media (max-width: 480px) {
   .hero {
-    padding: 0 15vw;
+    padding: 0 10vw; /* Adjust padding */
   }
 
   .hero .content {
-    max-width: 95%;
-  }
+    max-width: 100%; /* Ensure it takes up full width */
+    padding: 0 10px; /* Reduce side padding */  }
 }

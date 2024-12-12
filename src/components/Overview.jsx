@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Technologies from "./Technologies"; // Mengimpor komponen Technologies
 import "./Overview.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -11,6 +10,20 @@ const Overview = ({ userName }) => {
   const scrollTextRef = useRef(null);
   const initialTextRef = useRef(null);
   const [scrollLength, setScrollLength] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect if the screen is mobile or not
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
 
   useEffect(() => {
     const updateScrollLength = () => {
@@ -24,38 +37,41 @@ const Overview = ({ userName }) => {
     updateScrollLength();
     window.addEventListener("resize", updateScrollLength);
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: scrollTextWrapperRef.current,
-        start: "top top",
-        end: `+=${scrollLength}`,
-        pin: true,
-        scrub: 1,
-        invalidateOnRefresh: true,
-      },
-    });
-
-    tl.to(scrollTextRef.current, { x: -scrollLength, ease: "Power2.out" });
-
-    gsap.fromTo(
-      initialTextRef.current,
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "Power2.out",
+    // If it's not mobile, create the scroll effect
+    if (!isMobile) {
+      const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: initialTextRef.current,
+          trigger: scrollTextWrapperRef.current,
+          start: "top top",
+          end: `+=${scrollLength}`,
+          pin: true,
+          scrub: 1,
+          invalidateOnRefresh: true,
         },
-      }
-    );
+      });
+
+      tl.to(scrollTextRef.current, { x: -scrollLength, ease: "Power2.out" });
+
+      gsap.fromTo(
+        initialTextRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "Power2.out",
+          scrollTrigger: {
+            trigger: initialTextRef.current,
+          },
+        }
+      );
+    }
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       window.removeEventListener("resize", updateScrollLength);
     };
-  }, [scrollLength, userName]);
+  }, [scrollLength, isMobile, userName]);
 
   return (
     <div className="scrollText-wrapper" ref={scrollTextWrapperRef}>
@@ -75,7 +91,6 @@ const Overview = ({ userName }) => {
         <h1>Explore My Work and Projects, </h1>
         <h1>Let's Create Something Amazing ✨!</h1>
       </div>
-
     </div>
   );
 };

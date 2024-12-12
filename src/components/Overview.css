@@ -31,9 +31,32 @@
   font-weight: 500;
   user-select: none;
 }
+
 .initial-text h1 i {
   font-weight: 300;
 }
+
 .userName {
   color: rgb(72, 117, 201);
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .scroll-text {
+    display: block; /* Remove horizontal scrolling on small screens */
+    margin-left: 0;
+    gap: 10px;
+  }
+
+  .scroll-text h1 {
+    font-size: 3rem; /* Reduce font size for mobile */
+    margin-bottom: 20px;
+  }
+
+  /* Adjust initial text appearance */
+  .initial-text h1 {
+    font-size: 2.5rem; /* Smaller font size for mobile */
+    padding-top: 5vw;
+    margin: 10px;
+  }
 }
