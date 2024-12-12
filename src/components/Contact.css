@@ -5,18 +5,16 @@
   align-items: center;
   overflow-x: auto;
   max-width: 600px;
-  height: 40vw;
   margin: 50px auto;
-  padding: 20px;
   text-align: center;
   border-radius: 10px;
 }
 
 .contact-title {
   font-size: 4rem;
-  padding-top: 3vw;
   font-weight: 500;
   color: #333;
+  margin: 0;
 }
 
 .contact-container p {
