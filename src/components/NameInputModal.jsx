@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./NameInputModal.css";
 
 const NameInputModal = ({ onSubmit }) => {
   const [name, setName] = useState("");
   const [error, setError] = useState("");
+  const inputRef = useRef(null); 
 
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
   const handleSubmit = (e) => {
     e.preventDefault();
     if (name.trim() && name.length <= 10) {
@@ -18,7 +24,7 @@ const NameInputModal = ({ onSubmit }) => {
     const inputName = e.target.value;
     if (inputName.length <= 10) {
       setName(inputName);
-      setError(""); // Clear error if valid input
+      setError(""); 
     } else {
       setError("Name must be less than 10 characters.");
     }
@@ -34,6 +40,7 @@ const NameInputModal = ({ onSubmit }) => {
             placeholder="example: mulyono"
             value={name}
             onChange={handleChange}
+            ref={inputRef} 
           />
           {error && <p className="error-message">{error}</p>}
           <button type="submit" disabled={!name.trim() || name.length > 10}>

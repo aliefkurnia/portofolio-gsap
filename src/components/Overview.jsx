@@ -92,7 +92,8 @@ const Overview = ({ userName }) => {
             <>
               Welcome to My Portfolio{" "}
               <span className="userName">{userName ? userName : "anonimous"}</span>,{" "}
-            </>
+              Explore My Work and Projects, Let's Create Something Amazing ✨!</>
+
           )}
         </h1>
       </div>
