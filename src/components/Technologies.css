@@ -1,6 +1,7 @@
 .technologies-section {
     margin: 40px;
-  }
+  
+}
   
   .technologies-title {
     font-size: 4rem;
@@ -15,8 +16,7 @@
     grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     justify-content: center;
-    margin-top: 20px;
-    padding: 0 5vw;
+    padding: 0 3vw;
   }
   
   .technology-card {
@@ -25,17 +25,18 @@
     align-items: center;
     width: 200px;
     text-align: center;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease,filter 0.5s ease-in-out;
+    filter: grayscale();
   }
   
   .technology-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
+    filter: grayscale(0);
   }
   
   .tech-icon {
     width: 80px;
     height: 80px;
-    margin-bottom: 10px;
   }
   
   
