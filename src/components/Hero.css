@@ -127,7 +127,11 @@
   }
 
   .hero-title {
-    font-size: 10vw;
+    font-size: 8vw;
+    line-height: 1.5;
+  }
+  .hero-title1 {
+    font-size: 8vw;
     line-height: 1.5;
   }
 
