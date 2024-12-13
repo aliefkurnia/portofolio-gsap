@@ -37,12 +37,12 @@ const NameInputModal = ({ onSubmit }) => {
         <form onSubmit={handleSubmit}>
           <input
             type="text"
-            placeholder="example: mulyono"
+            placeholder="example: agus"
             value={name}
             onChange={handleChange}
             ref={inputRef} 
           />
-          {error && <p className="error-message">{error}</p>}
+          {error && <p className="error-messageModal">{error}</p>}
           <button type="submit" disabled={!name.trim() || name.length > 10}>
             Lets Go
           </button>

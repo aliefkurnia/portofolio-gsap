@@ -14,12 +14,12 @@
 
 .modal-content {
   background: #fff;
-  padding: 3vw 6vw;
-  border-radius: 12px;
+  padding: 2vw 4vw;
+  border-radius: 10px;
   text-align: center;
+  align-items: center;
   max-width: 450px;
   width: 100%;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   transform: scale(0.9);
   transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 }
@@ -30,7 +30,7 @@
 }
 
 .modal-content h2 {
-  margin-bottom: 20px;
+  margin: 1vw;
   font-size: 2rem;
   color: #333;
   font-weight: 600;
@@ -38,14 +38,17 @@
 
 .modal-content input {
   padding: 12px;
-  width: 90%;
   font-size: 1rem;
-  margin-bottom: 20px;
   border: 2px solid #ccc;
   border-radius: 8px;
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
+.modal-content form{
+  gap: 10px;
+  display: flex;
+  justify-content: center;
+}
 .modal-content input:focus {
   outline: none;
   border-color: #777777;
@@ -72,12 +75,10 @@
   cursor: not-allowed;
 }
 
-.error-message {
+.error-messageModal {
   color: red;
   font-size: 0.9rem;
-  margin-top: -10px;
-  margin-bottom: 10px;
-  font-weight: 300;
+  font-weight: 600;
 }
 
 @media (max-width: 768px) {
