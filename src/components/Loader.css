@@ -38,24 +38,25 @@
 
 @media (max-width: 768px) {
   .loader-image {
-    width: 25vw;
-    height: 25vh;
+    width: 30vw;
+    height: 30vh;
+    margin-bottom: 4vh;
   }
 
   .loader-bar {
-    width: 20%;
-    height: 1vw;
+    width: 50%;
+    height: 2vw;
   }
 }
 
 @media (max-width: 480px) {
   .loader-image {
-    width: 20vw;
-    height: 30vh;
+    width: 45vw;
+    height: 45vh;
   }
 
   .loader-bar {
-    width: 60%;
+    width: 70%;
     height: 4vw;
   }
 }

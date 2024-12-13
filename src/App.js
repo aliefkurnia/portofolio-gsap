@@ -37,7 +37,7 @@ function App() {
     const timer = setTimeout(() => {
       setLoading(false);
       setShowHero(true);
-    }, 1500);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
