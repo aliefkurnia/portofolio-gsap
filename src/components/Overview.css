@@ -14,7 +14,6 @@
 .scroll-text h1 {
   font-size: 8rem;
   white-space: nowrap;
-  margin-bottom: 10vw;
   user-select: none;
 }
 
@@ -25,8 +24,8 @@
 
 .initial-text h1 {
   font-size: 3rem;
-  padding-top: 10vw;
-  margin: 20px;
+  padding-top: 8vw;
+  margin: 0px;
   margin-left: 5vw;
   font-weight: 500;
   user-select: none;
