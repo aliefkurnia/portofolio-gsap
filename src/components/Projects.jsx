@@ -43,7 +43,9 @@ const Projects = () => {
             </div>
           </div>
         ))}
+        <div className="slide-indicator"> &gt;&gt;&gt; </div>
       </div>
+
     </section>
   );
 };

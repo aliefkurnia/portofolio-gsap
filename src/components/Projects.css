@@ -209,3 +209,36 @@
   -webkit-text-fill-color: transparent;
   display: inline-block;
 }
+
+.slide-indicator {
+  position: absolute;
+  font-size: 3em;
+  font-weight: bold;
+  color: #888;
+  animation: slideIndicator 2s infinite linear;
+}
+
+@keyframes slideIndicator {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateX(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateX(10px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateX(20px);
+  }
+}
+
+.slide-indicator {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .slide-indicator {
+    display: block;
+  }
+}
