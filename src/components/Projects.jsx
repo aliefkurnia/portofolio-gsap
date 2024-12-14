@@ -29,6 +29,7 @@ const Projects = () => {
                   href={project.source_code_link}
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="btn"
                 >
                   Source Code
                 </a>
@@ -36,6 +37,7 @@ const Projects = () => {
                   href={project.website_link}
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="btn"
                 >
                   Live Website
                 </a>
@@ -45,7 +47,6 @@ const Projects = () => {
         ))}
         <div className="slide-indicator"> &gt;&gt;&gt; </div>
       </div>
-
     </section>
   );
 };
