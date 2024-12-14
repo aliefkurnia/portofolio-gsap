@@ -44,7 +44,7 @@
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.modal-content form{
+.modal-content form {
   gap: 10px;
   display: flex;
   justify-content: center;
@@ -114,10 +114,10 @@
     align-items: center;
     z-index: 1000;
     transition: all 0.3s ease-in-out;
-    padding: 3vw 6vw;  
-    box-sizing: border-box; 
+    padding: 3vw 6vw;
+    box-sizing: border-box;
   }
-  
+
   .modal-content {
     background: #fff;
     padding: 3vw 6vw;

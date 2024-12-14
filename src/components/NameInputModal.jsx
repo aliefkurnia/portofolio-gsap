@@ -15,9 +15,9 @@ const NameInputModal = ({ onSubmit }) => {
     const allFocusableElements = document.querySelectorAll(
       'button, input, select, textarea, a, [tabindex]:not([tabindex="-1"])'
     );
-    
+
     const modalFocusableElements = modalRef.current.querySelectorAll(
-      'button, input, select, textarea'
+      "button, input, select, textarea"
     );
 
     allFocusableElements.forEach((el) => {
@@ -70,11 +70,11 @@ const NameInputModal = ({ onSubmit }) => {
             onChange={handleChange}
             ref={inputRef}
           />
-          {error && <p className="error-messageModal">{error}</p>}
           <button type="submit" disabled={!name.trim() || name.length > 10}>
             Let's Go
           </button>
         </form>
+        {error && <p className="error-messageModal">{error}</p>}
       </div>
     </div>
   );
