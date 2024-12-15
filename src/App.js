@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom"; // Hanya impor Routes dan Route
 import {
   Navbar,
   Hero,
@@ -10,9 +11,9 @@ import {
   Works,
   Projects,
   Contact,
-  Technologies
+  Technologies,
+  PreviewCV,
 } from "./components";
-
 import "./App.css";
 
 function App() {
@@ -55,18 +56,28 @@ function App() {
     <div>
       <ScrollProgressBar />
       <Navbar />
-      <div className={`hero-wrapper ${showHero ? "open-curtain" : ""}`}>
-        <Hero showHero={showHero} setUserName={setUserName} />
-      </div>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div>
+              <div className={`hero-wrapper ${showHero ? "open-curtain" : ""}`}>
+                <Hero showHero={showHero} setUserName={setUserName} />
+              </div>
 
-      {isModalOpen && <NameInputModal onSubmit={handleNameSubmit} />}
+              {isModalOpen && <NameInputModal onSubmit={handleNameSubmit} />}
 
-      <Overview userName={userName} />
-      <Technologies />
-      <Works />
-      <Projects />
-      <Contact userName={userName} />
-      <Footer />
+              <Overview userName={userName} />
+              <Technologies />
+              <Works />
+              <Projects />
+              <Contact userName={userName} />
+              <Footer />
+            </div>
+          }
+        />
+        <Route path="/PreviewCV" element={<PreviewCV />} />
+      </Routes>
     </div>
   );
 }

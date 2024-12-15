@@ -33,6 +33,9 @@ import carisurah from "./carisurah.png";
 import cariin from "./cariin.png";
 import bookingin from "./bookingin.png";
 import bookshelf from "./bookshelf.png";
+import cvIcon from "./cvIcon.png";
+import cvId from "./Muchammad Alief Kurnia Wijaya-resume-id.pdf";
+import cvEn from "./Muchammad Alief Kurnia Wijaya-resume-en.pdf";
 
 export {
   github,
@@ -67,4 +70,7 @@ export {
   linkedin,
   expres,
   postgres,
+  cvIcon,
+  cvId,
+  cvEn,
 };

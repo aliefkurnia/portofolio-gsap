@@ -7,7 +7,7 @@
   top: 0;
   z-index: 1000;
   padding: 3px 20px;
-  flex-wrap: nowrap; /* Prevent items from wrapping */
+  flex-wrap: nowrap;
 }
 
 .navbar-left,
@@ -32,19 +32,26 @@
 }
 
 .github-logo:hover {
-  filter: invert(35%) sepia(100%) saturate(1500%) hue-rotate(180deg) brightness(85%) contrast(85%);
+  filter: invert(35%) sepia(100%) saturate(1500%) hue-rotate(180deg)
+    brightness(85%) contrast(85%);
 }
-
+.cv-icon {
+  filter: invert(35%) sepia(100%) saturate(1500%) hue-rotate(180deg)
+    brightness(85%) contrast(85%);
+  width: 50px;
+  height: 50px;
+  transition: filter 0.3s ease;
+}
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: row; /* Keep navbar items in a row on smaller screens */
+    flex-direction: row;
     padding: 10px 15px;
   }
 
   .navbar-left,
   .navbar-right {
-    width: auto; /* Allow the left and right sections to shrink to their content */
-    justify-content: space-between; /* Add space between logo and GitHub icon */
+    width: auto;
+    justify-content: space-between;
   }
 
   .navbar-logo {
@@ -73,7 +80,7 @@
 
   .navbar-left,
   .navbar-right {
-    justify-content: space-between; /* Space between left and right sections */
+    justify-content: space-between;
     align-items: center;
   }
 }
