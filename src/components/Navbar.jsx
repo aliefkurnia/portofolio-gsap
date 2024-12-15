@@ -1,26 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import { github, cvIcon } from "./Assets";
+import { ReactComponent as CvIcon } from "./Assets/cvIcon.svg";
+import { ReactComponent as GithubIcon } from "./Assets/github.svg";
 
 const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <span className="navbar-logo">&lt;/&gt;</span>
-      </div>
-      <div className="navbar-right">
-        <Link to="/PreviewCV" className="cv-link">
-          <img src={cvIcon} alt="Download CV" className="cv-icon" />
+        <Link to="/" className="navbar-logo">
+          &lt;/&gt;
         </Link>
-        <a
-          href="https://github.com/aliefkurnia"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="github-link"
-        >
-          <img src={github} alt="GitHub Logo" className="github-logo" />
-        </a>
+      </div>
+
+      <div className={`navbar-right ${menuOpen ? "open" : ""}`}>
+        <div className={`sidebar ${menuOpen ? "open" : ""}`}>
+          <Link to="/PreviewCV" className="cv-link">
+            <div className="cv-text">
+              <label>Let me know more &gt;</label>
+            </div>
+            <CvIcon className="cv-icon" width="40" height="40" />
+          </Link>
+
+          <a
+            href="https://github.com/aliefkurnia"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="github-link"
+          >
+            <GithubIcon className="github-logo" width="40" height="40" />
+          </a>
+        </div>
+        <div className="hamburger" onClick={toggleMenu}>
+          <div className={`line ${menuOpen ? "open" : ""}`}></div>
+          <div className={`line ${menuOpen ? "open" : ""}`}></div>
+          <div className={`line ${menuOpen ? "open" : ""}`}></div>
+        </div>
       </div>
     </nav>
   );

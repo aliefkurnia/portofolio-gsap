@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./PreviewCV.css";
+import { useNavigate } from "react-router-dom";
 
 const PreviewCV = () => {
   const [language, setLanguage] = useState("id");
@@ -8,13 +9,13 @@ const PreviewCV = () => {
     en: require("./Assets/Muchammad Alief Kurnia Wijaya-resume-en.pdf"),
     id: require("./Assets/Muchammad Alief Kurnia Wijaya-resume-id.pdf"),
   };
-
   const handleLanguageChange = (event) => {
     setLanguage(event.target.value);
   };
 
+  const navigate = useNavigate();
   const handleBackClick = () => {
-    window.history.back();
+    navigate("/");
   };
 
   return (
