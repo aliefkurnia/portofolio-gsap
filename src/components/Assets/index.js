@@ -22,6 +22,7 @@ import csharp from "./tech/csharp.png";
 import astrowidget from "./astrowidget.webp";
 import instagram from "./instagram.png";
 import linkedin from "./linkedin.png";
+import pyhton from "./tech/pyhton.png";
 
 import bifarma from "./company/bifarma.png";
 import digitalent from "./company/digitalent.png";
@@ -56,6 +57,7 @@ export {
   kubernetes,
   sqlserver,
   vb,
+  pyhton,
   bifarma,
   digitalent,
   codeid,

@@ -1,5 +1,5 @@
 import React from "react";
-import { technologies } from "../constants"; 
+import { technologies } from "../constants";
 import "./Technologies.css";
 
 const Technologies = () => {
@@ -7,7 +7,7 @@ const Technologies = () => {
     <div className="technologies-section">
       <h2 className="technologies-title">Tech I Use</h2>
       <div className="technologies-list">
-        {technologies.slice(0, 23).map((tech, index) => (
+        {technologies.slice(0, 20).map((tech, index) => (
           <div className="technology-card" key={index}>
             <img src={tech.icon} alt={tech.name} className="tech-icon" />
             <p>{tech.name}</p>

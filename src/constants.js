@@ -24,6 +24,7 @@ import {
   kubernetes,
   expres,
   postgres,
+  pyhton
 } from "./components/Assets";
 
 const technologies = [
@@ -90,6 +91,10 @@ const technologies = [
   {
     name: "Postgres",
     icon: postgres,
+  },
+  {
+    name: "Pyhton",
+    icon: pyhton,
   },
 ];
 
