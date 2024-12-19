@@ -91,18 +91,19 @@
   margin-top: 1rem;
   text-decoration: none;
   color: black;
+  background-color: white;
   font-weight: bold;
 }
 
 .project-links a:hover {
-  text-decoration: underline;
+  color: white;
+  background-color: black;
 }
 .btn {
   display: inline-block;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   color: white;
-  background-color: whitesmoke;
   border-radius: 4px;
   text-decoration: none;
   text-align: center;
@@ -110,8 +111,8 @@
 }
 
 .btn:hover {
-  color: rgba(255, 255, 255, 0.644);
   transform: scale(1.05);
+  border: 1px solid white;
 }
 
 .btn:active {
