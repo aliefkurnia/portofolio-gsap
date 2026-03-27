@@ -1,153 +1,130 @@
 import {
-  javascript,
-  html,
-  css,
-  reactjs,
-  tailwind,
-  nodejs,
-  git,
-  docker,
-  threejs,
+  // TECH
   csharp,
-  vb,
   blazor,
+  dotnet,
+  kendo,
+  telerik,
   sqlserver,
-  bifarma,
-  digitalent,
-  codeid,
+  postgres,
+  redis,
+  swagger,
+  postman,
+  docker,
+  kubernetes,
+  azure,
+  git,
+  talend,
+
+  // COMPANY
+  pertamina,
   realta,
+  codeid,
+  digitalent,
+  bifarma,
+
+  // PROJECT
   hargaemas,
   carisurah,
   cariin,
   bookingin,
   bookshelf,
-  kubernetes,
-  expres,
-  postgres,
-  pyhton
 } from "./components/Assets";
 
 const technologies = [
-  {
-    name: "HTML 5",
-    icon: html,
-  },
-  {
-    name: "CSS 3",
-    icon: css,
-  },
-  {
-    name: "JavaScript",
-    icon: javascript,
-  },
-  {
-    name: "C#",
-    icon: csharp,
-  },
-  {
-    name: "React JS",
-    icon: reactjs,
-  },
-  {
-    name: "VB",
-    icon: vb,
-  },
-  {
-    name: "Tailwind CSS",
-    icon: tailwind,
-  },
-  {
-    name: "Node JS",
-    icon: nodejs,
-  },
-  {
-    name: "Blazor",
-    icon: blazor,
-  },
-  {
-    name: "Three JS",
-    icon: threejs,
-  },
-  {
-    name: "git",
-    icon: git,
-  },
-  {
-    name: "SQL Server",
-    icon: sqlserver,
-  },
-  {
-    name: "Docker",
-    icon: docker,
-  },
-  {
-    name: "kubernetes",
-    icon: kubernetes,
-  },
-  {
-    name: "Express",
-    icon: expres,
-  },
-  {
-    name: "Postgres",
-    icon: postgres,
-  },
-  {
-    name: "Pyhton",
-    icon: pyhton,
-  },
+  // CORE STACK
+  { name: "C#", icon: csharp },
+  { name: ".NET Core", icon: dotnet },
+  { name: "Blazor", icon: blazor },
+
+  // UI FRAMEWORK
+  { name: "Kendo UI", icon: kendo },
+  { name: "Telerik", icon: telerik },
+
+  // DATABASE
+  { name: "SQL Server", icon: sqlserver },
+  { name: "PostgreSQL", icon: postgres },
+  { name: "Redis", icon: redis },
+
+  // API & TOOLS
+  { name: "Swagger", icon: swagger },
+  { name: "Postman", icon: postman },
+
+  // DEVOPS
+  { name: "Docker", icon: docker },
+  { name: "Kubernetes", icon: kubernetes },
+  { name: "Azure DevOps", icon: azure },
+  { name: "Git", icon: git },
+
+  // DATA PROCESSING
+  { name: "Talend ETL", icon: talend },
 ];
 
 const experiences = [
   {
-    title: "Software Developer",
-    company_name: "PT.Realta Chakradharma",
-    icon: realta,
+    title: "Software Developer (Support Operation)",
+    company_name: "PT. Pertamina Hulu Energi",
+    icon: pertamina,
     iconBg: "#ffffff",
-    date: "May 2023 - Present",
+    date: "May 2025 - Present",
     points: [
-      "Developing enterprise software solutions with C#, .NET Core, and SQL Server.",
-      "Building responsive front-end applications using Blazor and WASM.",
-      "Utilizing Docker and Kubernetes for containerization and orchestration.",
-      "Collaborating with teams to integrate cutting-edge technology.",
+      "Maintaining and supporting production systems, including bug fixing and performance optimization.",
+      "Conducting issue tracing up to ETL processes using Talend.",
+      "Managing CI/CD pipelines and deployments using Azure DevSecOps.",
+      "Ensuring SLA compliance with fast resolution time for production issues.",
+      "Collaborating with cross-functional teams to improve system reliability.",
     ],
   },
   {
-    title: "Fullstack Developer",
-    company_name: "Code Academy",
+    title: "Software Developer",
+    company_name: "PT. Realta Chakradharma",
+    icon: realta,
+    iconBg: "#ffffff",
+    date: "May 2023 - Apr 2025",
+    points: [
+      "Developed BIMASAKTI11, a property management web app for apartments and malls.",
+      "Built reporting, transaction, and batch processing features.",
+      "Implemented MVVM architecture with C#, .NET Core, and Blazor WASM.",
+      "Utilized Redis Cache, SQL Server, and ADO.NET for performance optimization.",
+      "Deployed applications using Docker, Kubernetes, Helmfile, and IIS.",
+    ],
+  },
+  {
+    title: ".NET Developer",
+    company_name: "PT. Code Development Indonesia",
     icon: codeid,
     iconBg: "#ffffff",
     date: "Nov 2022 - Apr 2023",
     points: [
-      "Developed and maintained the master module of the Hotel Realta project.",
-      "Collaborated with cross-functional teams for seamless integration.",
-      "Implemented backend functionality with C# and SQL Server.",
-      "Created responsive front-end interfaces using Blazor.",
+      "Developed the master module for Hotel Realta project.",
+      "Ensured integration between multiple modules for system consistency.",
+      "Implemented MVC architecture with C#, SQL Server, and Entity Framework.",
+      "Built responsive UI using Blazor and Bootstrap.",
+      "Managed version control and collaboration using GitHub.",
     ],
   },
   {
     title: "Machine Learning Developer",
-    company_name:
-      "Student of Fresh Graduate Academy - Digital Talent Scholarship",
+    company_name: "Digital Talent Scholarship (Kominfo)",
     icon: digitalent,
     iconBg: "#ffffff",
     date: "Oct 2022 - Dec 2022",
     points: [
-      "Developed skills in Python programming and machine learning.",
-      "Worked on image classification using CNNs.",
-      "Designed NLP models with TensorFlow for real-world applications.",
+      "Developed machine learning models using Python and TensorFlow.",
+      "Built image classification models using CNN.",
+      "Designed NLP solutions for real-world use cases.",
     ],
   },
   {
     title: "Graphic Designer",
-    company_name: "PT.Bifarma Adiluhung (Kalbe)",
+    company_name: "PT. Bifarma Adiluhung (Kalbe)",
     icon: bifarma,
     iconBg: "#ffffff",
     date: "Aug 2021 - Jan 2022",
     points: [
-      "Design posters, banners, and flyers for social media.",
-      "Edit videos for product branding.",
-      "Responsible for UI/UX design of the genme.id website.",
+      "Designed marketing materials such as posters, banners, and flyers.",
+      "Edited videos for product branding and promotion.",
+      "Handled UI/UX design for Genme.id website.",
     ],
   },
 ];
@@ -156,20 +133,11 @@ const projects = [
   {
     name: "Kalkulator Harga Emas",
     description:
-      "provides real-time updates on the latest gold prices, reflecting changes in both USD and IDR. Additionally, it features a calculator to easily determine the price of gold per gram, offering a convenient tool for anyone interested in staying informed about gold market trends.",
+      "Provides real-time updates on gold prices in USD and IDR, with a calculator for price per gram.",
     tags: [
-      {
-        name: "react",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "expressjs",
-        color: "green-text-gradient",
-      },
-      {
-        name: "mui",
-        color: "pink-text-gradient",
-      },
+      { name: "react", color: "blue-text-gradient" },
+      { name: "expressjs", color: "green-text-gradient" },
+      { name: "mui", color: "pink-text-gradient" },
     ],
     image: hargaemas,
     source_code_link: "https://github.com/aliefkurnia/harga-emas",
@@ -178,20 +146,11 @@ const projects = [
   {
     name: "Cari Surah",
     description:
-      "This Website have a feature to search for specific Surahs in the Quran, along with a play feature that allows users to listen to the recitation of each Surah. This tool is designed to make it easier for users to explore and engage with the Quranic text.",
+      "Search and listen to Quran surahs with integrated audio playback.",
     tags: [
-      {
-        name: "react",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "axios",
-        color: "green-text-gradient",
-      },
-      {
-        name: "restapi",
-        color: "pink-text-gradient",
-      },
+      { name: "react", color: "blue-text-gradient" },
+      { name: "axios", color: "green-text-gradient" },
+      { name: "restapi", color: "pink-text-gradient" },
     ],
     image: carisurah,
     source_code_link: "https://github.com/aliefkurnia/cari-surah",
@@ -199,21 +158,11 @@ const projects = [
   },
   {
     name: "Cariin",
-    description:
-      "A web application for searching movies, providing detailed descriptions and ratings for each title.",
+    description: "Movie search app with detailed descriptions and ratings.",
     tags: [
-      {
-        name: "react",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "axios",
-        color: "green-text-gradient",
-      },
-      {
-        name: "restapi",
-        color: "pink-text-gradient",
-      },
+      { name: "react", color: "blue-text-gradient" },
+      { name: "axios", color: "green-text-gradient" },
+      { name: "restapi", color: "pink-text-gradient" },
     ],
     image: cariin,
     source_code_link: "https://github.com/aliefkurnia/Cariin-Film-Finder",
@@ -221,25 +170,12 @@ const projects = [
   },
   {
     name: "Bookingin",
-    description:
-      "A web application for searching hotels, providing detailed descriptions and ratings for each property.",
+    description: "Hotel search web app with property details and ratings.",
     tags: [
-      {
-        name: "javascript",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "dom",
-        color: "green-text-gradient",
-      },
-      {
-        name: "html",
-        color: "pink-text-gradient",
-      },
-      {
-        name: "css",
-        color: "pink-text-gradient",
-      },
+      { name: "javascript", color: "blue-text-gradient" },
+      { name: "dom", color: "green-text-gradient" },
+      { name: "html", color: "pink-text-gradient" },
+      { name: "css", color: "pink-text-gradient" },
     ],
     image: bookingin,
     source_code_link:
@@ -249,24 +185,12 @@ const projects = [
   {
     name: "Bookshelf App",
     description:
-      "A web application for managing your book collection, with features for adding, editing, searching, and categorizing books. Supports local storage for data persistence.",
+      "Manage book collection with add, edit, search, and local storage.",
     tags: [
-      {
-        name: "javascript",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "local storage",
-        color: "green-text-gradient",
-      },
-      {
-        name: "html",
-        color: "pink-text-gradient",
-      },
-      {
-        name: "css",
-        color: "pink-text-gradient",
-      },
+      { name: "javascript", color: "blue-text-gradient" },
+      { name: "local storage", color: "green-text-gradient" },
+      { name: "html", color: "pink-text-gradient" },
+      { name: "css", color: "pink-text-gradient" },
     ],
     image: bookshelf,
     source_code_link:
