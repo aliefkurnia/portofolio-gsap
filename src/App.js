@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom"; // Hanya impor Routes dan Route
+import { Routes, Route, useLocation } from "react-router-dom";
 import {
   Navbar,
   Hero,
@@ -14,16 +14,19 @@ import {
   Technologies,
   PreviewCV,
 } from "./components";
+import Admin from "./pages/Admin";
 import "./App.css";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [showHero, setShowHero] = useState(false);
-  const [userName, setUserName] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [userName, setUserName] = useState(() => localStorage.getItem("porto_nickname") || "");
+  const [isModalOpen, setIsModalOpen] = useState(() => !localStorage.getItem("porto_nickname"));
+  const location = useLocation();
+  const isAdmin = location.pathname === "/admin";
 
   useEffect(() => {
-    if (isModalOpen) {
+    if (isModalOpen && !isAdmin) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -32,7 +35,7 @@ function App() {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isModalOpen]);
+  }, [isModalOpen, isAdmin]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -44,18 +47,19 @@ function App() {
   }, []);
 
   const handleNameSubmit = (name) => {
+    localStorage.setItem("porto_nickname", name);
     setUserName(name);
     setIsModalOpen(false);
   };
 
-  if (loading) {
+  if (loading && !isAdmin) {
     return <Loader />;
   }
 
   return (
     <div>
-      <ScrollProgressBar />
-      <Navbar />
+      {!isAdmin && <ScrollProgressBar />}
+      {!isAdmin && <Navbar />}
       <Routes>
         <Route
           path="/"
@@ -77,6 +81,7 @@ function App() {
           }
         />
         <Route path="/PreviewCV" element={<PreviewCV />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </div>
   );

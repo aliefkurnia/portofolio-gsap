@@ -19,11 +19,11 @@ const Navbar = () => {
         </Link>
       </div>
 
-      <div className={`navbar-right ${menuOpen ? "open" : ""}`}>
-        <div className={`sidebar ${menuOpen ? "open" : ""}`}>
+      <div className={`navbar-right ${menuOpen ? "open" : "close"}`}>
+        <div className={`sidebar ${menuOpen ? "open" : "close"}`}>
           <Link to="/PreviewCV" className="cv-link">
             <div className="cv-text">
-              <label>Let me know more &gt;</label>
+              <label>My CV &gt;</label>
             </div>
             <CvIcon className="cv-icon" width="40" height="40" />
           </Link>

@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "./Hero.css";
 import { useScramble } from "use-scramble";
+import { usePortfolioData } from "../hooks/usePortfolioData";
 import SoftwareDeveloperMarquee from "./SoftwareDeveloperMarquee";
 
 const Hero = ({ showHero }) => {
+  const { settings } = usePortfolioData();
   const [showScramble, setShowScramble] = useState(false);
   const [showDescription, setShowDescription] = useState(false);
   const [showImage, setShowImage] = useState(false);
   const [scrambledText, setScrambledText] = useState("");
   const [scrambledText1, setScrambledText1] = useState("");
+
+  const heroImage = settings.hero_photo_url || require("./Assets/alief.png");
 
   const { ref: ref1, replay: replay1 } = useScramble({
     text: scrambledText,
@@ -67,7 +71,7 @@ const Hero = ({ showHero }) => {
       <div className="hero-content">
         {showImage && (
           <img
-            src={require("./Assets/alief.png")}
+            src={heroImage}
             alt="alip"
             className={`hero-image ${showImage ? "visible" : ""}`}
           />

@@ -1,78 +1,80 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { usePortfolioData } from "../hooks/usePortfolioData";
 import "./SoftwareDeveloperMarquee.css";
 
 const SoftwareDeveloperMarquee = () => {
-  const [scrollDirection, setScrollDirection] = useState("left-to-right");
+  const { settings } = usePortfolioData();
+  const rowRef = useRef(null);
+  const tlRef = useRef(null);
+  const directionRef = useRef(1);
 
-  const handleWheel = (event) => {
-    if (event.deltaY > 0) {
-      setScrollDirection("left-to-right");
-    } else {
-      setScrollDirection("right-to-left");
-    }
-  };
+  const marqueeText = settings.marquee_text || "Software Developer";
 
   useEffect(() => {
-    const developmentRow = document.querySelector(".cb-tagreel-row");
-    let rowWidth = developmentRow.getBoundingClientRect().width;
-    let rowItemWidth = developmentRow.children[0].getBoundingClientRect().width;
+    const row = rowRef.current;
+    if (!row) return;
 
-    let initialOffset = ((2 * rowItemWidth) / rowWidth) * 100 * -1;
+    const itemWidth = row.children[0].getBoundingClientRect().width;
+    const totalItems = row.children.length;
+    const repeatWidth = itemWidth * Math.floor(totalItems / 2);
 
-    gsap.set(developmentRow, {
-      xPercent: initialOffset,
+    gsap.set(row, { x: -repeatWidth });
+
+    tlRef.current = gsap.to(row, {
+      x: `-=${itemWidth}`,
+      duration: 3,
+      ease: "none",
+      repeat: -1,
+      modifiers: {
+        x: gsap.utils.unitize((x) => {
+          const val = parseFloat(x) % repeatWidth;
+          return val > 0 ? val - repeatWidth : val;
+        }),
+      },
     });
 
-    let duration = 6;
-    var tl = gsap.timeline();
-
-    const animateRow = () => {
-      if (scrollDirection === "left-to-right") {
-        tl.to(developmentRow, {
-          ease: "none",
-          duration: duration,
-          xPercent: 0,
-          repeat: -1,
-        });
-      } else {
-        tl.to(developmentRow, {
-          ease: "none",
-          duration: duration,
-          xPercent: -100,
-          repeat: -1,
+    const handleWheel = (e) => {
+      const newDir = e.deltaY > 0 ? 1 : -1;
+      if (newDir !== directionRef.current) {
+        directionRef.current = newDir;
+        gsap.to(tlRef.current, {
+          timeScale: newDir,
+          duration: 0.4,
+          ease: "power2.out",
         });
       }
     };
 
-    animateRow();
-
     window.addEventListener("wheel", handleWheel);
-
     return () => {
       window.removeEventListener("wheel", handleWheel);
+      tlRef.current?.kill();
     };
-  }, [scrollDirection]);
+  }, []);
 
   return (
     <section className="cb-tagreel">
       <div className="cb-tagreel-content">
         <div className="cb-tagreel-items" role="marquee">
-          <div className="cb-tagreel-row">
+          <div className="cb-tagreel-row" ref={rowRef}>
             <div className="cb-tagreel-item">
-              <span>Software Developer</span>
+              <span>{marqueeText}</span>
             </div>
             <div className="cb-tagreel-item -stroke">
-              <span>Software Developer</span>
+              <span>{marqueeText}</span>
             </div>
             <div className="cb-tagreel-item">
-              <span>Software Developer</span>
+              <span>{marqueeText}</span>
             </div>
             <div className="cb-tagreel-item -stroke">
-              <span>Software Developer</span>
+              <span>{marqueeText}</span>
             </div>
             <div className="cb-tagreel-item">
-              <span>Software Developer</span>
+              <span>{marqueeText}</span>
+            </div>
+            <div className="cb-tagreel-item -stroke">
+              <span>{marqueeText}</span>
             </div>
           </div>
         </div>

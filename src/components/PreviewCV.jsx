@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import "./PreviewCV.css";
 import { useNavigate } from "react-router-dom";
+import { usePortfolioData } from "../hooks/usePortfolioData";
 
 const PreviewCV = () => {
   const [language, setLanguage] = useState("id");
+  const { settings } = usePortfolioData();
 
   const pdfPaths = {
-    en: require("./Assets/Muchammad Alief Kurnia Wijaya-resume-en.pdf"),
-    id: require("./Assets/Muchammad Alief Kurnia Wijaya-resume-id.pdf"),
+    en: settings.cv_en_url || require("./Assets/Muchammad Alief Kurnia Wijaya-resume-en.pdf"),
+    id: settings.cv_id_url || require("./Assets/Muchammad Alief Kurnia Wijaya-resume-id.pdf"),
   };
   const handleLanguageChange = (event) => {
     setLanguage(event.target.value);

@@ -1,0 +1,648 @@
+/* ── Admin Login ── */
+.admin-login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #d1d1d1;
+  font-family: "Poppins", sans-serif;
+}
+
+.admin-login-form {
+  background: #fff;
+  padding: 3rem;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  min-width: 360px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.admin-login-form h2 {
+  color: #000;
+  margin: 0 0 0.5rem;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.admin-login-form input {
+  padding: 0.85rem 1.2rem;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #f5f5f5;
+  color: #333;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  transition: border-color 0.3s ease;
+}
+
+.admin-login-form input:focus {
+  outline: none;
+  border-color: rgb(72, 117, 201);
+}
+
+.admin-login-form button {
+  padding: 0.85rem;
+  border-radius: 10px;
+  border: none;
+  background: rgb(72, 117, 201);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.admin-login-form button:hover {
+  background: rgb(55, 95, 170);
+  transform: translateY(-1px);
+}
+
+/* ── Admin Container ���─ */
+.admin-container {
+  min-height: 100vh;
+  background-color: #d1d1d1;
+  color: #333;
+  padding: 2.5rem;
+  font-family: "Poppins", sans-serif;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.admin-header h1 {
+  color: #000;
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+
+.btn-logout {
+  padding: 0.6rem 1.2rem;
+  border-radius: 100px;
+  border: 1px solid #000;
+  background: transparent;
+  color: #000;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-logout:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* ── Tabs ── */
+.admin-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.admin-tabs .tab {
+  padding: 0.7rem 1.8rem;
+  border-radius: 100px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: transparent;
+  color: #555;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.admin-tabs .tab:hover {
+  border-color: rgba(0, 0, 0, 0.4);
+  color: #000;
+}
+
+.admin-tabs .tab.active {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+/* ── Loading ── */
+.admin-loading {
+  text-align: center;
+  padding: 4rem;
+  color: #888;
+  font-size: 1.1rem;
+}
+
+/* ── Toolbar ── */
+.admin-toolbar {
+  margin-bottom: 1.5rem;
+}
+
+.btn-add {
+  padding: 0.7rem 1.5rem;
+  border-radius: 100px;
+  border: none;
+  background: rgb(72, 117, 201);
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.btn-add:hover {
+  background: rgb(55, 95, 170);
+  transform: translateY(-1px);
+}
+
+/* ── List ── */
+.admin-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.admin-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem 1.5rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.admin-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.admin-thumb {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #f0f0f0;
+  padding: 5px;
+  flex-shrink: 0;
+}
+
+.admin-thumb.project-thumb {
+  width: 90px;
+  height: 56px;
+  object-fit: cover;
+  padding: 0;
+  border-radius: 10px;
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+}
+
+.item-info strong {
+  color: #000;
+  font-weight: 500;
+}
+
+.item-info span {
+  color: #777;
+  font-size: 0.85rem;
+}
+
+.admin-item > span:not(.sort-badge) {
+  color: #333;
+  font-weight: 400;
+}
+
+.sort-badge {
+  color: rgb(72, 117, 201);
+  font-size: 0.8rem;
+  font-weight: 600;
+  min-width: 30px;
+}
+
+/* ── Item Actions ���─ */
+.item-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.item-actions button {
+  padding: 0.45rem 1rem;
+  border-radius: 100px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: transparent;
+  color: #555;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-family: "Poppins", sans-serif;
+  transition: all 0.3s ease;
+}
+
+.item-actions button:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.3);
+  color: #000;
+}
+
+.item-actions .btn-del {
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #ef4444;
+}
+
+.item-actions .btn-del:hover {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: #ef4444;
+}
+
+/* ── Form Overlay ── */
+.admin-form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.admin-form {
+  background: #fff;
+  border-radius: 24px;
+  padding: 2.5rem;
+  max-width: 600px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+}
+
+.admin-form::-webkit-scrollbar {
+  width: 6px;
+}
+
+.admin-form::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.admin-form::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+}
+
+.admin-form h3 {
+  color: #000;
+  margin: 0 0 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+/* ─�� Form Fields ── */
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-fields label {
+  color: #777;
+  font-size: 0.8rem;
+  margin-top: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-fields input,
+.form-fields textarea,
+.form-fields select {
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #f5f5f5;
+  color: #333;
+  font-size: 0.9rem;
+  font-family: "Poppins", sans-serif;
+  transition: border-color 0.3s ease;
+}
+
+.form-fields input:focus,
+.form-fields textarea:focus,
+.form-fields select:focus {
+  outline: none;
+  border-color: rgb(72, 117, 201);
+}
+
+.form-fields textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-fields input[type="file"] {
+  padding: 0.5rem;
+  border: 1px dashed rgba(0, 0, 0, 0.2);
+  background: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.form-fields input[type="color"] {
+  padding: 0;
+  width: 50px;
+  height: 38px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: transparent;
+}
+
+.form-preview {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #f0f0f0;
+  padding: 5px;
+}
+
+.form-preview.project-preview {
+  width: 140px;
+  height: 85px;
+  object-fit: cover;
+  padding: 0;
+  border-radius: 12px;
+}
+
+/* ── Points & Tags Rows ── */
+.point-row,
+.tag-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.point-row input,
+.tag-row input {
+  flex: 1;
+}
+
+.tag-row select {
+  width: 110px;
+}
+
+.btn-remove-point {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  background: transparent;
+  color: #ef4444;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.btn-remove-point:hover {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: #ef4444;
+}
+
+.btn-add-point {
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  border: 1px dashed rgba(0, 0, 0, 0.2);
+  background: transparent;
+  color: #777;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-family: "Poppins", sans-serif;
+  margin-top: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-add-point:hover {
+  border-color: rgb(72, 117, 201);
+  color: rgb(72, 117, 201);
+}
+
+/* ── Form Actions ─��� */
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.btn-save {
+  padding: 0.75rem 2rem;
+  border-radius: 100px;
+  border: none;
+  background: rgb(72, 117, 201);
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.btn-save:hover {
+  background: rgb(55, 95, 170);
+  transform: translateY(-1px);
+}
+
+.btn-cancel {
+  padding: 0.75rem 2rem;
+  border-radius: 100px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: transparent;
+  color: #555;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.btn-cancel:hover {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.3);
+  color: #000;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .admin-container {
+    padding: 1.5rem;
+  }
+
+  .admin-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .admin-tabs {
+    flex-wrap: wrap;
+  }
+
+  .admin-item {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .item-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .admin-form {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-container {
+    padding: 1rem;
+  }
+
+  .admin-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .admin-tabs .tab {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .admin-login-form {
+    min-width: 280px;
+    padding: 2rem;
+  }
+}
+
+/* ── Settings Panel ── */
+.settings-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.settings-section {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.settings-section h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #000;
+}
+
+.settings-desc {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.settings-section input[type="text"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #f5f5f5;
+  color: #333;
+  font-size: 0.9rem;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+}
+
+.settings-section input[type="text"]:focus {
+  outline: none;
+  border-color: rgb(72, 117, 201);
+}
+
+.settings-section input[type="file"] {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.settings-preview {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 0.75rem;
+  border: 3px solid #f0f0f0;
+}
+
+.cv-upload-group {
+  margin-bottom: 1rem;
+}
+
+.cv-upload-group label {
+  display: block;
+  font-size: 0.8rem;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.4rem;
+}
+
+.cv-link-preview {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: rgb(72, 117, 201);
+  text-decoration: none;
+  margin-bottom: 0.4rem;
+}
+
+.cv-link-preview:hover {
+  text-decoration: underline;
+}
+
+.btn-save-settings {
+  padding: 0.85rem 2.5rem;
+  border-radius: 100px;
+  border: none;
+  background: rgb(72, 117, 201);
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.btn-save-settings:hover {
+  background: rgb(55, 95, 170);
+  transform: translateY(-1px);
+}
+
+.btn-save-settings:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
