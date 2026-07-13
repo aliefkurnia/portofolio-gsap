@@ -121,6 +121,11 @@
   border: none;
 }
 
+.cv__viewer--skeleton {
+  display: flex;
+  flex-direction: column;
+}
+
 .cv__empty {
   display: flex;
   flex-direction: column;

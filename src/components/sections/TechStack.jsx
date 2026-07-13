@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SectionHeading from '../ui/SectionHeading';
+import { TechStackSkeleton } from '../ui/Skeleton';
 import { usePortfolioData } from '../../hooks/usePortfolioData';
 import './TechStack.css';
 
@@ -11,9 +12,11 @@ const TechStack = () => {
   const sectionRef = useRef(null);
   const gridRef = useRef(null);
 
-  const { technologies } = usePortfolioData();
+  const { technologies, loading } = usePortfolioData();
 
   useEffect(() => {
+    if (loading || technologies.length === 0) return;
+
     const ctx = gsap.context(() => {
       gsap.fromTo(
         '.techstack__heading',
@@ -45,7 +48,7 @@ const TechStack = () => {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [technologies]);
+  }, [technologies, loading]);
 
   return (
     <section className="techstack section section--light" id="techstack" ref={sectionRef}>
@@ -58,21 +61,25 @@ const TechStack = () => {
           />
         </div>
 
-        <div className="techstack__grid" ref={gridRef}>
-          {technologies.map((tech) => (
-            <div key={tech.id} className="techstack__item">
-              <div className="techstack__icon-wrapper">
-                <img
-                  src={tech.icon_url}
-                  alt={tech.name}
-                  className="techstack__icon"
-                  loading="lazy"
-                />
+        {loading ? (
+          <TechStackSkeleton />
+        ) : (
+          <div className="techstack__grid" ref={gridRef}>
+            {technologies.map((tech) => (
+              <div key={tech.id} className="techstack__item">
+                <div className="techstack__icon-wrapper">
+                  <img
+                    src={tech.icon_url}
+                    alt={tech.name}
+                    className="techstack__icon"
+                    loading="lazy"
+                  />
+                </div>
+                <span className="techstack__name">{tech.name}</span>
               </div>
-              <span className="techstack__name">{tech.name}</span>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

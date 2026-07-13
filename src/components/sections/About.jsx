@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SectionHeading from '../ui/SectionHeading';
+import { AboutImageSkeleton } from '../ui/Skeleton';
 import { aboutText } from '../../data/constants';
 import { usePortfolioData } from '../../hooks/usePortfolioData';
 import './About.css';
@@ -13,7 +14,7 @@ const About = () => {
   const imageRef = useRef(null);
   const statsRef = useRef(null);
 
-  const { settings } = usePortfolioData();
+  const { settings, loading } = usePortfolioData();
   const heroImage = settings.hero_photo_url;
   const headline = settings.about_headline || aboutText.headline;
   const bio = settings.about_bio || aboutText.bio;
@@ -84,9 +85,11 @@ const About = () => {
         <div className="about__grid">
           <div className="about__image-col">
             <div className="about__image-wrapper" ref={imageRef}>
-              {heroImage && (
+              {loading ? (
+                <AboutImageSkeleton />
+              ) : heroImage ? (
                 <img src={heroImage} alt="Alief Kurnia" className="about__image" />
-              )}
+              ) : null}
               <div className="about__image-border"></div>
             </div>
           </div>

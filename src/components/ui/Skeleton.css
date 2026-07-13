@@ -1,0 +1,46 @@
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(140, 140, 140, 0.08) 0%,
+    rgba(140, 140, 140, 0.15) 50%,
+    rgba(140, 140, 140, 0.08) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+
+.section--light .skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.04) 0%,
+    rgba(0, 0, 0, 0.08) 50%,
+    rgba(0, 0, 0, 0.04) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+
+.skeleton--mt-sm {
+  margin-top: 0.4rem;
+}
+
+.skeleton--mt-md {
+  margin-top: 0.75rem;
+}
+
+.skeleton--aspect {
+  padding-bottom: 62.5%;
+}
+
+.skeleton--square {
+  padding-bottom: 100%;
+}

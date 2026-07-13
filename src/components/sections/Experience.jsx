@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SectionHeading from '../ui/SectionHeading';
+import { ExperienceSkeleton } from '../ui/Skeleton';
 import { usePortfolioData } from '../../hooks/usePortfolioData';
 import './Experience.css';
 
@@ -11,9 +12,11 @@ const Experience = () => {
   const sectionRef = useRef(null);
   const timelineRef = useRef(null);
 
-  const { experiences } = usePortfolioData();
+  const { experiences, loading } = usePortfolioData();
 
   useEffect(() => {
+    if (loading || experiences.length === 0) return;
+
     const ctx = gsap.context(() => {
       gsap.fromTo(
         '.experience__heading',
@@ -68,7 +71,7 @@ const Experience = () => {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [experiences]);
+  }, [experiences, loading]);
 
   return (
     <section className="experience section section--dark" id="experience" ref={sectionRef}>
@@ -77,36 +80,40 @@ const Experience = () => {
           <SectionHeading label="Career" title="Experience" light />
         </div>
 
-        <div className="experience__timeline" ref={timelineRef}>
-          <div className="experience__line"></div>
+        {loading ? (
+          <ExperienceSkeleton />
+        ) : (
+          <div className="experience__timeline" ref={timelineRef}>
+            <div className="experience__line"></div>
 
-          {experiences.map((exp) => (
-            <div key={exp.id} className="experience__item">
-              <div className="experience__dot"></div>
+            {experiences.map((exp) => (
+              <div key={exp.id} className="experience__item">
+                <div className="experience__dot"></div>
 
-              <div className="experience__card">
-                <div className="experience__card-header">
-                  <img
-                    src={exp.icon_url}
-                    alt={exp.company_name}
-                    className="experience__icon"
-                    style={{ backgroundColor: exp.icon_bg }}
-                  />
-                  <div>
-                    <h3 className="experience__role">{exp.title}</h3>
-                    <p className="experience__company">{exp.company_name}</p>
+                <div className="experience__card">
+                  <div className="experience__card-header">
+                    <img
+                      src={exp.icon_url}
+                      alt={exp.company_name}
+                      className="experience__icon"
+                      style={{ backgroundColor: exp.icon_bg }}
+                    />
+                    <div>
+                      <h3 className="experience__role">{exp.title}</h3>
+                      <p className="experience__company">{exp.company_name}</p>
+                    </div>
                   </div>
+                  <span className="experience__date">{exp.date_range}</span>
+                  <ul className="experience__points">
+                    {exp.points.map((point, idx) => (
+                      <li key={idx}>{point}</li>
+                    ))}
+                  </ul>
                 </div>
-                <span className="experience__date">{exp.date_range}</span>
-                <ul className="experience__points">
-                  {exp.points.map((point, idx) => (
-                    <li key={idx}>{point}</li>
-                  ))}
-                </ul>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

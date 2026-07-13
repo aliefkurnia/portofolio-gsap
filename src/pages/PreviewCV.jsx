@@ -1,11 +1,35 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePortfolioData } from "../hooks/usePortfolioData";
+import { Skeleton } from "../components/ui/Skeleton";
 import "./PreviewCV.css";
+
+const CvSkeleton = () => (
+  <div className="cv__viewer cv__viewer--skeleton">
+    <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <Skeleton width="40%" height="2rem" />
+      <Skeleton width="60%" height="1rem" />
+      <Skeleton width="100%" height="1rem" />
+      <Skeleton width="90%" height="1rem" />
+      <Skeleton width="100%" height="1rem" />
+      <div style={{ marginTop: '1rem' }} />
+      <Skeleton width="35%" height="1.5rem" />
+      <Skeleton width="100%" height="1rem" />
+      <Skeleton width="95%" height="1rem" />
+      <Skeleton width="80%" height="1rem" />
+      <Skeleton width="100%" height="1rem" />
+      <div style={{ marginTop: '1rem' }} />
+      <Skeleton width="30%" height="1.5rem" />
+      <Skeleton width="100%" height="1rem" />
+      <Skeleton width="85%" height="1rem" />
+      <Skeleton width="92%" height="1rem" />
+    </div>
+  </div>
+);
 
 const PreviewCV = () => {
   const [language, setLanguage] = useState("id");
-  const { settings } = usePortfolioData();
+  const { settings, loading } = usePortfolioData();
   const navigate = useNavigate();
 
   const pdfPaths = {
@@ -45,7 +69,9 @@ const PreviewCV = () => {
       </header>
 
       <main className="cv__body">
-        {pdfPaths[language] ? (
+        {loading ? (
+          <CvSkeleton />
+        ) : pdfPaths[language] ? (
           <div className="cv__viewer">
             <iframe src={pdfPaths[language]} title="Resume" />
           </div>

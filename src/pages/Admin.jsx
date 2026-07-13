@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import "./Admin.css";
 
-const ADMIN_PASSWORD = "admin123";
+const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
 const BUCKET = "portfolio-assets";
 
 function Admin() {
