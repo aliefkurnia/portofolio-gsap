@@ -1,0 +1,107 @@
+.contact__card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-3xl);
+  backdrop-filter: blur(20px);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.contact__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.contact__label {
+  font-size: var(--text-xs);
+  color: var(--color-silver-dark);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.contact__input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  color: var(--color-white);
+  font-size: var(--text-base);
+  transition: border-color var(--duration-fast) ease, background var(--duration-fast) ease;
+}
+
+.contact__input::placeholder {
+  color: var(--color-silver-dark);
+}
+
+.contact__input:focus {
+  outline: none;
+  border-color: rgba(192, 192, 192, 0.3);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.contact__textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact__submit {
+  align-self: flex-start;
+  background: var(--gradient-metallic);
+  color: var(--color-black);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide);
+  padding: 0.85rem 2rem;
+  border-radius: var(--radius-full);
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) ease,
+    opacity var(--duration-fast) ease;
+}
+
+.contact__submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+.contact__submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.contact__status {
+  font-size: var(--text-sm);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+}
+
+.contact__status--success {
+  color: #6ee7b7;
+  background: rgba(110, 231, 183, 0.08);
+  border: 1px solid rgba(110, 231, 183, 0.2);
+}
+
+.contact__status--error {
+  color: #fca5a5;
+  background: rgba(252, 165, 165, 0.08);
+  border: 1px solid rgba(252, 165, 165, 0.2);
+}
+
+@media (max-width: 480px) {
+  .contact__card {
+    padding: var(--space-xl);
+  }
+
+  .contact__submit {
+    width: 100%;
+    text-align: center;
+  }
+}

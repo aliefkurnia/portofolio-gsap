@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import "./Admin.css";
 
@@ -16,6 +17,7 @@ function Admin() {
   const [loading, setLoading] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
   const [formData, setFormData] = useState({});
+  const navigate = useNavigate();
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -163,7 +165,7 @@ function Admin() {
     <div className="admin-container">
       <header className="admin-header">
         <h1>Portfolio Admin</h1>
-        <button onClick={() => setAuthenticated(false)} className="btn-logout">
+        <button onClick={() => navigate("/")} className="btn-logout">
           Logout
         </button>
       </header>
@@ -483,7 +485,9 @@ function ProjectForm({ formData, setFormData, onFileChange }) {
 
 function SettingsPanel({ settings, uploadImage, onSaved }) {
   const [heroPhoto, setHeroPhoto] = useState(settings.hero_photo_url || "");
-  const [marqueeText, setMarqueeText] = useState(settings.marquee_text || "Software Developer");
+  const [jobTitle, setJobTitle] = useState(settings.job_title || "Software Developer");
+  const [aboutHeadline, setAboutHeadline] = useState(settings.about_headline || "");
+  const [aboutBio, setAboutBio] = useState(settings.about_bio || "");
   const [cvIdUrl, setCvIdUrl] = useState(settings.cv_id_url || "");
   const [cvEnUrl, setCvEnUrl] = useState(settings.cv_en_url || "");
   const [saving, setSaving] = useState(false);
@@ -506,7 +510,9 @@ function SettingsPanel({ settings, uploadImage, onSaved }) {
     setSaving(true);
     await Promise.all([
       upsertSetting("hero_photo_url", heroPhoto),
-      upsertSetting("marquee_text", marqueeText),
+      upsertSetting("job_title", jobTitle),
+      upsertSetting("about_headline", aboutHeadline),
+      upsertSetting("about_bio", aboutBio),
       upsertSetting("cv_id_url", cvIdUrl),
       upsertSetting("cv_en_url", cvEnUrl),
     ]);
@@ -543,19 +549,42 @@ function SettingsPanel({ settings, uploadImage, onSaved }) {
     <div className="settings-panel">
       <div className="settings-section">
         <h3>Hero Photo</h3>
-        <p className="settings-desc">Photo displayed in the hero/header section</p>
+        <p className="settings-desc">Photo displayed in the About section</p>
         {heroPhoto && <img src={heroPhoto} alt="Hero" className="settings-preview" />}
         <input type="file" accept="image/*" onChange={handlePhotoUpload} />
       </div>
 
       <div className="settings-section">
-        <h3>Marquee / Scroll Text</h3>
-        <p className="settings-desc">Running text displayed below hero section</p>
+        <h3>Job Title</h3>
+        <p className="settings-desc">Subtitle shown below your name in the hero section</p>
         <input
           type="text"
-          value={marqueeText}
-          onChange={(e) => setMarqueeText(e.target.value)}
+          value={jobTitle}
+          onChange={(e) => setJobTitle(e.target.value)}
           placeholder="Software Developer"
+        />
+      </div>
+
+      <div className="settings-section">
+        <h3>About Headline</h3>
+        <p className="settings-desc">Short headline in the About section</p>
+        <input
+          type="text"
+          value={aboutHeadline}
+          onChange={(e) => setAboutHeadline(e.target.value)}
+          placeholder="Software developer based in Indonesia."
+        />
+      </div>
+
+      <div className="settings-section">
+        <h3>About Bio</h3>
+        <p className="settings-desc">Your bio paragraph in the About section</p>
+        <textarea
+          className="settings-textarea"
+          value={aboutBio}
+          onChange={(e) => setAboutBio(e.target.value)}
+          placeholder="Write a short bio about yourself..."
+          rows={4}
         />
       </div>
 

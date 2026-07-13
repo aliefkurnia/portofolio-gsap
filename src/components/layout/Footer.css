@@ -1,0 +1,103 @@
+.footer {
+  background: var(--color-black);
+  color: var(--color-silver-dark);
+  padding: var(--space-3xl) 0 var(--space-xl);
+}
+
+.footer__inner {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer__logo {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  background: var(--gradient-metallic-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.footer__tagline {
+  font-size: var(--text-sm);
+  color: var(--color-silver-dark);
+  letter-spacing: var(--tracking-wide);
+}
+
+.footer__socials {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.footer__social {
+  color: var(--color-silver-dark);
+  transition: color var(--duration-fast) ease, transform var(--duration-fast) var(--ease-out);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer__social:hover {
+  color: var(--color-white);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.footer__divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-charcoal), transparent);
+  margin: var(--space-2xl) 0;
+}
+
+.footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer__copyright {
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+}
+
+.footer__back-to-top {
+  font-size: var(--text-xs);
+  color: var(--color-silver-dark);
+  letter-spacing: var(--tracking-wide);
+  transition: color var(--duration-fast) ease;
+  cursor: pointer;
+}
+
+.footer__back-to-top:hover {
+  color: var(--color-silver);
+}
+
+@media (max-width: 480px) {
+  .footer__top {
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .footer__bottom {
+    flex-direction: column;
+    gap: var(--space-md);
+    text-align: center;
+  }
+}
