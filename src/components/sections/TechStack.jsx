@@ -1,73 +1,47 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SectionHeading from '../ui/SectionHeading';
 import { TechStackSkeleton } from '../ui/Skeleton';
 import { usePortfolioData } from '../../hooks/usePortfolioData';
+import { useReveals } from '../../hooks/useScrollReveal';
 import './TechStack.css';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const TechStack = () => {
   const sectionRef = useRef(null);
-  const gridRef = useRef(null);
-
   const { technologies, loading } = usePortfolioData();
 
-  useEffect(() => {
-    if (loading || technologies.length === 0) return;
+  useReveals(sectionRef, [technologies.length, loading]);
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        '.techstack__heading',
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' },
-        }
-      );
+  const prefersReduced = () =>
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      if (gridRef.current) {
-        gsap.fromTo(
-          gridRef.current.children,
-          { opacity: 0, y: 30, scale: 0.9 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.5,
-            stagger: 0.05,
-            ease: 'power3.out',
-            scrollTrigger: { trigger: gridRef.current, start: 'top 85%' },
-          }
-        );
-      }
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, [technologies, loading]);
+  const hover = (e, lift) => {
+    if (prefersReduced()) return;
+    gsap.to(e.currentTarget, {
+      y: lift ? -4 : 0,
+      backgroundColor: lift ? 'var(--panel)' : 'var(--bg)',
+      duration: 0.3,
+      ease: 'power3.out',
+    });
+  };
 
   return (
-    <section className="techstack section section--light" id="techstack" ref={sectionRef}>
+    <section className="techstack section" id="techstack" ref={sectionRef}>
       <div className="container">
-        <div className="techstack__heading">
-          <SectionHeading
-            label="Technologies"
-            title="Tech Stack"
-            align="center"
-          />
-        </div>
+        <SectionHeading label="// stack.map()" title="Tech Stack" />
 
         {loading ? (
           <TechStackSkeleton />
         ) : (
-          <div className="techstack__grid" ref={gridRef}>
+          <div className="techstack__grid" data-stagger>
             {technologies.map((tech) => (
-              <div key={tech.id} className="techstack__item">
-                <div className="techstack__icon-wrapper">
+              <div
+                key={tech.id}
+                className="techstack__tile"
+                onMouseEnter={(e) => hover(e, true)}
+                onMouseLeave={(e) => hover(e, false)}
+              >
+                <div className="techstack__icon-box">
                   <img
                     src={tech.icon_url}
                     alt={tech.name}

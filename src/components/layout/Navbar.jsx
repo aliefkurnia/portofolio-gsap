@@ -3,172 +3,109 @@ import { gsap } from "gsap";
 import { navLinks } from "../../data/constants";
 import "./Navbar.css";
 
+const RESUME_URL = "/PreviewCV";
+
 const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const navRef = useRef(null);
-  const panelRef = useRef(null);
-  const backdropRef = useRef(null);
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
+  // Nav drops in on load (Hero timeline handles the rest of the page)
   useEffect(() => {
     if (!navRef.current) return;
-    gsap.fromTo(
-      navRef.current,
-      { y: -20, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, delay: 2.4, ease: "power3.out" },
-    );
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReduced) return;
+    // gsap.context + explicit fromTo keeps this StrictMode-safe (double-invoked
+    // effects in dev would otherwise leave the bar stuck offscreen at y:-68).
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        navRef.current,
+        { y: -68 },
+        { y: 0, duration: 0.7, delay: 0.1, ease: "power3.out" }
+      );
+    }, navRef);
+    return () => ctx.revert();
   }, []);
 
   useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = "hidden";
-
-      if (panelRef.current) {
-        gsap.fromTo(
-          panelRef.current,
-          { x: "100%" },
-          { x: "0%", duration: 0.4, ease: "power3.out" },
-        );
-        gsap.fromTo(
-          panelRef.current.querySelectorAll(".navbar__panel-item"),
-          { opacity: 0, x: 30 },
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.3,
-            stagger: 0.06,
-            delay: 0.2,
-            ease: "power3.out",
-          },
-        );
-      }
-
-      if (backdropRef.current) {
-        gsap.fromTo(
-          backdropRef.current,
-          { opacity: 0 },
-          { opacity: 1, duration: 0.3 },
-        );
-      }
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [menuOpen]);
 
-  const closeMenu = () => {
-    if (panelRef.current && backdropRef.current) {
-      gsap.to(panelRef.current, {
-        x: "100%",
-        duration: 0.3,
-        ease: "power2.in",
-      });
-      gsap.to(backdropRef.current, {
-        opacity: 0,
-        duration: 0.3,
-        onComplete: () => setMenuOpen(false),
-      });
-    } else {
-      setMenuOpen(false);
-    }
+  // Smooth-scroll with a fixed 60px offset (never scrollIntoView)
+  const scrollTo = (id) => {
+    setMenuOpen(false);
+    const el = document.getElementById(id);
+    if (!el) return;
+    const y = el.getBoundingClientRect().top + window.scrollY - 60;
+    window.scrollTo({ top: y, behavior: "smooth" });
   };
 
-  const scrollTo = (id) => {
-    closeMenu();
-    setTimeout(() => {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-    }, 350);
+  const scrollTop = () => {
+    setMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
     <>
-      <nav
-        ref={navRef}
-        className={`navbar ${scrolled ? "navbar--scrolled" : ""}`}
-      >
-        <div className="navbar__inner">
-          <a
-            href="#hero"
-            className="navbar__logo"
-            onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-          ></a>
+      <nav className="nav" ref={navRef}>
+        <div className="nav__inner">
+          <button className="nav__logo" onClick={scrollTop}>
+            alief<span className="nav__logo-dot">.</span>dev
+          </button>
 
-          <div className="navbar__links">
+          <div className="nav__links">
             {navLinks.map((link) => (
               <button
                 key={link.id}
-                className="navbar__link"
+                className="nav__link"
                 onClick={() => scrollTo(link.id)}
               >
-                {link.label}
+                {link.label.toLowerCase()}
               </button>
             ))}
-            <a href="/PreviewCV" className="navbar__cta">
-              Resume
+            <a href={RESUME_URL} className="nav__resume">
+              resume <span className="nav__arrow">↗</span>
             </a>
           </div>
 
           <button
-            className={`navbar__hamburger ${menuOpen ? "navbar__hamburger--open" : ""}`}
-            onClick={() => (menuOpen ? closeMenu() : setMenuOpen(true))}
-            aria-label="Toggle menu"
+            className="nav__burger"
+            onClick={() => setMenuOpen(true)}
+            aria-label="Open menu"
             aria-expanded={menuOpen}
           >
-            <span></span>
-            <span></span>
-            <span></span>
+            ≡
           </button>
         </div>
       </nav>
 
       {menuOpen && (
-        <div className="navbar__overlay">
-          <div
-            className="navbar__backdrop"
-            ref={backdropRef}
-            onClick={closeMenu}
-          />
-          <aside className="navbar__panel" ref={panelRef}>
-            <div className="navbar__panel-header">
-              <span className="navbar__panel-title">Menu</span>
+        <div className="nav-overlay">
+          <button
+            className="nav-overlay__close"
+            onClick={() => setMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            ✕
+          </button>
+          <nav className="nav-overlay__links">
+            {navLinks.map((link) => (
               <button
-                className="navbar__panel-close"
-                onClick={closeMenu}
-                aria-label="Close menu"
+                key={link.id}
+                className="nav-overlay__link"
+                onClick={() => scrollTo(link.id)}
               >
-                <span></span>
-                <span></span>
+                {link.label.toLowerCase()}
               </button>
-            </div>
-            <nav className="navbar__panel-nav">
-              {navLinks.map((link) => (
-                <button
-                  key={link.id}
-                  className="navbar__panel-item"
-                  onClick={() => scrollTo(link.id)}
-                >
-                  {link.label}
-                </button>
-              ))}
-            </nav>
-            <div className="navbar__panel-footer">
-              <a href="/PreviewCV" className="navbar__panel-cta">
-                Resume
-              </a>
-            </div>
-          </aside>
+            ))}
+          </nav>
+          <a href={RESUME_URL} className="nav-overlay__resume">
+            resume ↗
+          </a>
         </div>
       )}
     </>

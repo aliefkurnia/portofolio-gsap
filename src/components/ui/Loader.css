@@ -1,7 +1,7 @@
 .loader {
   position: fixed;
   inset: 0;
-  background: var(--color-black);
+  background: var(--bg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,16 +19,18 @@
 }
 
 .loader__main {
-  font-family: var(--font-heading);
+  font-family: var(--font-mono);
   font-size: clamp(3rem, 10vw, 5.5rem);
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: -0.03em;
-  background: var(--gradient-metallic-text);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--ink);
   position: relative;
   z-index: 2;
+}
+
+.loader__main::before {
+  content: '$ ';
+  color: var(--accent);
 }
 
 .loader__word {
@@ -36,10 +38,10 @@
   top: 50%;
   left: 50%;
   transform: translate(var(--x), var(--y));
-  font-family: var(--font-heading);
+  font-family: var(--font-mono);
   font-size: calc(clamp(1.8rem, 5vw, 3rem) * var(--size, 1));
-  font-weight: 300;
-  color: var(--color-silver-dark);
+  font-weight: 400;
+  color: var(--faint);
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;

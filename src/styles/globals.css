@@ -1,4 +1,4 @@
-/* ─── Global Reset & Base Styles ─── */
+/* ─── Global Reset & Base — Terminal / IDE ─── */
 @import './variables.css';
 
 *,
@@ -11,25 +11,25 @@
 
 html {
   font-size: 16px;
-  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
 body {
-  font-family: var(--font-body);
-  color: var(--color-charcoal);
-  background-color: var(--color-snow);
-  line-height: var(--leading-normal);
+  font-family: var(--font-sans);
+  color: var(--body);
+  background-color: var(--bg);
+  line-height: 1.5;
   overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  font-weight: 600;
-  line-height: var(--leading-tight);
-  letter-spacing: var(--tracking-tight);
+  font-family: var(--font-sans);
+  color: var(--ink);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 a {
@@ -44,10 +44,11 @@ img {
 }
 
 button {
-  font-family: var(--font-body);
+  font-family: var(--font-mono);
   cursor: pointer;
   border: none;
   background: none;
+  color: inherit;
 }
 
 ul, ol {
@@ -55,47 +56,42 @@ ul, ol {
 }
 
 input, textarea, select {
-  font-family: var(--font-body);
-  font-size: var(--text-base);
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
 }
 
 ::selection {
-  background: rgba(192, 192, 192, 0.3);
-  color: var(--color-dark);
+  background: rgba(126, 231, 135, 0.24);
+  color: var(--ink);
 }
 
-/* ─── Utility Classes ─── */
+/* ─── Layout Utilities ─── */
 .container {
   width: 100%;
-  max-width: var(--max-width);
+  max-width: var(--container);
   margin: 0 auto;
-  padding: 0 var(--space-xl);
+  padding: 0 var(--container-pad);
 }
 
 .container--narrow {
-  max-width: var(--max-width-narrow);
+  max-width: var(--container-narrow);
 }
 
 .section {
-  padding: var(--section-padding) 0;
+  padding: var(--section-y) 0;
   position: relative;
+  border-top: 1px solid var(--border);
 }
 
-.section--dark {
-  background-color: var(--color-black);
-  color: var(--color-silver-light);
-}
-
-.section--light {
-  background-color: var(--color-snow);
-  color: var(--color-charcoal);
-}
-
-.text-gradient {
-  background: var(--gradient-metallic-text);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Section eyebrow — mono, accent, // prefixed */
+.eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  margin-bottom: 18px;
 }
 
 .sr-only {
@@ -108,6 +104,13 @@ input, textarea, select {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+@media (max-width: 820px) {
+  :root {
+    --container-pad: 24px;
+    --section-y: 72px;
+  }
 }
 
 /* ─── Reduced Motion ─── */
@@ -124,18 +127,15 @@ input, textarea, select {
 
 /* ─── Scrollbar ─── */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
-
 ::-webkit-scrollbar-track {
-  background: var(--color-black);
+  background: var(--bg);
 }
-
 ::-webkit-scrollbar-thumb {
-  background: var(--color-silver-dark);
-  border-radius: 3px;
+  background: var(--border);
+  border-radius: 0;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-silver);
+  background: var(--gutter);
 }

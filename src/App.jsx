@@ -6,10 +6,9 @@ import ScrollProgress from './components/layout/ScrollProgress';
 import Loader from './components/ui/Loader';
 import Hero from './components/sections/Hero';
 import About from './components/sections/About';
+import TechStack from './components/sections/TechStack';
 import Experience from './components/sections/Experience';
 import Projects from './components/sections/Projects';
-import TechStack from './components/sections/TechStack';
-import Achievements from './components/sections/Achievements';
 import Contact from './components/sections/Contact';
 import Admin from './pages/Admin';
 import PreviewCV from './pages/PreviewCV';
@@ -37,10 +36,9 @@ function App() {
               <main>
                 <Hero />
                 <About />
+                <TechStack />
                 <Experience />
                 <Projects />
-                <TechStack />
-                <Achievements />
                 <Contact />
               </main>
               <Footer />
