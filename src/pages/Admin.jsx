@@ -17,6 +17,8 @@ function Admin() {
   const [loading, setLoading] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
   const [formData, setFormData] = useState({});
+  const [dragItem, setDragItem] = useState(null);
+  const [dragOverIndex, setDragOverIndex] = useState(null);
   const navigate = useNavigate();
 
   const fetchData = useCallback(async () => {
@@ -144,6 +146,57 @@ function Admin() {
     if (url) setFormData((prev) => ({ ...prev, [field]: url }));
   }
 
+  const listConfig = {
+    technologies: { items: technologies, setItems: setTechnologies },
+    experiences: { items: experiences, setItems: setExperiences },
+    projects: { items: projects, setItems: setProjects },
+  };
+
+  function handleDragStart(table, index) {
+    setDragItem({ table, index });
+  }
+
+  function handleDragEnter(table, index) {
+    if (dragItem && dragItem.table === table) setDragOverIndex(index);
+  }
+
+  function handleDragEnd() {
+    setDragItem(null);
+    setDragOverIndex(null);
+  }
+
+  async function handleDrop(table, dropIndex) {
+    if (!dragItem || dragItem.table !== table) {
+      handleDragEnd();
+      return;
+    }
+    const from = dragItem.index;
+    const to = dropIndex;
+    handleDragEnd();
+    if (from === to) return;
+
+    const { items, setItems } = listConfig[table];
+    const updated = [...items];
+    const [moved] = updated.splice(from, 1);
+    updated.splice(to, 0, moved);
+    const reordered = updated.map((it, i) => ({ ...it, sort_order: i }));
+    setItems(reordered);
+
+    const changed = reordered.filter(
+      (it, i) => items.findIndex((o) => o.id === it.id) !== i
+    );
+    const results = await Promise.all(
+      changed.map((it) =>
+        supabase.from(table).update({ sort_order: it.sort_order }).eq("id", it.id)
+      )
+    );
+    const failed = results.find((r) => r.error);
+    if (failed) {
+      alert("Error saving order: " + failed.error.message);
+      fetchData();
+    }
+  }
+
   if (!authenticated) {
     return (
       <div className="admin-login">
@@ -236,11 +289,24 @@ function Admin() {
 
           {activeTab === "technologies" && (
             <div className="admin-list">
-              {technologies.map((tech) => (
-                <div key={tech.id} className="admin-item">
+              {technologies.map((tech, index) => (
+                <div
+                  key={tech.id}
+                  className={`admin-item${
+                    dragItem?.table === "technologies" && dragItem.index === index
+                      ? " dragging"
+                      : ""
+                  }${dragOverIndex === index && dragItem?.table === "technologies" ? " drag-over" : ""}`}
+                  draggable
+                  onDragStart={() => handleDragStart("technologies", index)}
+                  onDragEnter={() => handleDragEnter("technologies", index)}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={() => handleDrop("technologies", index)}
+                  onDragEnd={handleDragEnd}
+                >
+                  <span className="drag-handle" title="Drag to reorder">⠿</span>
                   <img src={tech.icon_url} alt={tech.name} className="admin-thumb" />
                   <span>{tech.name}</span>
-                  <span className="sort-badge">#{tech.sort_order}</span>
                   <div className="item-actions">
                     <button onClick={() => startEdit(tech)}>Edit</button>
                     <button onClick={() => handleDelete("technologies", tech.id)} className="btn-del">
@@ -254,14 +320,27 @@ function Admin() {
 
           {activeTab === "experiences" && (
             <div className="admin-list">
-              {experiences.map((exp) => (
-                <div key={exp.id} className="admin-item">
+              {experiences.map((exp, index) => (
+                <div
+                  key={exp.id}
+                  className={`admin-item${
+                    dragItem?.table === "experiences" && dragItem.index === index
+                      ? " dragging"
+                      : ""
+                  }${dragOverIndex === index && dragItem?.table === "experiences" ? " drag-over" : ""}`}
+                  draggable
+                  onDragStart={() => handleDragStart("experiences", index)}
+                  onDragEnter={() => handleDragEnter("experiences", index)}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={() => handleDrop("experiences", index)}
+                  onDragEnd={handleDragEnd}
+                >
+                  <span className="drag-handle" title="Drag to reorder">⠿</span>
                   <img src={exp.icon_url} alt={exp.company_name} className="admin-thumb" />
                   <div className="item-info">
                     <strong>{exp.title}</strong>
                     <span>{exp.company_name} | {exp.date_range}</span>
                   </div>
-                  <span className="sort-badge">#{exp.sort_order}</span>
                   <div className="item-actions">
                     <button onClick={() => startEdit(exp)}>Edit</button>
                     <button onClick={() => handleDelete("experiences", exp.id)} className="btn-del">
@@ -275,14 +354,27 @@ function Admin() {
 
           {activeTab === "projects" && (
             <div className="admin-list">
-              {projects.map((proj) => (
-                <div key={proj.id} className="admin-item">
+              {projects.map((proj, index) => (
+                <div
+                  key={proj.id}
+                  className={`admin-item${
+                    dragItem?.table === "projects" && dragItem.index === index
+                      ? " dragging"
+                      : ""
+                  }${dragOverIndex === index && dragItem?.table === "projects" ? " drag-over" : ""}`}
+                  draggable
+                  onDragStart={() => handleDragStart("projects", index)}
+                  onDragEnter={() => handleDragEnter("projects", index)}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={() => handleDrop("projects", index)}
+                  onDragEnd={handleDragEnd}
+                >
+                  <span className="drag-handle" title="Drag to reorder">⠿</span>
                   <img src={proj.image_url} alt={proj.name} className="admin-thumb project-thumb" />
                   <div className="item-info">
                     <strong>{proj.name}</strong>
                     <span>{proj.description.slice(0, 60)}...</span>
                   </div>
-                  <span className="sort-badge">#{proj.sort_order}</span>
                   <div className="item-actions">
                     <button onClick={() => startEdit(proj)}>Edit</button>
                     <button onClick={() => handleDelete("projects", proj.id)} className="btn-del">
@@ -318,12 +410,6 @@ function TechForm({ formData, setFormData, onFileChange }) {
       <label>Icon</label>
       {formData.icon_url && <img src={formData.icon_url} alt="" className="form-preview" />}
       <input type="file" accept="image/*" onChange={(e) => onFileChange(e, "icon_url", "tech")} />
-      <label>Sort Order</label>
-      <input
-        type="number"
-        value={formData.sort_order ?? 0}
-        onChange={(e) => setFormData((p) => ({ ...p, sort_order: parseInt(e.target.value) || 0 }))}
-      />
     </div>
   );
 }
@@ -387,12 +473,6 @@ function ExpForm({ formData, setFormData, onFileChange }) {
       >
         + Add Point
       </button>
-      <label>Sort Order</label>
-      <input
-        type="number"
-        value={formData.sort_order ?? 0}
-        onChange={(e) => setFormData((p) => ({ ...p, sort_order: parseInt(e.target.value) || 0 }))}
-      />
     </div>
   );
 }
@@ -473,12 +553,6 @@ function ProjectForm({ formData, setFormData, onFileChange }) {
       >
         + Add Tag
       </button>
-      <label>Sort Order</label>
-      <input
-        type="number"
-        value={formData.sort_order ?? 0}
-        onChange={(e) => setFormData((p) => ({ ...p, sort_order: parseInt(e.target.value) || 0 }))}
-      />
     </div>
   );
 }

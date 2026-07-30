@@ -224,7 +224,7 @@
   font-size: 0.85rem;
 }
 
-.admin-item > span:not(.sort-badge) {
+.admin-item > span:not(.sort-badge):not(.drag-handle) {
   color: var(--body);
   font-weight: 400;
 }
@@ -235,6 +235,36 @@
   font-weight: 600;
   min-width: 30px;
   font-family: var(--font-mono);
+}
+
+/* ── Drag & Drop ── */
+.drag-handle {
+  cursor: grab;
+  color: var(--faint);
+  font-size: 1.1rem;
+  line-height: 1;
+  user-select: none;
+  flex-shrink: 0;
+  padding: 0 0.2rem;
+  transition: color var(--duration-fast) ease;
+}
+
+.admin-item:hover .drag-handle {
+  color: var(--body);
+}
+
+.admin-item.dragging {
+  opacity: 0.4;
+  cursor: grabbing;
+}
+
+.admin-item.dragging .drag-handle {
+  cursor: grabbing;
+}
+
+.admin-item.drag-over {
+  border-color: var(--accent, var(--gutter));
+  box-shadow: inset 0 2px 0 var(--accent, var(--gutter));
 }
 
 /* ── Item Actions ── */
