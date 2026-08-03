@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
+import { getBest, submitBest } from "./scores";
+import { typeKey, win as winSfx } from "./sfx";
+import ScoreSubmit from "./ScoreSubmit";
 import "./Games.css";
 import "./TypingTest.css";
 
@@ -8,8 +11,6 @@ const SNIPPETS = [
   "services.AddScoped<IUserRepository, UserRepository>();",
   "if (!ModelState.IsValid) return BadRequest(ModelState);",
 ];
-
-const BEST_KEY = "typing_best_wpm";
 
 const TypingTest = () => {
   const [snippetIdx, setSnippetIdx] = useState(() =>
@@ -23,7 +24,7 @@ const TypingTest = () => {
   const [finished, setFinished] = useState(false);
   const [strokes, setStrokes] = useState(0);
   const [errors, setErrors] = useState(0);
-  const [best, setBest] = useState(() => Number(localStorage.getItem(BEST_KEY)) || 0);
+  const [best, setBest] = useState(() => getBest("typing") || 0);
   const inputRef = useRef(null);
 
   // live timer
@@ -56,6 +57,7 @@ const TypingTest = () => {
     if (attempted !== snippet[idx]) {
       // Wrong key — reject it. Cursor stays put; you must type the right key.
       setErrors((x) => x + 1);
+      typeKey(false);
       e.target.value = typed;
       return;
     }
@@ -63,6 +65,7 @@ const TypingTest = () => {
     // Correct — advance exactly one character (also blocks paste-ahead).
     const next = snippet.slice(0, idx + 1);
     setTyped(next);
+    typeKey(true);
 
     if (next.length === snippet.length) {
       const finalElapsed = (Date.now() - (startTime || Date.now())) / 1000;
@@ -70,13 +73,8 @@ const TypingTest = () => {
       setFinished(true);
       const finalWpm =
         finalElapsed > 0 ? Math.round(snippet.length / 5 / (finalElapsed / 60)) : 0;
-      setBest((b) => {
-        if (finalWpm > b) {
-          localStorage.setItem(BEST_KEY, String(finalWpm));
-          return finalWpm;
-        }
-        return b;
-      });
+      if (submitBest("typing", finalWpm, "high")) setBest(finalWpm);
+      winSfx();
     }
   };
 
@@ -164,6 +162,7 @@ const TypingTest = () => {
               {accuracy}% accuracy · {elapsed.toFixed(1)}s
               {wpm >= best && wpm > 0 ? " · new best!" : ""}
             </span>
+            <ScoreSubmit gameId="typing" score={wpm} />
             <div className="typing__actions">
               <button className="game-btn game-btn--ghost" onClick={() => reset(false)}>
                 Retry

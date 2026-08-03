@@ -1,0 +1,62 @@
+.ss {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 340px;
+  margin: 4px 0 2px;
+}
+
+.ss__prompt {
+  font-size: 13px;
+  color: var(--body);
+}
+
+.ss__row {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.ss__input {
+  flex: 1;
+  min-width: 0;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border-strong);
+  border-radius: var(--radius-full);
+  padding: 10px 16px;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+}
+
+.ss__input::placeholder {
+  color: var(--faint);
+}
+
+.ss__input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.ss__save {
+  flex-shrink: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.ss__done {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--up);
+}
+
+.ss__err {
+  font-size: 12px;
+  color: var(--down);
+}

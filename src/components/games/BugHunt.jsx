@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { getBest, submitBest } from "./scores";
+import ScoreSubmit from "./ScoreSubmit";
+import { hit, comboUp } from "./sfx";
 import "./Games.css";
 import "./BugHunt.css";
 
 const GAME_TIME = 30;
 const BUG_LIFESPAN = 1100;
 const SPAWN_EVERY = 680;
-const BEST_KEY = "bughunt_best";
 
 const BugHunt = () => {
   const [playing, setPlaying] = useState(false);
@@ -14,11 +16,22 @@ const BugHunt = () => {
   const [combo, setCombo] = useState(0);
   const [timeLeft, setTimeLeft] = useState(GAME_TIME);
   const [bugs, setBugs] = useState([]);
-  const [best, setBest] = useState(() => Number(localStorage.getItem(BEST_KEY)) || 0);
+  const [best, setBest] = useState(() => getBest("bughunt") || 0);
+  const [popups, setPopups] = useState([]);
 
   const idRef = useRef(0);
   const timeoutsRef = useRef({});
   const playingRef = useRef(false);
+  const scoreRef = useRef(0);
+  const comboRef = useRef(0);
+  const popupIdRef = useRef(0);
+
+  useEffect(() => {
+    scoreRef.current = score;
+  }, [score]);
+  useEffect(() => {
+    comboRef.current = combo;
+  }, [combo]);
 
   const clearAllTimeouts = () => {
     Object.values(timeoutsRef.current).forEach(clearTimeout);
@@ -26,21 +39,14 @@ const BugHunt = () => {
   };
 
   const endGame = useCallback(() => {
+    if (!playingRef.current) return;
     playingRef.current = false;
     setPlaying(false);
     setOver(true);
     setBugs([]);
     clearAllTimeouts();
-    setScore((s) => {
-      setBest((b) => {
-        if (s > b) {
-          localStorage.setItem(BEST_KEY, String(s));
-          return s;
-        }
-        return b;
-      });
-      return s;
-    });
+    const final = scoreRef.current;
+    if (submitBest("bughunt", final, "high")) setBest(final);
   }, []);
 
   // Countdown
@@ -81,10 +87,12 @@ const BugHunt = () => {
   const start = () => {
     clearAllTimeouts();
     idRef.current = 0;
+    comboRef.current = 0;
     setScore(0);
     setCombo(0);
     setTimeLeft(GAME_TIME);
     setBugs([]);
+    setPopups([]);
     setOver(false);
     playingRef.current = true;
     setPlaying(true);
@@ -94,16 +102,31 @@ const BugHunt = () => {
     e.stopPropagation();
     // A bug button only exists while its bug is on the field, so a click is
     // always a valid hit. Clear its expiry timer so it can't reset the combo.
+    const bug = bugs.find((x) => x.id === id);
     if (timeoutsRef.current[id]) {
       clearTimeout(timeoutsRef.current[id]);
       delete timeoutsRef.current[id];
     }
     setBugs((b) => b.filter((x) => x.id !== id));
-    setCombo((c) => {
-      const nc = c + 1;
-      setScore((s) => s + 10 + (nc - 1) * 2);
-      return nc;
-    });
+
+    const nc = comboRef.current + 1;
+    comboRef.current = nc;
+    const pts = 10 + (nc - 1) * 2;
+    setCombo(nc);
+    setScore((s) => s + pts);
+
+    // sound — a flourish every 5th hit, a rising blip otherwise
+    if (nc % 5 === 0) comboUp(nc);
+    else hit(nc);
+
+    // floating score popup at the bug's spot
+    if (bug) {
+      const pid = ++popupIdRef.current;
+      setPopups((p) => [...p, { id: pid, x: bug.x, y: bug.y, pts, combo: nc }]);
+      setTimeout(() => {
+        setPopups((p) => p.filter((x) => x.id !== pid));
+      }, 750);
+    }
   };
 
   useEffect(() => () => clearAllTimeouts(), []);
@@ -117,7 +140,13 @@ const BugHunt = () => {
         </div>
         <div className="game-stat">
           <span className="game-stat__label">Combo</span>
-          <span className="game-stat__value game-stat__value--accent">×{combo}</span>
+          <span
+            key={combo}
+            className="game-stat__value game-stat__value--accent bughunt__combo"
+            data-hot={combo >= 5 ? "true" : "false"}
+          >
+            ×{combo}
+          </span>
         </div>
         <div className="game-stat">
           <span className="game-stat__label">Time</span>
@@ -146,6 +175,17 @@ const BugHunt = () => {
           </button>
         ))}
 
+        {popups.map((p) => (
+          <span
+            key={p.id}
+            className={`bughunt__popup${p.combo >= 5 ? " is-hot" : ""}`}
+            style={{ left: `${p.x}%`, top: `${p.y}%` }}
+          >
+            +{p.pts}
+            {p.combo >= 3 ? <b> ×{p.combo}</b> : ""}
+          </span>
+        ))}
+
         {!playing && (
           <div className="game-overlay">
             {over ? (
@@ -155,6 +195,7 @@ const BugHunt = () => {
                 <span className="game-overlay__note">
                   You squashed {score} points{score >= best && score > 0 ? " · new best!" : ""}
                 </span>
+                <ScoreSubmit gameId="bughunt" score={score} />
                 <button className="game-btn game-btn--solid" onClick={start}>
                   Play again
                 </button>

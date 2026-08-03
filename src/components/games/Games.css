@@ -104,6 +104,7 @@
   -webkit-backdrop-filter: blur(10px);
   border-radius: inherit;
   padding: 24px;
+  overflow-y: auto;
 }
 
 .game-overlay__emoji {

@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
+import { getBest, submitBest } from "./scores";
+import { flip as flipSfx, match as matchSfx, win as winSfx } from "./sfx";
+import ScoreSubmit from "./ScoreSubmit";
 import csharp from "../Assets/tech/csharp.png";
 import dotnet from "../Assets/tech/dotnet.png";
 import blazor from "../Assets/tech/blazor.png";
@@ -45,9 +48,22 @@ const MemoryMatch = () => {
   const [matched, setMatched] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [running, setRunning] = useState(false);
+  const [best, setBest] = useState(() => getBest("memory"));
+  const [isBest, setIsBest] = useState(false);
   const lockRef = useRef(false);
 
   const won = matched === ICONS.length;
+
+  // Record best (fewest moves) once solved, and post to the leaderboard.
+  useEffect(() => {
+    if (!won) return;
+    winSfx();
+    if (submitBest("memory", moves, "low")) {
+      setBest(moves);
+      setIsBest(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [won]);
 
   // Timer
   useEffect(() => {
@@ -67,6 +83,7 @@ const MemoryMatch = () => {
       const nextPicks = [...picks, index];
       setCards(nextCards);
       setPicks(nextPicks);
+      flipSfx();
 
       if (nextPicks.length === 2) {
         setMoves((m) => m + 1);
@@ -78,6 +95,7 @@ const MemoryMatch = () => {
           );
           setMatched((m) => m + 1);
           setPicks([]);
+          matchSfx();
         } else {
           // no match — flip back after a beat
           lockRef.current = true;
@@ -102,6 +120,7 @@ const MemoryMatch = () => {
     setMatched(0);
     setSeconds(0);
     setRunning(false);
+    setIsBest(false);
   };
 
   const mm = String(Math.floor(seconds / 60)).padStart(2, "0");
@@ -124,6 +143,12 @@ const MemoryMatch = () => {
           <span className="game-stat__label">Time</span>
           <span className="game-stat__value">
             {mm}:{ss}
+          </span>
+        </div>
+        <div className="game-stat">
+          <span className="game-stat__label">Best</span>
+          <span className="game-stat__value game-stat__value--accent">
+            {best != null ? `${best} mv` : "—"}
           </span>
         </div>
         <div className="game-spacer" />
@@ -168,7 +193,9 @@ const MemoryMatch = () => {
             <span className="game-overlay__title">Cleared!</span>
             <span className="game-overlay__note">
               {moves} moves · {mm}:{ss}
+              {isBest ? " · new best!" : ""}
             </span>
+            <ScoreSubmit gameId="memory" score={moves} />
             <button className="game-btn game-btn--solid" onClick={restart}>
               Play again
             </button>

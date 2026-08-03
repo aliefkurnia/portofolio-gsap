@@ -4,6 +4,7 @@ import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import ScrollProgress from './components/layout/ScrollProgress';
 import Loader from './components/ui/Loader';
+import GameNudge from './components/ui/GameNudge';
 import Hero from './components/sections/Hero';
 import About from './components/sections/About';
 import TechStack from './components/sections/TechStack';
@@ -43,6 +44,7 @@ function App() {
                 <Contact />
               </main>
               <Footer />
+              <GameNudge />
             </>
           )
         }

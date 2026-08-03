@@ -3,6 +3,12 @@ import { useNavigate } from "react-router-dom";
 import MemoryMatch from "../components/games/MemoryMatch";
 import BugHunt from "../components/games/BugHunt";
 import TypingTest from "../components/games/TypingTest";
+import ReactionTime from "../components/games/ReactionTime";
+import Simon from "../components/games/Simon";
+import Snake from "../components/games/Snake";
+import Leaderboard from "../components/games/Leaderboard";
+import { getBest } from "../components/games/scores";
+import { isMuted, setMuted } from "../components/games/sfx";
 import "./Play.css";
 
 const GAMES = [
@@ -13,6 +19,8 @@ const GAMES = [
     emoji: "🃏",
     tag: "Memory",
     Component: MemoryMatch,
+    dir: "low",
+    formatBest: (v) => `${v} moves`,
   },
   {
     id: "bughunt",
@@ -21,6 +29,8 @@ const GAMES = [
     emoji: "🐛",
     tag: "Reaction",
     Component: BugHunt,
+    dir: "high",
+    formatBest: (v) => `${v} pts`,
   },
   {
     id: "typing",
@@ -29,13 +39,52 @@ const GAMES = [
     emoji: "⌨️",
     tag: "Speed",
     Component: TypingTest,
+    dir: "high",
+    formatBest: (v) => `${v} WPM`,
+  },
+  {
+    id: "reaction",
+    title: "Reaction Time",
+    desc: "Wait for green, then click as fast as you can. Your best reaction in milliseconds.",
+    emoji: "⚡",
+    tag: "Reflex",
+    Component: ReactionTime,
+    dir: "low",
+    formatBest: (v) => `${v} ms`,
+  },
+  {
+    id: "simon",
+    title: "Sequence Memory",
+    desc: "Watch the colours light up, then repeat the growing pattern. How far can you get?",
+    emoji: "🎨",
+    tag: "Memory",
+    Component: Simon,
+    dir: "high",
+    formatBest: (v) => `round ${v}`,
+  },
+  {
+    id: "snake",
+    title: "Snake",
+    desc: "The classic. Steer with arrow keys or WASD, eat the dots, and don't crash into yourself.",
+    emoji: "🐍",
+    tag: "Arcade",
+    Component: Snake,
+    dir: "high",
+    formatBest: (v) => `${v} pts`,
   },
 ];
 
 const Play = () => {
   const navigate = useNavigate();
   const [activeId, setActiveId] = useState(null);
+  const [muted, setMutedState] = useState(() => isMuted());
   const active = GAMES.find((g) => g.id === activeId);
+
+  const toggleMute = () => {
+    const m = !muted;
+    setMuted(m);
+    setMutedState(m);
+  };
 
   return (
     <div className="play">
@@ -56,9 +105,19 @@ const Play = () => {
               ← Portfolio
             </button>
           )}
-          <span className="play__brand">
-            alief<span className="play__brand-dot">.</span>arcade
-          </span>
+          <div className="play__header-right">
+            <button
+              className="play__mute"
+              onClick={toggleMute}
+              aria-label={muted ? "Unmute" : "Mute"}
+              title={muted ? "Unmute" : "Mute"}
+            >
+              {muted ? "🔇" : "🔊"}
+            </button>
+            <span className="play__brand">
+              alief<span className="play__brand-dot">.</span>arcade
+            </span>
+          </div>
         </header>
 
         {!active ? (
@@ -73,21 +132,32 @@ const Play = () => {
             </div>
 
             <div className="play__grid">
-              {GAMES.map((g) => (
-                <button
-                  key={g.id}
-                  className="play__card glass"
-                  onClick={() => setActiveId(g.id)}
-                >
-                  <div className="play__card-top">
-                    <span className="play__card-emoji">{g.emoji}</span>
-                    <span className="play__card-tag">{g.tag}</span>
-                  </div>
-                  <h3 className="play__card-title">{g.title}</h3>
-                  <p className="play__card-desc">{g.desc}</p>
-                  <span className="play__card-cta">Play →</span>
-                </button>
-              ))}
+              {GAMES.map((g) => {
+                const best = getBest(g.id);
+                return (
+                  <button
+                    key={g.id}
+                    className="play__card glass"
+                    onClick={() => setActiveId(g.id)}
+                  >
+                    <div className="play__card-top">
+                      <span className="play__card-emoji">{g.emoji}</span>
+                      <span className="play__card-tag">{g.tag}</span>
+                    </div>
+                    <h3 className="play__card-title">{g.title}</h3>
+                    <p className="play__card-desc">{g.desc}</p>
+                    <div className="play__card-foot">
+                      <span className="play__card-cta">Play →</span>
+                      {best != null && (
+                        <span className="play__card-best">
+                          <span className="play__card-best-star">★</span>
+                          {g.formatBest(best)}
+                        </span>
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           </>
         ) : (
@@ -99,6 +169,11 @@ const Play = () => {
               </h2>
             </div>
             <active.Component />
+            <Leaderboard
+              gameId={active.id}
+              dir={active.dir}
+              formatBest={active.formatBest}
+            />
           </div>
         )}
       </div>
