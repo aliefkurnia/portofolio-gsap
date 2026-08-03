@@ -1,0 +1,228 @@
+.play {
+  position: relative;
+  min-height: 100vh;
+  background: var(--bg);
+  overflow: hidden;
+  font-family: var(--font-sans);
+}
+
+/* ─── Gradient mesh background ─── */
+.play__mesh {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(80px) saturate(135%);
+}
+
+.play__blob {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.5;
+  will-change: transform;
+}
+
+.play__blob--1 {
+  width: 46vw;
+  height: 46vw;
+  top: -16%;
+  left: -8%;
+  background: radial-gradient(circle at 30% 30%, #4f8cff, transparent 68%);
+  animation: playDrift1 24s ease-in-out infinite;
+}
+
+.play__blob--2 {
+  width: 40vw;
+  height: 40vw;
+  top: -10%;
+  right: -8%;
+  background: radial-gradient(circle at 60% 40%, #7c6cff, transparent 66%);
+  animation: playDrift2 28s ease-in-out infinite;
+}
+
+.play__blob--3 {
+  width: 42vw;
+  height: 42vw;
+  bottom: -24%;
+  left: 30%;
+  background: radial-gradient(circle at 50% 50%, #63d6ff, transparent 66%);
+  animation: playDrift1 32s ease-in-out infinite reverse;
+}
+
+@keyframes playDrift1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(6%, 8%) scale(1.12); }
+}
+@keyframes playDrift2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-7%, 5%) scale(1.08); }
+}
+
+.play__container {
+  position: relative;
+  z-index: 1;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px var(--container-pad) 80px;
+}
+
+/* ─── Header ─── */
+.play__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0 40px;
+}
+
+.play__back {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--body);
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-sm));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  padding: 9px 18px;
+  transition: color var(--duration-fast) ease, background var(--duration-fast) ease;
+}
+
+.play__back:hover {
+  color: var(--ink);
+  background: var(--glass-bg-hover);
+}
+
+.play__brand {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.play__brand-dot {
+  color: var(--accent);
+}
+
+/* ─── Intro ─── */
+.play__intro {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.play__title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--ink);
+  margin: 8px 0 14px;
+}
+
+.play__subtitle {
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.6;
+  max-width: 52ch;
+  margin: 0 auto;
+}
+
+/* ─── Game grid ─── */
+.play__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.play__card {
+  position: relative;
+  text-align: left;
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+}
+
+.play__card:hover {
+  transform: translateY(-5px);
+  border-color: var(--glass-border-strong);
+  box-shadow: 0 24px 60px -28px rgba(110, 168, 255, 0.6);
+}
+
+.play__card-top {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.play__card-emoji {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.play__card-tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  padding: 4px 10px;
+}
+
+.play__card-title {
+  position: relative;
+  z-index: 1;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.play__card-desc {
+  position: relative;
+  z-index: 1;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.play__card-cta {
+  position: relative;
+  z-index: 1;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* ─── Stage (active game) ─── */
+.play__stage-head {
+  margin-bottom: 24px;
+}
+
+.play__stage-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.play__stage-emoji {
+  font-size: 1.4em;
+}
+
+@media (max-width: 520px) {
+  .play__grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -12,6 +12,7 @@ import Projects from './components/sections/Projects';
 import Contact from './components/sections/Contact';
 import Admin from './pages/Admin';
 import PreviewCV from './pages/PreviewCV';
+import Play from './pages/Play';
 
 function App() {
   const hasLoaded = sessionStorage.getItem('hasLoaded');
@@ -47,6 +48,7 @@ function App() {
         }
       />
       <Route path="/PreviewCV" element={<PreviewCV />} />
+      <Route path="/play" element={<Play />} />
       <Route path="/admin" element={<Admin />} />
     </Routes>
   );

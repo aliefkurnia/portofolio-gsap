@@ -1,9 +1,27 @@
+.experience__list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .experience__row {
   display: grid;
   grid-template-columns: 220px 1fr;
   gap: 32px;
-  padding: 36px 0;
-  border-top: 1px solid var(--border);
+  padding: 28px;
+  border-radius: var(--radius-xl);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(140%);
+  transition: background var(--duration-fast) ease, border-color var(--duration-fast) ease,
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.experience__row:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-strong);
+  transform: translateY(-3px);
 }
 
 /* ─── Left meta col ─── */
@@ -14,15 +32,16 @@
 }
 
 .experience__date {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 13px;
+  font-weight: 600;
   color: var(--accent);
 }
 
 .experience__logo-tile {
-  width: 72px;
-  height: 72px;
-  border-radius: 8px;
+  width: 68px;
+  height: 68px;
+  border-radius: var(--radius-md);
   background: #ffffff;
   display: flex;
   align-items: center;
@@ -46,8 +65,9 @@
 
 .experience__company {
   margin-top: 4px;
-  font-family: var(--font-mono);
-  font-size: 13.5px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
   color: var(--accent);
   margin-bottom: 18px;
 }
@@ -68,8 +88,8 @@
 }
 
 .experience__marker {
-  font-family: var(--font-mono);
   color: var(--accent);
+  font-weight: 700;
 }
 
 @media (max-width: 820px) {

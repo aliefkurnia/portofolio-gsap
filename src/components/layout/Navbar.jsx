@@ -67,6 +67,9 @@ const Navbar = () => {
                 {link.label.toLowerCase()}
               </button>
             ))}
+            <a href="/play" className="nav__link nav__link--play">
+              play
+            </a>
             <a href={RESUME_URL} className="nav__resume">
               resume <span className="nav__arrow">↗</span>
             </a>
@@ -102,6 +105,9 @@ const Navbar = () => {
                 {link.label.toLowerCase()}
               </button>
             ))}
+            <a href="/play" className="nav-overlay__link">
+              play
+            </a>
           </nav>
           <a href={RESUME_URL} className="nav-overlay__resume">
             resume ↗

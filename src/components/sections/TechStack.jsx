@@ -18,8 +18,7 @@ const TechStack = () => {
   const hover = (e, lift) => {
     if (prefersReduced()) return;
     gsap.to(e.currentTarget, {
-      y: lift ? -4 : 0,
-      backgroundColor: lift ? 'var(--panel)' : 'var(--bg)',
+      y: lift ? -5 : 0,
       duration: 0.3,
       ease: 'power3.out',
     });
@@ -28,7 +27,7 @@ const TechStack = () => {
   return (
     <section className="techstack section" id="techstack" ref={sectionRef}>
       <div className="container">
-        <SectionHeading label="// stack.map()" title="Tech Stack" />
+        <SectionHeading label="Stack" title="Tech Stack" />
 
         {loading ? (
           <TechStackSkeleton />

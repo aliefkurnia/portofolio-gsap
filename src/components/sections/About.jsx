@@ -27,14 +27,13 @@ const About = () => {
             ) : null}
           </div>
           <div className="about__caption">
-            <span>alief.png</span>
-            <span className="about__caption-sep">·</span>
-            <span>Indonesia</span>
+            <span className="about__caption-dot" />
+            <span>Based in Indonesia</span>
           </div>
         </div>
 
         <div className="about__body">
-          <span className="eyebrow" data-reveal>// about</span>
+          <span className="eyebrow" data-reveal>About</span>
           <h2 className="about__headline" data-reveal>{headline}</h2>
           <p className="about__bio" data-reveal>{bio}</p>
           <div className="about__chips" data-stagger>

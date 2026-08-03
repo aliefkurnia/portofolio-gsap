@@ -51,7 +51,7 @@ const Projects = () => {
     const card = e.currentTarget;
     gsap.to(card, {
       y: active ? -6 : 0,
-      borderColor: active ? 'var(--accent)' : 'var(--border)',
+      borderColor: active ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.12)',
       duration: 0.35,
       ease: 'power3.out',
     });
@@ -65,7 +65,7 @@ const Projects = () => {
     <section className="projects section" id="projects" ref={sectionRef}>
       <div className="container">
         <SectionHeading
-          label="// ls ./projects"
+          label="Work"
           title="Selected Projects"
           meta={repoMeta}
         />

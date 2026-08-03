@@ -15,7 +15,7 @@ const Experience = () => {
     <section className="experience section" id="experience" ref={sectionRef}>
       <div className="container">
         <SectionHeading
-          label="// career.log"
+          label="Career"
           title="Experience"
           meta="2021 → present"
         />

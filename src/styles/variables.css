@@ -1,28 +1,63 @@
-/* ─── Design System — Terminal / IDE ─── */
+/* ─── Design System — Dark Dashboard + Aurora ─── */
 :root {
   /* Surfaces */
-  --bg: #0a0e16;        /* Page background */
-  --panel: #0d1220;     /* Terminal windows, cards, form */
-  --border: #1c2230;    /* Hairline borders / dividers */
+  --bg: #08080b;        /* Page background — near black */
+  --panel: #121218;     /* Cards, widgets, forms */
+  --panel-2: #1a1a22;   /* Elevated / hover surface */
+  --panel-3: #22222c;   /* Highest elevation, active rows */
+  --border: #23232c;    /* Hairline borders / dividers */
+  --border-soft: rgba(255, 255, 255, 0.06);
+  --border-strong: rgba(255, 255, 255, 0.12);
 
   /* Text */
-  --ink: #f0f6fc;       /* Headings / high-contrast */
-  --body: #c9d1d9;      /* Body text */
-  --muted: #8b949e;     /* Secondary text, nav links */
-  --faint: #5a6472;     /* Captions, mono meta */
-  --gutter: #2f3947;    /* Line-number gutter */
+  --ink: #f5f5f7;       /* Headings / high-contrast */
+  --body: #b9b9c3;      /* Body text */
+  --muted: #82828d;     /* Secondary text, nav links */
+  --faint: #565661;     /* Captions, meta */
+  --gutter: #33333d;    /* Legacy alias (some components) */
 
-  /* Accent (user-swappable: #79c0ff, #f0b429, #ff7b72) */
-  --accent: #7ee787;
-  --accent-ink: #06110a; /* Text on solid accent */
+  /* Accent — SaaS blue primary, user-swappable */
+  --accent: #6ea8ff;
+  --accent-strong: #4f8cff;
+  --accent-ink: #06122b; /* Text on solid accent */
+  --accent-soft: rgba(110, 168, 255, 0.14);
 
-  /* Code syntax (hero code block) */
+  /* Aurora palette (soft glows) — blue-led */
+  --aurora-blue: #5b8cff;
+  --aurora-cyan: #63d6ff;
+  --aurora-indigo: #7c6cff;
+  --aurora-purple: #a855f7;
+  --aurora-pink: #ff6ec4;
+
+  /* Gradients — blue mesh / glow */
+  --grad-aurora: linear-gradient(135deg, #63d6ff 0%, #6ea8ff 45%, #7c6cff 100%);
+  --grad-aurora-warm: linear-gradient(120deg, #6ea8ff 0%, #7c6cff 50%, #a855f7 100%);
+  /* Corner spotlight for glass cards — place top-right */
+  --grad-spotlight: radial-gradient(120% 120% at 85% 8%, rgba(99,214,255,0.30) 0%, rgba(110,168,255,0.24) 30%, rgba(124,108,255,0.12) 55%, transparent 74%);
+  /* Blue mesh glow (section + hero backdrop) */
+  --grad-mesh-blue: radial-gradient(90% 120% at 50% -10%, rgba(91,140,255,0.40) 0%, rgba(48,86,180,0.18) 45%, transparent 75%);
+  --glow-blue: radial-gradient(60% 70% at 50% 0%, rgba(91,140,255,0.22) 0%, transparent 70%);
+
+  /* ─── Glassmorphism ─── */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-bg-strong: rgba(255, 255, 255, 0.09);
+  --glass-bg-hover: rgba(255, 255, 255, 0.11);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-border-strong: rgba(255, 255, 255, 0.2);
+  --glass-blur: 20px;
+  --glass-blur-sm: 12px;
+  --glass-highlight: linear-gradient(180deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0) 40%);
+  --glass-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.5);
+
+  /* Semantic (up/down deltas) */
+  --up: #34d399;
+  --down: #fb7185;
+
+  /* Data / status */
   --code-comment: #6a7684;
   --code-keyword: #ff7b72;
   --code-func: #79c0ff;
   --code-string: #a5d6ff;
-
-  /* Traffic lights */
   --tl-red: #ff5f57;
   --tl-yellow: #febc2e;
   --tl-green: #28c840;
@@ -51,16 +86,19 @@
   --space-3xl: 4rem;
   --space-4xl: 6rem;
 
-  /* Radius — mostly sharp */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
+  /* Radius — soft, rounded dashboard cards */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-2xl: 30px;
   --radius-full: 9999px;
 
-  /* Shadows */
-  --shadow-window: 0 40px 90px -50px rgba(0, 0, 0, 0.8);
-  --shadow-card: 0 20px 50px -30px rgba(0, 0, 0, 0.7);
+  /* Shadows — floating widgets */
+  --shadow-window: 0 40px 90px -45px rgba(0, 0, 0, 0.85);
+  --shadow-card: 0 24px 60px -34px rgba(0, 0, 0, 0.7);
+  --shadow-float: 0 40px 80px -40px rgba(0, 0, 0, 0.75);
+  --shadow-glow-accent: 0 20px 60px -24px rgba(168, 85, 247, 0.45);
 
   /* Motion */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -116,8 +154,6 @@
   --max-width: 1200px;
   --max-width-narrow: 900px;
   --section-padding: clamp(4rem, 10vw, 8rem);
-
-  --radius-2xl: 24px;
 
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);

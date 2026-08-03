@@ -1,8 +1,26 @@
+.contact {
+  position: relative;
+}
+
+.contact::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--glow-blue);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.contact .container {
+  position: relative;
+  z-index: 1;
+}
+
 .contact__title {
   font-size: clamp(30px, 4vw, 44px);
   font-weight: 700;
   letter-spacing: -0.035em;
-  line-height: 1.02;
+  line-height: 1.05;
   color: var(--ink);
   margin-bottom: 16px;
 }
@@ -15,40 +33,17 @@
   margin-bottom: 40px;
 }
 
-/* ─── Terminal window ─── */
-.contact__window {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-window);
-}
-
-.contact__titlebar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 13px 16px;
-  border-bottom: 1px solid var(--border);
-}
-
-.contact__dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-}
-.contact__dot--red { background: var(--tl-red); }
-.contact__dot--yellow { background: var(--tl-yellow); }
-.contact__dot--green { background: var(--tl-green); }
-
-.contact__caption {
-  margin-left: 12px;
-  font-family: var(--font-mono);
-  font-size: 12.5px;
-  color: var(--faint);
+/* ─── Glass card ─── */
+.contact__card {
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
 }
 
 /* ─── Form ─── */
 .contact__form {
-  padding: 28px;
+  position: relative;
+  z-index: 1;
+  padding: 32px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -61,20 +56,25 @@
 }
 
 .contact__label {
-  font-family: var(--font-mono);
-  font-size: 12.5px;
-  color: var(--accent);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--body);
 }
 
 .contact__input {
-  background: var(--bg);
-  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
   color: var(--ink);
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.95rem;
-  padding: 13px 14px;
+  padding: 14px 16px;
   width: 100%;
-  transition: border-color var(--duration-fast) ease;
+  backdrop-filter: blur(var(--glass-blur-sm));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+  transition: border-color var(--duration-fast) ease, background var(--duration-fast) ease,
+    box-shadow var(--duration-fast) ease;
 }
 
 .contact__input::placeholder {
@@ -84,6 +84,8 @@
 .contact__input:focus {
   outline: none;
   border-color: var(--accent);
+  background: var(--glass-bg-strong);
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 .contact__textarea {
@@ -94,16 +96,19 @@
 
 .contact__submit {
   align-self: flex-start;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 14px;
+  font-weight: 600;
   background: var(--accent);
   color: var(--accent-ink);
-  padding: 14px 24px;
-  transition: background var(--duration-fast) ease;
+  border-radius: var(--radius-full);
+  padding: 14px 28px;
+  transition: transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
 }
 
 .contact__submit:hover:not(:disabled) {
-  background: #9af0a1;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px -12px rgba(110, 168, 255, 0.7);
 }
 
 .contact__submit:disabled {
@@ -112,33 +117,41 @@
 }
 
 .contact__error {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 13px;
-  color: var(--tl-red);
+  color: var(--down);
 }
 
 /* ─── Success state ─── */
 .contact__done {
-  padding: 40px 28px 48px;
-  font-family: var(--font-mono);
+  position: relative;
+  z-index: 1;
+  padding: 56px 32px;
+  text-align: center;
 }
 
-.contact__done-line {
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.contact__prompt {
+.contact__done-check {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
   color: var(--accent);
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.contact__done-ok {
-  color: var(--accent);
-  font-size: 20px;
-  margin: 16px 0 8px;
+.contact__done-title {
+  color: var(--ink);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
 }
 
 .contact__done-note {
-  color: var(--faint);
-  font-size: 13.5px;
+  color: var(--muted);
+  font-size: 14px;
 }

@@ -1,0 +1,38 @@
+.bughunt__field {
+  position: relative;
+  height: 380px;
+  overflow: hidden;
+}
+
+.bughunt__bug {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  line-height: 1;
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  animation: bugIn 0.16s var(--ease-out);
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+  transition: transform 0.06s ease;
+  user-select: none;
+}
+
+.bughunt__bug:hover {
+  transform: translate(-50%, -50%) scale(1.12) rotate(-8deg);
+}
+
+.bughunt__bug:active {
+  transform: translate(-50%, -50%) scale(0.85);
+}
+
+@keyframes bugIn {
+  from { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
+  to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+@media (max-width: 520px) {
+  .bughunt__field {
+    height: 320px;
+  }
+}

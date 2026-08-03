@@ -54,26 +54,17 @@ const Contact = () => {
   return (
     <section className="contact section" id="contact" ref={sectionRef}>
       <div className="container container--narrow">
-        <span className="eyebrow" data-reveal>// get in touch</span>
+        <span className="eyebrow" data-reveal>Get in touch</span>
         <h2 className="contact__title" data-reveal>Let's build something reliable.</h2>
         <p className="contact__subtitle" data-reveal>
           Have a project, a role, or a question? Drop a message and I'll get back to you.
         </p>
 
-        <div className="contact__window" data-reveal>
-          <div className="contact__titlebar">
-            <span className="contact__dot contact__dot--red" />
-            <span className="contact__dot contact__dot--yellow" />
-            <span className="contact__dot contact__dot--green" />
-            <span className="contact__caption">new-message.sh</span>
-          </div>
-
+        <div className="contact__card glass" data-reveal>
           {status === 'success' ? (
             <div className="contact__done">
-              <p className="contact__done-line">
-                <span className="contact__prompt">$</span> ./new-message.sh
-              </p>
-              <p className="contact__done-ok">✓ message sent</p>
+              <div className="contact__done-check">✓</div>
+              <h3 className="contact__done-title">Message sent</h3>
               <p className="contact__done-note">
                 Thanks — I'll reply to you soon.
               </p>
@@ -81,21 +72,21 @@ const Contact = () => {
           ) : (
             <form ref={formRef} onSubmit={handleSubmit} className="contact__form">
               <div className="contact__field">
-                <label htmlFor="name" className="contact__label">name</label>
+                <label htmlFor="name" className="contact__label">Name</label>
                 <input
                   id="name"
                   type="text"
                   name="name"
                   value={form.name}
                   onChange={handleChange}
-                  placeholder="your name"
+                  placeholder="Your name"
                   required
                   className="contact__input"
                 />
               </div>
 
               <div className="contact__field">
-                <label htmlFor="email" className="contact__label">email</label>
+                <label htmlFor="email" className="contact__label">Email</label>
                 <input
                   id="email"
                   type="email"
@@ -109,13 +100,13 @@ const Contact = () => {
               </div>
 
               <div className="contact__field">
-                <label htmlFor="message" className="contact__label">message</label>
+                <label htmlFor="message" className="contact__label">Message</label>
                 <textarea
                   id="message"
                   name="message"
                   value={form.message}
                   onChange={handleChange}
-                  placeholder="what can I help you with?"
+                  placeholder="What can I help you with?"
                   rows="5"
                   required
                   className="contact__input contact__textarea"
@@ -123,12 +114,12 @@ const Contact = () => {
               </div>
 
               <button type="submit" className="contact__submit" disabled={loading}>
-                {loading ? '$ sending…' : '$ send message'}
+                {loading ? 'Sending…' : 'Send message'}
               </button>
 
               {status === 'error' && (
                 <p className="contact__error">
-                  ✕ something went wrong. Please try again.
+                  Something went wrong. Please try again.
                 </p>
               )}
             </form>

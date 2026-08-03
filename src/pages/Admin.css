@@ -5,19 +5,23 @@
   align-items: center;
   justify-content: center;
   background-color: var(--bg);
+  background-image: var(--glow-blue);
   font-family: var(--font-sans);
   padding: 1rem;
 }
 
 .admin-login-form {
-  background: var(--panel);
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
   padding: 2.5rem;
-  border: 1px solid var(--border);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-2xl);
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
   min-width: 360px;
-  box-shadow: var(--shadow-window);
+  box-shadow: var(--glass-shadow);
 }
 
 .admin-login-form h2 {
@@ -32,12 +36,13 @@
 
 .admin-login-form input {
   padding: 0.85rem 1rem;
-  border: 1px solid var(--border);
-  background: var(--bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  background: var(--glass-bg);
   color: var(--ink);
   font-size: 0.95rem;
-  font-family: var(--font-mono);
-  transition: border-color var(--duration-fast) ease;
+  font-family: var(--font-sans);
+  transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
 }
 
 .admin-login-form input::placeholder {
@@ -47,22 +52,25 @@
 .admin-login-form input:focus {
   outline: none;
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 .admin-login-form button {
   padding: 0.85rem;
   border: none;
+  border-radius: var(--radius-full);
   background: var(--accent);
   color: var(--accent-ink);
   font-size: 0.95rem;
   cursor: pointer;
-  font-weight: 500;
-  font-family: var(--font-mono);
-  transition: background var(--duration-fast) ease;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  transition: transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
 }
 
 .admin-login-form button:hover {
-  background: #9af0a1;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px -12px rgba(110, 168, 255, 0.7);
 }
 
 /* ── Admin Container ── */
@@ -80,7 +88,7 @@
   align-items: center;
   margin-bottom: 2.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--glass-border);
 }
 
 .admin-header h1 {
@@ -93,18 +101,20 @@
 
 .btn-logout {
   padding: 0.6rem 1.2rem;
-  border: 1px solid var(--border);
-  background: transparent;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  background: var(--glass-bg);
   color: var(--muted);
   cursor: pointer;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.85rem;
-  transition: color var(--duration-fast) ease, border-color var(--duration-fast) ease;
+  font-weight: 500;
+  transition: color var(--duration-fast) ease, background var(--duration-fast) ease;
 }
 
 .btn-logout:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  background: var(--glass-bg-hover);
+  color: var(--ink);
 }
 
 /* ── Tabs ── */
@@ -116,24 +126,26 @@
 
 .admin-tabs .tab {
   padding: 0.6rem 1.4rem;
-  border: 1px solid var(--border);
-  background: transparent;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  background: var(--glass-bg);
   color: var(--muted);
   cursor: pointer;
   font-size: 0.85rem;
-  font-family: var(--font-mono);
+  font-weight: 500;
+  font-family: var(--font-sans);
   transition: color var(--duration-fast) ease, border-color var(--duration-fast) ease, background var(--duration-fast) ease;
 }
 
 .admin-tabs .tab:hover {
-  border-color: var(--gutter);
+  border-color: var(--glass-border-strong);
   color: var(--ink);
 }
 
 .admin-tabs .tab.active {
   background: var(--accent);
   color: var(--accent-ink);
-  border-color: var(--accent);
+  border-color: transparent;
 }
 
 /* ── Loading ── */
@@ -142,7 +154,7 @@
   padding: 4rem;
   color: var(--faint);
   font-size: 1rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
 }
 
 /* ── Toolbar ── */
@@ -153,17 +165,19 @@
 .btn-add {
   padding: 0.7rem 1.4rem;
   border: none;
+  border-radius: var(--radius-full);
   background: var(--accent);
   color: var(--accent-ink);
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.85rem;
-  transition: background var(--duration-fast) ease;
+  transition: transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
 }
 
 .btn-add:hover {
-  background: #9af0a1;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px -12px rgba(110, 168, 255, 0.7);
 }
 
 /* ── List ── */
@@ -178,14 +192,18 @@
   align-items: center;
   gap: 1rem;
   padding: 1.1rem 1.4rem;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  transition: border-color var(--duration-fast) ease, transform var(--duration-fast) var(--ease-out);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(140%);
+  transition: border-color var(--duration-fast) ease, background var(--duration-fast) ease, transform var(--duration-fast) var(--ease-out);
 }
 
 .admin-item:hover {
   transform: translateY(-2px);
-  border-color: var(--gutter);
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-strong);
 }
 
 .admin-thumb {
@@ -234,7 +252,7 @@
   font-size: 0.8rem;
   font-weight: 600;
   min-width: 30px;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
 }
 
 /* ── Drag & Drop ── */
@@ -263,8 +281,8 @@
 }
 
 .admin-item.drag-over {
-  border-color: var(--accent, var(--gutter));
-  box-shadow: inset 0 2px 0 var(--accent, var(--gutter));
+  border-color: var(--accent);
+  box-shadow: inset 0 2px 0 var(--accent);
 }
 
 /* ── Item Actions ── */
@@ -276,13 +294,15 @@
 
 .item-actions button {
   padding: 0.45rem 1rem;
-  border: 1px solid var(--border);
-  background: transparent;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  background: var(--glass-bg);
   color: var(--muted);
   cursor: pointer;
   font-size: 0.8rem;
-  font-family: var(--font-mono);
-  transition: color var(--duration-fast) ease, border-color var(--duration-fast) ease;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  transition: color var(--duration-fast) ease, border-color var(--duration-fast) ease, background var(--duration-fast) ease;
 }
 
 .item-actions button:hover {
@@ -291,14 +311,14 @@
 }
 
 .item-actions .btn-del {
-  border-color: rgba(255, 123, 114, 0.4);
-  color: var(--code-keyword);
+  border-color: rgba(251, 113, 133, 0.4);
+  color: var(--down);
 }
 
 .item-actions .btn-del:hover {
-  background: rgba(255, 123, 114, 0.08);
-  border-color: var(--code-keyword);
-  color: var(--code-keyword);
+  background: rgba(251, 113, 133, 0.1);
+  border-color: var(--down);
+  color: var(--down);
 }
 
 /* ── Form Overlay ── */
@@ -308,8 +328,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(5, 8, 13, 0.7);
-  backdrop-filter: blur(8px);
+  background: rgba(5, 8, 13, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -318,14 +339,17 @@
 }
 
 .admin-form {
-  background: var(--panel);
-  border: 1px solid var(--border);
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-2xl);
   padding: 2.5rem;
   max-width: 600px;
   width: 100%;
   max-height: 85vh;
   overflow-y: auto;
-  box-shadow: var(--shadow-window);
+  box-shadow: var(--glass-shadow);
 }
 
 .admin-form h3 {
@@ -345,24 +369,25 @@
 }
 
 .form-fields label {
-  color: var(--accent);
-  font-size: 0.75rem;
+  color: var(--body);
+  font-size: 0.78rem;
+  font-weight: 600;
   margin-top: 0.75rem;
-  text-transform: lowercase;
-  letter-spacing: 0.3px;
-  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+  font-family: var(--font-sans);
 }
 
 .form-fields input,
 .form-fields textarea,
 .form-fields select {
   padding: 0.75rem 1rem;
-  border: 1px solid var(--border);
-  background: var(--bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  background: var(--glass-bg);
   color: var(--ink);
   font-size: 0.9rem;
-  font-family: var(--font-mono);
-  transition: border-color var(--duration-fast) ease;
+  font-family: var(--font-sans);
+  transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
 }
 
 .form-fields input::placeholder,
@@ -375,6 +400,7 @@
 .form-fields select:focus {
   outline: none;
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 .form-fields textarea {
@@ -385,7 +411,8 @@
 
 .form-fields input[type="file"] {
   padding: 0.5rem;
-  border: 1px dashed var(--border);
+  border: 1px dashed var(--glass-border-strong);
+  border-radius: var(--radius-md);
   background: transparent;
   cursor: pointer;
   color: var(--muted);
@@ -395,8 +422,8 @@
   padding: 0;
   width: 50px;
   height: 38px;
-  border: 1px solid var(--border);
-  border-radius: 0;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
   cursor: pointer;
   background: transparent;
 }
@@ -415,7 +442,7 @@
   height: 85px;
   object-fit: cover;
   padding: 0;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   background: var(--bg);
 }
 
@@ -437,11 +464,12 @@
 }
 
 .btn-remove-point {
-  width: 30px;
-  height: 30px;
-  border: 1px solid rgba(255, 123, 114, 0.3);
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(251, 113, 133, 0.3);
+  border-radius: var(--radius-full);
   background: transparent;
-  color: var(--code-keyword);
+  color: var(--down);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -452,18 +480,20 @@
 }
 
 .btn-remove-point:hover {
-  background: rgba(255, 123, 114, 0.08);
-  border-color: var(--code-keyword);
+  background: rgba(251, 113, 133, 0.1);
+  border-color: var(--down);
 }
 
 .btn-add-point {
   padding: 0.5rem 1rem;
-  border: 1px dashed var(--border);
+  border: 1px dashed var(--glass-border-strong);
+  border-radius: var(--radius-full);
   background: transparent;
   color: var(--muted);
   cursor: pointer;
   font-size: 0.8rem;
-  font-family: var(--font-mono);
+  font-weight: 500;
+  font-family: var(--font-sans);
   margin-top: 0.5rem;
   transition: color var(--duration-fast) ease, border-color var(--duration-fast) ease;
 }
@@ -483,32 +513,35 @@
 .btn-save {
   padding: 0.75rem 2rem;
   border: none;
+  border-radius: var(--radius-full);
   background: var(--accent);
   color: var(--accent-ink);
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.9rem;
-  transition: background var(--duration-fast) ease;
+  transition: transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
 }
 
 .btn-save:hover {
-  background: #9af0a1;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px -12px rgba(110, 168, 255, 0.7);
 }
 
 .btn-cancel {
   padding: 0.75rem 2rem;
-  border: 1px solid var(--border);
-  background: transparent;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  background: var(--glass-bg);
   color: var(--muted);
   cursor: pointer;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.9rem;
-  transition: color var(--duration-fast) ease, border-color var(--duration-fast) ease;
+  transition: color var(--duration-fast) ease, background var(--duration-fast) ease;
 }
 
 .btn-cancel:hover {
-  border-color: var(--gutter);
+  background: var(--glass-bg-hover);
   color: var(--ink);
 }
 
@@ -520,8 +553,11 @@
 }
 
 .settings-section {
-  background: var(--panel);
-  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(140%);
   padding: 1.5rem 2rem;
 }
 
@@ -543,19 +579,21 @@
 .settings-textarea {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 1px solid var(--border);
-  background: var(--bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  background: var(--glass-bg);
   color: var(--ink);
   font-size: 0.9rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   box-sizing: border-box;
-  transition: border-color var(--duration-fast) ease;
+  transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
 }
 
 .settings-section input[type="text"]:focus,
 .settings-textarea:focus {
   outline: none;
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 .settings-textarea {
@@ -576,7 +614,7 @@
   object-fit: cover;
   border-radius: var(--radius-md);
   margin-bottom: 0.75rem;
-  border: 1px solid var(--border);
+  border: 1px solid var(--glass-border);
 }
 
 .cv-upload-group {
@@ -585,48 +623,51 @@
 
 .cv-upload-group label {
   display: block;
-  font-size: 0.75rem;
-  color: var(--accent);
-  text-transform: lowercase;
-  letter-spacing: 0.3px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--body);
+  letter-spacing: 0.02em;
   margin-bottom: 0.4rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
 }
 
 .cv-link-preview {
   display: inline-block;
   font-size: 0.85rem;
-  color: var(--muted);
+  color: var(--accent);
   text-decoration: none;
   margin-bottom: 0.4rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
 }
 
 .cv-link-preview:hover {
   text-decoration: underline;
-  color: var(--accent);
 }
 
 .btn-save-settings {
   padding: 0.85rem 2.5rem;
   border: none;
+  border-radius: var(--radius-full);
   background: var(--accent);
   color: var(--accent-ink);
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.95rem;
-  transition: background var(--duration-fast) ease;
+  transition: transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
   align-self: flex-start;
 }
 
 .btn-save-settings:hover {
-  background: #9af0a1;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px -12px rgba(110, 168, 255, 0.7);
 }
 
 .btn-save-settings:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 /* ── Responsive ── */

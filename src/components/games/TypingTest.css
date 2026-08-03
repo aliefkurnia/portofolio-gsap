@@ -1,0 +1,56 @@
+.typing__panel {
+  cursor: text;
+  min-height: 200px;
+}
+
+.typing__snippet {
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: clamp(15px, 2.4vw, 20px);
+  line-height: 1.9;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 8px 0 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.typing__ch {
+  color: var(--faint);
+  border-radius: 3px;
+  transition: color 0.08s ease, background 0.08s ease;
+}
+
+.typing__ch.is-correct {
+  color: var(--ink);
+}
+
+.typing__ch.is-wrong {
+  color: #fff;
+  background: rgba(251, 113, 133, 0.5);
+}
+
+.typing__ch.is-current {
+  background: var(--accent-soft);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+.typing__input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 1px;
+  height: 1px;
+}
+
+.typing__hint {
+  position: relative;
+  z-index: 1;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.typing__actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}

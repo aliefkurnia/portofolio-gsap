@@ -3,44 +3,52 @@
   background: var(--bg);
   display: flex;
   flex-direction: column;
+  font-family: var(--font-sans);
 }
 
 .cv__header {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(10, 14, 22, 0.82);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
+  padding: 12px 0;
 }
 
 .cv__header-inner {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 14px 24px;
+  padding: 8px 12px 8px 20px;
+  width: calc(100% - 32px);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  /* glass pill bar */
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  box-shadow: var(--glass-shadow);
 }
 
 .cv__back {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 8px 16px;
+  padding: 9px 16px;
   font-size: 13px;
-  color: var(--muted);
-  background: none;
-  border: 1px solid var(--border);
+  font-weight: 500;
+  color: var(--body);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
   cursor: pointer;
-  font-family: var(--font-mono);
-  transition: color var(--duration-fast) ease, border-color var(--duration-fast) ease;
+  font-family: var(--font-sans);
+  transition: color var(--duration-fast) ease, background var(--duration-fast) ease;
 }
 
 .cv__back:hover {
-  color: var(--accent);
-  border-color: var(--accent);
+  color: var(--ink);
+  background: var(--glass-bg-hover);
 }
 
 .cv__controls {
@@ -51,21 +59,23 @@
 
 .cv__lang-toggle {
   display: flex;
-  background: var(--panel);
-  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
   padding: 3px;
 }
 
 .cv__lang-btn {
   padding: 6px 16px;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.05em;
-  color: var(--faint);
+  color: var(--muted);
   background: none;
   border: none;
+  border-radius: var(--radius-full);
   cursor: pointer;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   transition: color var(--duration-fast) ease, background var(--duration-fast) ease;
 }
 
@@ -92,10 +102,12 @@
 .cv__viewer {
   width: 100%;
   max-width: 900px;
-  height: calc(100vh - 88px);
+  height: calc(100vh - 104px);
   overflow: hidden;
-  border: 1px solid var(--border);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
   background: var(--panel);
+  box-shadow: var(--glass-shadow);
 }
 
 .cv__viewer iframe {
@@ -117,8 +129,8 @@
   gap: 1rem;
   padding: 4rem 2rem;
   text-align: center;
-  color: var(--faint);
-  font-family: var(--font-mono);
+  color: var(--muted);
+  font-family: var(--font-sans);
 }
 
 .cv__empty svg {
@@ -128,7 +140,7 @@
 
 .cv__empty p {
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--body);
 }
 
@@ -138,7 +150,7 @@
 
 @media (max-width: 768px) {
   .cv__header-inner {
-    padding: 12px 16px;
+    padding: 8px 10px 8px 16px;
   }
 
   .cv__body {
@@ -146,7 +158,7 @@
   }
 
   .cv__viewer {
-    height: calc(100vh - 78px);
+    height: calc(100vh - 96px);
   }
 }
 
