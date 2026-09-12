@@ -41,6 +41,7 @@ export const heroStats = [
 
 export const navLinks = [
   { id: 'about', label: 'About' },
+  { id: 'ai-workflow', label: 'AI' },
   { id: 'experience', label: 'Experience' },
   { id: 'projects', label: 'Projects' },
   { id: 'contact', label: 'Contact' },

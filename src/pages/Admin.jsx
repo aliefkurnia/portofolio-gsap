@@ -11,6 +11,7 @@ function Admin() {
   const [password, setPassword] = useState("");
   const [activeTab, setActiveTab] = useState("technologies");
   const [technologies, setTechnologies] = useState([]);
+  const [aiTools, setAiTools] = useState([]);
   const [experiences, setExperiences] = useState([]);
   const [projects, setProjects] = useState([]);
   const [settings, setSettings] = useState({});
@@ -23,13 +24,15 @@ function Admin() {
 
   const fetchData = useCallback(async () => {
     setLoading(true);
-    const [techRes, expRes, projRes, settingsRes] = await Promise.all([
+    const [techRes, aiRes, expRes, projRes, settingsRes] = await Promise.all([
       supabase.from("technologies").select("*").order("sort_order"),
+      supabase.from("ai_tools").select("*").order("sort_order"),
       supabase.from("experiences").select("*").order("sort_order"),
       supabase.from("projects").select("*").order("sort_order"),
       supabase.from("site_settings").select("*"),
     ]);
     if (techRes.data) setTechnologies(techRes.data);
+    if (aiRes.data) setAiTools(aiRes.data);
     if (expRes.data) setExperiences(expRes.data);
     if (projRes.data) setProjects(projRes.data);
     if (settingsRes.data) {
@@ -78,6 +81,8 @@ function Admin() {
     setEditingItem("new");
     if (activeTab === "technologies") {
       setFormData({ name: "", icon_url: "", sort_order: technologies.length });
+    } else if (activeTab === "ai_tools") {
+      setFormData({ name: "", icon_url: "", sort_order: aiTools.length });
     } else if (activeTab === "experiences") {
       setFormData({
         title: "",
@@ -148,6 +153,7 @@ function Admin() {
 
   const listConfig = {
     technologies: { items: technologies, setItems: setTechnologies },
+    ai_tools: { items: aiTools, setItems: setAiTools },
     experiences: { items: experiences, setItems: setExperiences },
     projects: { items: projects, setItems: setProjects },
   };
@@ -224,7 +230,13 @@ function Admin() {
       </header>
 
       <nav className="admin-tabs">
-        {["technologies", "experiences", "projects", "settings"].map((tab) => (
+        {[
+          ["technologies", "Technologies"],
+          ["ai_tools", "AI Tools"],
+          ["experiences", "Experiences"],
+          ["projects", "Projects"],
+          ["settings", "Settings"],
+        ].map(([tab, label]) => (
           <button
             key={tab}
             className={`tab ${activeTab === tab ? "active" : ""}`}
@@ -233,7 +245,7 @@ function Admin() {
               cancelEdit();
             }}
           >
-            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+            {label}
           </button>
         ))}
       </nav>
@@ -259,6 +271,15 @@ function Admin() {
                     formData={formData}
                     setFormData={setFormData}
                     onFileChange={handleFileChange}
+                    folder="tech"
+                  />
+                )}
+                {activeTab === "ai_tools" && (
+                  <TechForm
+                    formData={formData}
+                    setFormData={setFormData}
+                    onFileChange={handleFileChange}
+                    folder="ai"
                   />
                 )}
                 {activeTab === "experiences" && (
@@ -310,6 +331,39 @@ function Admin() {
                   <div className="item-actions">
                     <button onClick={() => startEdit(tech)}>Edit</button>
                     <button onClick={() => handleDelete("technologies", tech.id)} className="btn-del">
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {activeTab === "ai_tools" && (
+            <div className="admin-list">
+              {aiTools.map((tool, index) => (
+                <div
+                  key={tool.id}
+                  className={`admin-item${
+                    dragItem?.table === "ai_tools" && dragItem.index === index
+                      ? " dragging"
+                      : ""
+                  }${dragOverIndex === index && dragItem?.table === "ai_tools" ? " drag-over" : ""}`}
+                  draggable
+                  onDragStart={() => handleDragStart("ai_tools", index)}
+                  onDragEnter={() => handleDragEnter("ai_tools", index)}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={() => handleDrop("ai_tools", index)}
+                  onDragEnd={handleDragEnd}
+                >
+                  <span className="drag-handle" title="Drag to reorder">⠿</span>
+                  {tool.icon_url && (
+                    <img src={tool.icon_url} alt={tool.name} className="admin-thumb" />
+                  )}
+                  <span>{tool.name}</span>
+                  <div className="item-actions">
+                    <button onClick={() => startEdit(tool)}>Edit</button>
+                    <button onClick={() => handleDelete("ai_tools", tool.id)} className="btn-del">
                       Delete
                     </button>
                   </div>
@@ -399,7 +453,7 @@ function Admin() {
   );
 }
 
-function TechForm({ formData, setFormData, onFileChange }) {
+function TechForm({ formData, setFormData, onFileChange, folder = "tech" }) {
   return (
     <div className="form-fields">
       <label>Name</label>
