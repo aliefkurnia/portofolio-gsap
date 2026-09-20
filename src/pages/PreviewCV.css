@@ -227,9 +227,54 @@
   }
 }
 
+/* Small phones: the back button plus both switches (View + Language) can't
+   share one line, and the header clips overflow — so the language switch used
+   to slide off-screen. Let the bar wrap instead, and tighten the chrome. */
+@media (max-width: 560px) {
+  .cv__header {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .cv__header-inner {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+  }
+
+  .cv__controls {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .cv__seg-btn {
+    padding: 6px 12px;
+    font-size: 12.5px;
+  }
+}
+
 @media (max-width: 480px) {
   .cv__back {
     padding: 8px 12px;
+  }
+}
+
+/* Very narrow: give the controls their own full-width row and let the two
+   switches split it evenly, so neither can ever run past the edge. */
+@media (max-width: 400px) {
+  .cv__controls {
+    width: 100%;
+  }
+
+  .cv__seg {
+    flex: 1 1 0;
+    justify-content: center;
+  }
+
+  .cv__seg-btn {
+    flex: 1;
+    padding: 6px 8px;
   }
 }
 
