@@ -8,7 +8,7 @@
 .simon__status {
   font-size: 13px;
   font-weight: 600;
-  color: var(--muted);
+  color: var(--ink-3);
 }
 
 .simon__pads {
@@ -27,8 +27,8 @@
 }
 
 .simon__pad {
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--glass-border-strong);
+  border-radius: var(--radius-md);
+  border: 3px solid var(--outline);
   cursor: pointer;
   opacity: 0.45;
   transition: opacity 0.12s ease, transform 0.08s ease, box-shadow 0.12s ease,
@@ -43,18 +43,22 @@
   transform: scale(0.97);
 }
 
-.simon__pad--0 { background: #4f8cff; }
-.simon__pad--1 { background: #63d6ff; }
-.simon__pad--2 { background: #7c6cff; }
-.simon__pad--3 { background: #ff6ec4; }
+.simon__pad--0 { background: var(--pad-1); }
+.simon__pad--1 { background: var(--pad-2); }
+.simon__pad--2 { background: var(--pad-3); }
+.simon__pad--3 { background: var(--pad-4); }
 
+/* Lit pad. A glow would be the one blurred thing on the page, so the hit
+   reads as brightness + a thick ring + a lift instead. */
 .simon__pad.is-active {
   opacity: 1;
-  filter: brightness(1.35) saturate(1.2);
-  box-shadow: 0 0 40px -6px currentColor, inset 0 0 24px rgba(255, 255, 255, 0.35);
+  filter: brightness(1.3) saturate(1.15);
+  transform: scale(1.04);
+  box-shadow: 0 0 0 4px var(--outline), 6px 6px 0 var(--shadow-hard);
 }
 
-.simon__pad--0.is-active { color: #4f8cff; }
-.simon__pad--1.is-active { color: #63d6ff; }
-.simon__pad--2.is-active { color: #7c6cff; }
-.simon__pad--3.is-active { color: #ff6ec4; }
+@media (prefers-reduced-motion: reduce) {
+  .simon__pad.is-active {
+    transform: none;
+  }
+}

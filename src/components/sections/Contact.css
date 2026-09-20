@@ -1,157 +1,138 @@
+/* ─── Contact stage ─── */
 .contact {
-  position: relative;
+  width: 100%;
+  max-width: 640px;
 }
 
-.contact::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--glow-blue);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.contact .container {
-  position: relative;
-  z-index: 1;
+.contact__intro {
+  margin-bottom: 26px;
 }
 
 .contact__title {
-  font-size: clamp(30px, 4vw, 44px);
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
+  font-size: clamp(1.5rem, 3.4vw, 2.3rem);
   color: var(--ink);
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .contact__subtitle {
-  color: var(--muted);
-  font-size: 1.02rem;
-  line-height: 1.6;
+  color: var(--ink-2);
+  font-size: 1rem;
+  line-height: var(--leading-relaxed);
   max-width: 60ch;
-  margin-bottom: 40px;
 }
 
-/* ─── Glass card ─── */
+/* No inner panel here — the stage frame is already a thick-bordered box, and
+   nesting a second one 20px inside it reads as noise. */
 .contact__card {
-  border-radius: var(--radius-2xl);
-  overflow: hidden;
+  margin-top: 4px;
 }
 
 /* ─── Form ─── */
 .contact__form {
-  position: relative;
-  z-index: 1;
-  padding: 32px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
 }
 
 .contact__field {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 7px;
 }
 
 .contact__label {
-  font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--body);
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: var(--ink-2);
 }
 
 .contact__input {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-md);
+  width: 100%;
+  padding: 13px 15px;
+  background: var(--surface-2);
   color: var(--ink);
   font-family: var(--font-sans);
   font-size: 0.95rem;
-  padding: 14px 16px;
-  width: 100%;
-  backdrop-filter: blur(var(--glass-blur-sm));
-  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
-  transition: border-color var(--duration-fast) ease, background var(--duration-fast) ease,
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+  transition: border-color var(--duration-fast) ease,
+    background var(--duration-fast) ease,
     box-shadow var(--duration-fast) ease;
 }
 
 .contact__input::placeholder {
-  color: var(--faint);
+  color: var(--ink-3);
 }
 
 .contact__input:focus {
   outline: none;
+  background: var(--surface);
   border-color: var(--accent);
-  background: var(--glass-bg-strong);
-  box-shadow: 0 0 0 3px var(--accent-soft);
+  box-shadow: 4px 4px 0 var(--shadow-hard);
 }
 
 .contact__textarea {
   resize: vertical;
   min-height: 120px;
-  line-height: 1.6;
+  line-height: var(--leading-normal);
 }
 
 .contact__submit {
   align-self: flex-start;
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 600;
-  background: var(--accent);
-  color: var(--accent-ink);
-  border-radius: var(--radius-full);
-  padding: 14px 28px;
-  transition: transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
-}
-
-.contact__submit:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 34px -12px rgba(110, 168, 255, 0.7);
-}
-
-.contact__submit:disabled {
-  opacity: 0.6;
-  cursor: default;
 }
 
 .contact__error {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
   color: var(--down);
 }
 
 /* ─── Success state ─── */
 .contact__done {
-  position: relative;
-  z-index: 1;
-  padding: 56px 32px;
+  padding: 44px 24px;
   text-align: center;
+  background: var(--surface-2);
+  border: 4px solid var(--outline);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
 }
 
 .contact__done-check {
   width: 56px;
   height: 56px;
-  margin: 0 auto 20px;
-  border-radius: 50%;
-  background: var(--accent-soft);
-  border: 1px solid var(--accent);
-  color: var(--accent);
-  font-size: 26px;
+  margin: 0 auto 18px;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--accent-ink);
+  background: var(--up);
+  border: 4px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: 4px 4px 0 var(--shadow-hard);
 }
 
 .contact__done-title {
   color: var(--ink);
-  font-size: 22px;
-  font-weight: 700;
+  font-size: 1.35rem;
   margin-bottom: 8px;
 }
 
 .contact__done-note {
-  color: var(--muted);
+  color: var(--ink-2);
   font-size: 14px;
+}
+
+@media (max-width: 520px) {
+  .contact__submit {
+    align-self: stretch;
+    width: 100%;
+  }
 }

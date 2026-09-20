@@ -13,7 +13,9 @@
   padding: 4px;
   cursor: pointer;
   animation: bugIn 0.16s var(--ease-out);
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+  /* Hard offset shadow rather than a soft blur — every other surface on the
+     page is flat, and a blurred bug would read as a different art style. */
+  filter: drop-shadow(3px 3px 0 var(--shadow-hard));
   transition: transform 0.06s ease;
   user-select: none;
 }
@@ -36,10 +38,11 @@
   position: absolute;
   transform: translate(-50%, -50%);
   pointer-events: none;
+  font-family: var(--font-display);
   font-size: 15px;
   font-weight: 700;
   color: var(--up);
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 0 var(--outline);
   white-space: nowrap;
   animation: popFloat 0.75s var(--ease-out) forwards;
 }
@@ -50,7 +53,7 @@
 
 .bughunt__popup.is-hot {
   font-size: 20px;
-  color: #ffd76e;
+  color: var(--accent-3);
 }
 
 @keyframes popFloat {
@@ -66,8 +69,9 @@
 }
 
 .bughunt__combo[data-hot="true"] {
-  color: #ffd76e;
-  text-shadow: 0 0 18px rgba(255, 215, 110, 0.7);
+  color: var(--accent-3);
+  /* Hard offset, not a glow — pixel art has no bloom. */
+  text-shadow: 3px 3px 0 var(--outline);
 }
 
 @keyframes comboPulse {
@@ -78,19 +82,33 @@
 
 /* Mute toggle */
 .bughunt__mute {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 40px;
   height: 40px;
-  border-radius: var(--radius-full);
-  border: 1px solid var(--glass-border);
-  background: var(--glass-bg);
   font-size: 16px;
   line-height: 1;
-  transition: background var(--duration-fast) ease, border-color var(--duration-fast) ease;
+  color: var(--ink);
+  background: var(--surface-2);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: 3px 3px 0 var(--shadow-hard);
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) ease;
 }
 
 .bughunt__mute:hover {
-  background: var(--glass-bg-hover);
-  border-color: var(--glass-border-strong);
+  background: var(--accent);
+  color: var(--accent-ink);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--shadow-hard);
+}
+
+.bughunt__mute:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--shadow-hard);
 }
 
 @media (max-width: 520px) {

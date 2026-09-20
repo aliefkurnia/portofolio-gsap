@@ -16,7 +16,7 @@
       content=".NET developer, C#, .NET Core, Blazor, software engineer, Azure, portfolio, Indonesia, Alief Kurnia"
     />
     <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#08080b" />
+    <meta name="theme-color" content="#f5edd8" />
     <link rel="canonical" href="https://alief.dev/" />
 
     <!-- Icons -->
@@ -48,11 +48,29 @@
     />
     <meta name="twitter:image" content="https://alief.dev/og-image.png" />
 
-    <!-- Fonts -->
+    <!-- Theme — applied before first paint so the wrong palette never flashes.
+         The two colours mirror --bg in src/styles/variables.css; the browser
+         chrome has to be told separately because it can't read CSS vars. -->
+    <script>
+      (function () {
+        var BG = { light: '#f5edd8', dark: '#17120f' };
+        var theme = 'light';
+        try {
+          theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+        } catch (e) {
+          /* private mode — fall through to light */
+        }
+        document.documentElement.setAttribute('data-theme', theme);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', BG[theme]);
+      })();
+    </script>
+
+    <!-- Fonts — pixel display + neutral body -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Archivo:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
   </head>

@@ -1,82 +1,104 @@
-/* ─── Design System — Dark Dashboard + Aurora ─── */
+/* ─── Design System — Pixel-Art / Retro-Game ───
+   Two palettes. Light is the default (sampled from the Behance reference);
+   dark is an opt-in inversion flipped via [data-theme="dark"] on <html>.
+
+   Names are role-based, never colour-based, so the two palettes can swap
+   cleanly. Legacy token names (--panel, --body, --muted, --glass-*, …) are
+   kept as aliases further down — most component CSS still reads those, so
+   mapping them here recolours the bulk of the site in one step.
+   ────────────────────────────────────────────────────────────────────── */
+
 :root {
-  /* Surfaces */
-  --bg: #08080b;        /* Page background — near black */
-  --panel: #121218;     /* Cards, widgets, forms */
-  --panel-2: #1a1a22;   /* Elevated / hover surface */
-  --panel-3: #22222c;   /* Highest elevation, active rows */
-  --border: #23232c;    /* Hairline borders / dividers */
-  --border-soft: rgba(255, 255, 255, 0.06);
-  --border-strong: rgba(255, 255, 255, 0.12);
+  /* ── Surfaces ── */
+  --bg: #f5edd8;          /* page background — cream */
+  --bg-alt: #9db3a6;      /* alternating section background — sage */
+  --surface: #fbf6e9;     /* cards on cream */
+  --surface-2: #efe6d0;   /* inset / hover / wells */
 
-  /* Text */
-  --ink: #f5f5f7;       /* Headings / high-contrast */
-  --body: #b9b9c3;      /* Body text */
-  --muted: #82828d;     /* Secondary text, nav links */
-  --faint: #565661;     /* Captions, meta */
-  --gutter: #33333d;    /* Legacy alias (some components) */
+  /* ── Pixel cloud backdrop (Hero sky + section texture) ── */
+  --px-clouds: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='140'%3E%3Cg fill='%23e6d9bc'%3E%3Crect x='32' y='40' width='32' height='8'/%3E%3Crect x='24' y='48' width='48' height='8'/%3E%3Crect x='16' y='56' width='64' height='8'/%3E%3Crect x='8' y='64' width='80' height='8'/%3E%3Crect x='140' y='72' width='48' height='8'/%3E%3Crect x='132' y='80' width='64' height='8'/%3E%3Crect x='124' y='88' width='80' height='8'/%3E%3Crect x='116' y='96' width='96' height='8'/%3E%3C/g%3E%3C/svg%3E");
 
-  /* Accent — SaaS blue primary, user-swappable */
-  --accent: #6ea8ff;
-  --accent-strong: #4f8cff;
-  --accent-ink: #06122b; /* Text on solid accent */
-  --accent-soft: rgba(110, 168, 255, 0.14);
+  /* ── The thick pixel border — the signature element ── */
+  --outline: #5b3d3d;     /* dark plum-brown, from the reference frames */
+  --outline-soft: rgba(91, 61, 61, 0.35);
 
-  /* Aurora palette (soft glows) — blue-led */
-  --aurora-blue: #5b8cff;
-  --aurora-cyan: #63d6ff;
-  --aurora-indigo: #7c6cff;
-  --aurora-purple: #a855f7;
-  --aurora-pink: #ff6ec4;
+  /* ── Text ramp ── */
+  --ink: #4a3233;         /* headings */
+  --ink-2: #6b4f4a;       /* body copy */
+  --ink-3: #8a6f68;       /* muted / meta / captions */
+  --on-alt: #fbf6e9;      /* text sitting on a sage section */
 
-  /* Gradients — blue mesh / glow */
-  --grad-aurora: linear-gradient(135deg, #63d6ff 0%, #6ea8ff 45%, #7c6cff 100%);
-  --grad-aurora-warm: linear-gradient(120deg, #6ea8ff 0%, #7c6cff 50%, #a855f7 100%);
-  /* Corner spotlight for glass cards — place top-right */
-  --grad-spotlight: radial-gradient(120% 120% at 85% 8%, rgba(99,214,255,0.30) 0%, rgba(110,168,255,0.24) 30%, rgba(124,108,255,0.12) 55%, transparent 74%);
-  /* Blue mesh glow (section + hero backdrop) */
-  --grad-mesh-blue: radial-gradient(90% 120% at 50% -10%, rgba(91,140,255,0.40) 0%, rgba(48,86,180,0.18) 45%, transparent 75%);
-  --glow-blue: radial-gradient(60% 70% at 50% 0%, rgba(91,140,255,0.22) 0%, transparent 70%);
+  /* ── Accents ── */
+  --accent: #4e7f82;      /* teal — primary */
+  --accent-2: #d98f70;    /* salmon */
+  --accent-3: #efcb84;    /* butter */
+  --accent-strong: #3d6669;
+  --accent-ink: #fbf6e9;  /* text on a solid accent fill */
+  --accent-soft: rgba(78, 127, 130, 0.14);
 
-  /* ─── Glassmorphism ─── */
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-bg-strong: rgba(255, 255, 255, 0.09);
-  --glass-bg-hover: rgba(255, 255, 255, 0.11);
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --glass-border-strong: rgba(255, 255, 255, 0.2);
-  --glass-blur: 20px;
-  --glass-blur-sm: 12px;
-  --glass-highlight: linear-gradient(180deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0) 40%);
-  --glass-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.5);
+  /* ── Level-card fills (Hero world map) ── */
+  --card-1: #d98f70;
+  --card-2: #efcb84;
+  --card-3: #6e9a9c;
+  --card-4: #9cb3a6;
 
-  /* Semantic (up/down deltas) */
-  --up: #34d399;
-  --down: #fb7185;
+  /* Ink that sits directly on one of those fills, rather than on a surface.
+     The four fills are mid-tone in light and dark in dark, so one value per
+     theme is legible on all four — no per-card contrast token needed. */
+  --card-ink: #5b3d3d;
 
-  /* Data / status */
-  --code-comment: #6a7684;
-  --code-keyword: #ff7b72;
-  --code-func: #79c0ff;
-  --code-string: #a5d6ff;
-  --tl-red: #ff5f57;
-  --tl-yellow: #febc2e;
-  --tl-green: #28c840;
+  /* ── CRT screen, inside the loader's television ──
+     Dark in BOTH themes: a television is a light source, not a surface, so
+     inverting it with the theme would be wrong. The scanline tile is an SVG
+     of hard-edged 1px lines rather than a repeating-linear-gradient — the
+     edges stay on pixel boundaries at any zoom. */
+  --crt-screen: #2b211d;
+  --crt-scan: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='1' fill='%23000000' fill-opacity='0.3'/%3E%3C/svg%3E");
 
-  /* Typography */
-  --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-  /* Back-compat aliases (older components) */
+  /* Plate behind third-party brand logos. Stays light in BOTH themes —
+     vendor logos are drawn for light backgrounds, so tinting this with the
+     dark palette would make them unreadable. */
+  --icon-plate: #fdfaf0;
+
+  /* ── Simon pads — four hues that stay distinct and vivid in both themes,
+     since the game is unplayable if the player can't tell them apart. ── */
+  --pad-1: #d98f70;
+  --pad-2: #efcb84;
+  --pad-3: #4e7f82;
+  --pad-4: #9cb3a6;
+
+  /* ── 3D text extrusion (two stacked hard shadows) ── */
+  --px-extrude-1: #d9a98c;
+  --px-extrude-2: #a8604a;
+
+  /* ── Hard shadows — no blur, pixel convention ── */
+  --shadow-hard: rgba(91, 61, 61, 0.5);
+  --shadow-card: 6px 6px 0 var(--shadow-hard);
+  --shadow-card-lg: 10px 10px 0 var(--shadow-hard);
+  --shadow-float: 8px 8px 0 var(--shadow-hard);
+  --shadow-window: 12px 12px 0 var(--shadow-hard);
+  --shadow-inset: inset 0 0 0 4px var(--surface);
+
+  /* Scrim behind modals. Dark in BOTH themes on purpose — tying it to
+     --outline would give dark mode a near-white wash over the page. */
+  --scrim: rgba(23, 18, 15, 0.6);
+
+  /* ── Typography ── */
+  --font-display: 'Pixelify Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-sans: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* Back-compat aliases */
   --font-body: var(--font-sans);
-  --font-heading: var(--font-sans);
+  --font-heading: var(--font-display);
 
-  /* Layout */
+  /* ── Layout ── */
   --container: 1160px;
   --container-narrow: 820px;
   --container-pad: 40px;
-  --nav-height: 68px;
+  --nav-height: 72px;
   --section-y: 96px;
 
-  /* Spacing */
+  /* ── Spacing ── */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
@@ -86,26 +108,24 @@
   --space-3xl: 4rem;
   --space-4xl: 6rem;
 
-  /* Radius — soft, rounded dashboard cards */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
-  --radius-xl: 24px;
-  --radius-2xl: 30px;
+  /* ── Radius — near-square; pixel art does not do soft curves ── */
+  --radius-sm: 0px;
+  --radius-md: 2px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
+  --radius-2xl: 8px;
   --radius-full: 9999px;
 
-  /* Shadows — floating widgets */
-  --shadow-window: 0 40px 90px -45px rgba(0, 0, 0, 0.85);
-  --shadow-card: 0 24px 60px -34px rgba(0, 0, 0, 0.7);
-  --shadow-float: 0 40px 80px -40px rgba(0, 0, 0, 0.75);
-  --shadow-glow-accent: 0 20px 60px -24px rgba(168, 85, 247, 0.45);
-
-  /* Motion */
+  /* ── Motion ── */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --duration-fast: 200ms;
-  --duration-normal: 400ms;
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 120ms;
+  --duration-normal: 240ms;
+  --duration-slow: 400ms;
+  --duration-slower: 600ms;
 
-  /* Z-Index */
+  /* ── Z-Index ── */
   --z-base: 1;
   --z-sticky: 200;
   --z-navbar: 500;
@@ -113,18 +133,7 @@
   --z-progress: 950;
   --z-loader: 9999;
 
-  /* ─── Legacy tokens (kept for /admin + /PreviewCV pages) ─── */
-  --color-white: #ffffff;
-  --color-snow: #fafafa;
-  --color-silver-light: #e8e8e8;
-  --color-silver: #c0c0c0;
-  --color-silver-dark: #8c8c8c;
-  --color-charcoal: #2d2d2d;
-  --color-dark: #1a1a1a;
-  --color-black: #0a0a0a;
-  --gradient-metallic: linear-gradient(135deg, #e8e8e8 0%, #a8a8a8 25%, #d4d4d4 50%, #b8b8b8 75%, #e0e0e0 100%);
-  --gradient-metallic-text: linear-gradient(90deg, #c0c0c0 0%, #e8e8e8 30%, #a8a8a8 60%, #d4d4d4 100%);
-
+  /* ── Font sizes ── */
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
@@ -138,31 +147,117 @@
 
   --leading-tight: 1.1;
   --leading-snug: 1.25;
-  --leading-normal: 1.5;
-  --leading-relaxed: 1.7;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.75;
 
-  --tracking-tight: -0.02em;
-  --tracking-normal: 0;
-  --tracking-wide: 0.05em;
-  --tracking-wider: 0.1em;
-  --tracking-widest: 0.2em;
+  --tracking-tight: 0;
+  --tracking-normal: 0.02em;
+  --tracking-wide: 0.08em;
+  --tracking-wider: 0.14em;
+  --tracking-widest: 0.22em;
 
-  --space-2xl-legacy: 3rem;
-  --space-5xl: 8rem;
-  --space-6xl: 12rem;
+  /* ══════════════════════════════════════════════════════════
+     Legacy aliases — older component CSS reads these names.
+     Pointing them at the new roles is what recolours the bulk
+     of the site before per-component polish.
+     ══════════════════════════════════════════════════════════ */
+  --panel: var(--surface);
+  --panel-2: var(--surface-2);
+  --panel-3: var(--surface-2);
+  --border: var(--outline);
+  --border-soft: var(--outline-soft);
+  --border-strong: var(--outline);
+
+  --body: var(--ink-2);
+  --muted: var(--ink-3);
+  --faint: var(--ink-3);
+  --gutter: var(--outline);
+
+  /* Old glass tokens — kept so any straggler still resolves. The .glass
+     class is renamed to .px-panel, but these guard against misses. */
+  --glass-bg: var(--surface);
+  --glass-bg-strong: var(--surface);
+  --glass-bg-hover: var(--surface-2);
+  --glass-border: var(--outline);
+  --glass-border-strong: var(--outline);
+  --glass-blur: 0px;
+  --glass-blur-sm: 0px;
+  --glass-highlight: none;
+  --glass-shadow: var(--shadow-card);
+
+  /* Retired aurora / gradient-mesh tokens — flattened to nothing so any
+     leftover reference renders as a no-op instead of a blue blob. */
+  --aurora-blue: var(--accent);
+  --aurora-cyan: var(--accent);
+  --aurora-indigo: var(--accent);
+  --aurora-purple: var(--accent);
+  --aurora-pink: var(--accent-2);
+  --grad-aurora: none;
+  --grad-aurora-warm: none;
+  --grad-spotlight: none;
+  --grad-mesh-blue: none;
+  --glow-blue: none;
+
+  /* Semantic deltas */
+  --up: #4e8f6b;
+  --down: #c4635c;
 
   --max-width: 1200px;
   --max-width-narrow: 900px;
   --section-padding: clamp(4rem, 10vw, 8rem);
+}
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
-  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.2);
-  --shadow-glow: 0 0 40px rgba(192, 192, 192, 0.15);
+/* ─── Dark — opt-in inversion. The outline flips to cream, which is the
+   standard pixel-art convention for a dark ground. ─── */
+:root[data-theme='dark'] {
+  --bg: #17120f;
+  --bg-alt: #1c2420;
+  --surface: #241c18;
+  --surface-2: #2e241e;
 
-  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --duration-slow: 600ms;
-  --duration-slower: 800ms;
+  --outline: #f0e4cc;
+  --outline-soft: rgba(240, 228, 204, 0.32);
+
+  --ink: #f5edd8;
+  --ink-2: #c9bca5;
+  --ink-3: #948872;
+  --on-alt: #f5edd8;
+
+  --accent: #7fb3b6;
+  --accent-2: #e89a7c;
+  --accent-3: #f2d48a;
+  --accent-strong: #9ccdd0;
+  --accent-ink: #17120f;
+  --accent-soft: rgba(127, 179, 182, 0.18);
+
+  --card-1: #8c4f3c;
+  --card-2: #8a6a2e;
+  --card-3: #2f5558;
+  --card-4: #4a6257;
+
+  --card-ink: #f0e4cc;
+
+  /* Darker still than light mode — the screen should read as the only lit
+     thing in a dark room. */
+  --crt-screen: #150f0d;
+
+  /* Dimmed, but still light enough to read a dark vendor logo against. */
+  --icon-plate: #ded4ba;
+
+  --px-extrude-1: #3a2e26;
+  --px-extrude-2: #12100d;
+
+  --pad-1: #e89a7c;
+  --pad-2: #f2d48a;
+  --pad-3: #7fb3b6;
+  --pad-4: #a8c4b6;
+
+  --px-clouds: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='140'%3E%3Cg fill='%23241c18'%3E%3Crect x='32' y='40' width='32' height='8'/%3E%3Crect x='24' y='48' width='48' height='8'/%3E%3Crect x='16' y='56' width='64' height='8'/%3E%3Crect x='8' y='64' width='80' height='8'/%3E%3Crect x='140' y='72' width='48' height='8'/%3E%3Crect x='132' y='80' width='64' height='8'/%3E%3Crect x='124' y='88' width='80' height='8'/%3E%3Crect x='116' y='96' width='96' height='8'/%3E%3C/g%3E%3C/svg%3E");
+
+  --shadow-hard: rgba(0, 0, 0, 0.62);
+  --shadow-inset: inset 0 0 0 4px var(--surface);
+  --scrim: rgba(0, 0, 0, 0.72);
+
+  --up: #6fbf90;
+  --down: #e08a80;
 }

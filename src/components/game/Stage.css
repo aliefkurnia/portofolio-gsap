@@ -1,0 +1,264 @@
+/* ─── Stage — a single game screen ───
+   Fixed to the viewport. The panel never grows past the screen; only the
+   `.stage__scroll` region inside it scrolls.
+   ─────────────────────────────────────────────────────────────────── */
+
+.stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0 clamp(12px, 2.5vw, 28px) clamp(14px, 2.5vw, 26px);
+}
+
+.stage__frame {
+  flex: 1;
+  /* Without this the panel would grow to fit its content and push the page
+     taller than the viewport, which is exactly what we are avoiding. */
+  min-height: 0;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* The bar and the scroller have no padding of their own, so without this
+     gutter they would sit flush against the border and bury .px-panel's inner
+     frame line — the double-frame is the look we are after. */
+  padding: 5px;
+}
+
+/* ─── Title bar — `->> STAGE <<-` ───
+   Sage, echoing the alternating cream/sage bands of the reference. The cream
+   chips and the cream-faced title both read strongly against it.
+   No bottom border: `.stage__steps` sits directly under it and *is* the rule. */
+.stage__bar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px 12px;
+  background: var(--bg-alt);
+}
+
+.stage__back {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink);
+  background: var(--surface);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: 3px 3px 0 var(--shadow-hard);
+  padding: 7px 12px;
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.stage__back:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--shadow-hard);
+}
+
+.stage__back:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--shadow-hard);
+}
+
+.stage__heading {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  /* Room for the 3D extrusion to bleed without touching the border */
+  padding: 4px 0 6px;
+}
+
+.stage__arrow {
+  flex: 0 0 auto;
+  color: var(--accent-2);
+}
+
+.stage__title {
+  font-size: clamp(1rem, 2.4vw, 1.5rem);
+  text-align: center;
+  /* No overflow clipping here: it would shear the 3D extrusion off the
+     bottom-right of every letter. Stage names are short enough to fit. */
+  white-space: nowrap;
+  /* A tighter extrusion than the page-level .px-title — this sits in a bar */
+  text-shadow:
+    -2px -2px 0 var(--outline),
+     2px -2px 0 var(--outline),
+    -2px  2px 0 var(--outline),
+     2px  2px 0 var(--outline),
+     3px  3px 0 var(--px-extrude-1);
+}
+
+.stage__tail {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stage__meta {
+  font-family: var(--font-display);
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: var(--ink-2);
+  background: var(--surface);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+  padding: 5px 10px;
+  white-space: nowrap;
+}
+
+/* Key-cap hint. Reads as a button you could press, and keeps full contrast
+   on the sage bar — --ink-3 would be too faint there. */
+.stage__esc {
+  font-family: var(--font-display);
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: var(--ink);
+  background: var(--surface);
+  border: 3px dashed var(--outline);
+  border-radius: var(--radius-md);
+  padding: 5px 8px;
+}
+
+/* ─── Deck controls ───
+   Square, icon-only, and the same hard-shadow pixel treatment as `map` beside
+   them. Disabled ends keep their slot rather than disappearing, so the row
+   never reflows as you walk the deck. */
+.stage__nav {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stage__step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: 3px 3px 0 var(--shadow-hard);
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.stage__step:hover:not(:disabled) {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--shadow-hard);
+}
+
+.stage__step:active:not(:disabled) {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--shadow-hard);
+}
+
+/* Flattened rather than faded: at the end of the deck the button should read
+   as a slot with nothing in it, not as a control that is briefly unavailable. */
+.stage__step:disabled {
+  color: var(--ink-3);
+  background: var(--bg-alt);
+  box-shadow: none;
+  cursor: default;
+}
+
+/* ─── Deck position ───
+   The bar's rule, segmented: one cell per slide, the current one lit.
+   The ticks carry the outline colour and the gaps are the bar's own sage
+   showing through, so the strip reads as a solid rule with notches cut in it.
+   The inverse — sage ticks on a dark strip — collapses into an invisible band,
+   because a sage tick and the sage bar above it are the same colour. */
+.stage__steps {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 3px;
+  height: 4px;
+  background: var(--bg-alt);
+}
+
+.stage__tick {
+  flex: 1;
+  background: var(--outline);
+}
+
+.stage__tick--on {
+  background: var(--accent-2);
+}
+
+/* ─── The one scroller in the app ─── */
+.stage__scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  background: var(--surface);
+}
+
+.stage__scroll:focus {
+  outline: none;
+}
+
+.stage__content {
+  padding: clamp(22px, 3.2vw, 44px) clamp(18px, 3vw, 40px);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 720px) {
+  .stage__bar {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 12px 12px;
+  }
+
+  .stage__heading {
+    order: -1;
+    flex-basis: 100%;
+    gap: 8px;
+  }
+
+  .stage__tail {
+    margin-left: auto;
+  }
+
+  .stage__esc {
+    display: none;
+  }
+}
+
+@media (max-width: 460px) {
+  .stage__arrow {
+    display: none;
+  }
+
+  .stage__back {
+    font-size: 11.5px;
+    padding: 6px 9px;
+  }
+
+  .stage__step {
+    width: 28px;
+    height: 28px;
+  }
+}

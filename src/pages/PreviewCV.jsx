@@ -2,23 +2,44 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePortfolioData } from "../hooks/usePortfolioData";
 import { Skeleton } from "../components/ui/Skeleton";
+import PixelIcon from "../components/ui/PixelIcon";
+import CvDocument from "./CvDocument";
 import "./PreviewCV.css";
 
+/**
+ * CV viewer.
+ *
+ * Like the game shell, this is a single fixed screen — the header is pinned
+ * at the top and the document gets the rest of the viewport, so the page
+ * itself never scrolls. Scrolling happens inside whichever view is showing.
+ *
+ * Two views, because they answer different questions. `card` renders the CV
+ * from the live payload and is the one that looks like the rest of the site;
+ * `pdf` shows the file that was actually authored and uploaded, which is the
+ * one that is complete and correct to send to an employer. Neither is a
+ * fallback for the other, so both stay one click apart.
+ */
+
+const VIEWS = [
+  { key: "card", label: "Card" },
+  { key: "pdf", label: "PDF" },
+];
+
 const CvSkeleton = () => (
-  <div className="cv__viewer cv__viewer--skeleton">
-    <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+  <div className="cv__viewer cv__viewer--skeleton px-panel">
+    <div className="cv__skeleton-body">
       <Skeleton width="40%" height="2rem" />
       <Skeleton width="60%" height="1rem" />
       <Skeleton width="100%" height="1rem" />
       <Skeleton width="90%" height="1rem" />
       <Skeleton width="100%" height="1rem" />
-      <div style={{ marginTop: '1rem' }} />
+      <div className="cv__skeleton-gap" />
       <Skeleton width="35%" height="1.5rem" />
       <Skeleton width="100%" height="1rem" />
       <Skeleton width="95%" height="1rem" />
       <Skeleton width="80%" height="1rem" />
       <Skeleton width="100%" height="1rem" />
-      <div style={{ marginTop: '1rem' }} />
+      <div className="cv__skeleton-gap" />
       <Skeleton width="30%" height="1.5rem" />
       <Skeleton width="100%" height="1rem" />
       <Skeleton width="85%" height="1rem" />
@@ -29,7 +50,8 @@ const CvSkeleton = () => (
 
 const PreviewCV = () => {
   const [language, setLanguage] = useState("id");
-  const { settings, loading } = usePortfolioData();
+  const [view, setView] = useState("card");
+  const { settings, experiences, technologies, loading } = usePortfolioData();
   const navigate = useNavigate();
 
   const pdfPaths = {
@@ -42,28 +64,42 @@ const PreviewCV = () => {
       <header className="cv__header">
         <div className="cv__header-inner">
           <button className="cv__back" onClick={() => navigate("/")}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M19 12H5" />
-              <path d="m12 19-7-7 7-7" />
-            </svg>
-            Back
+            <PixelIcon name="arrowLeft" size={16} />
+            back
           </button>
 
+          <span className="cv__title">Resume</span>
+
           <div className="cv__controls">
-            <div className="cv__lang-toggle">
-              <button
-                className={`cv__lang-btn ${language === "id" ? "cv__lang-btn--active" : ""}`}
-                onClick={() => setLanguage("id")}
-              >
-                ID
-              </button>
-              <button
-                className={`cv__lang-btn ${language === "en" ? "cv__lang-btn--active" : ""}`}
-                onClick={() => setLanguage("en")}
-              >
-                EN
-              </button>
+            <div className="cv__seg" role="group" aria-label="View">
+              {VIEWS.map((v) => (
+                <button
+                  key={v.key}
+                  className={`cv__seg-btn ${view === v.key ? "cv__seg-btn--active" : ""}`}
+                  onClick={() => setView(v.key)}
+                  aria-pressed={view === v.key}
+                >
+                  {v.label}
+                </button>
+              ))}
             </div>
+
+            {/* The language switch picks between two uploaded files, so it
+                has nothing to do in the rendered view. */}
+            {view === "pdf" && (
+              <div className="cv__seg" role="group" aria-label="Language">
+                {["id", "en"].map((code) => (
+                  <button
+                    key={code}
+                    className={`cv__seg-btn ${language === code ? "cv__seg-btn--active" : ""}`}
+                    onClick={() => setLanguage(code)}
+                    aria-pressed={language === code}
+                  >
+                    {code.toUpperCase()}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </header>
@@ -71,19 +107,21 @@ const PreviewCV = () => {
       <main className="cv__body">
         {loading ? (
           <CvSkeleton />
+        ) : view === "card" ? (
+          <div className="cv__paper">
+            <CvDocument
+              settings={settings}
+              experiences={experiences}
+              technologies={technologies}
+            />
+          </div>
         ) : pdfPaths[language] ? (
-          <div className="cv__viewer">
+          <div className="cv__viewer px-panel">
             <iframe src={pdfPaths[language]} title="Resume" />
           </div>
         ) : (
-          <div className="cv__empty">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-              <polyline points="14 2 14 8 20 8" />
-              <line x1="16" y1="13" x2="8" y2="13" />
-              <line x1="16" y1="17" x2="8" y2="17" />
-              <polyline points="10 9 9 9 8 9" />
-            </svg>
+          <div className="cv__empty px-panel">
+            <PixelIcon name="file" size={56} />
             <p>No resume uploaded yet.</p>
             <span>Upload via the Admin panel to preview here.</span>
           </div>

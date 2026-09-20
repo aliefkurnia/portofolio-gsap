@@ -1,0 +1,159 @@
+/* ─── The CV as a pixel document ───
+   Reference layout: profile down the left, the record down the right, every
+   section announced by a plate-and-plaque header.
+   ────────────────────────────────────────────────────────────────────── */
+
+.cvdoc {
+  width: 100%;
+  padding: clamp(18px, 3vw, 38px);
+  background: var(--surface);
+  border: 4px solid var(--outline);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.cvdoc__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  gap: clamp(18px, 2.6vw, 40px);
+  align-items: start;
+}
+
+/* ─── The record ─── */
+.cvdoc__main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* The first heading sits flush with the top of the profile column beside it. */
+.cvdoc__section:first-child .plate-head {
+  margin-top: 0;
+}
+
+.cvdoc__bio {
+  font-size: 13.5px;
+  line-height: var(--leading-relaxed);
+  color: var(--ink-2);
+}
+
+.cvdoc__jobs {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.cvdoc__job-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cvdoc__job-title {
+  font-size: 14.5px;
+  color: var(--ink);
+}
+
+.cvdoc__job-date {
+  flex: 0 0 auto;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink-3);
+  background: var(--surface-2);
+  border: 2px solid var(--outline-soft);
+  border-radius: var(--radius-md);
+  padding: 2px 8px;
+}
+
+.cvdoc__job-company {
+  margin-top: 2px;
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* Square bullets — the reference never uses a round one. */
+.cvdoc__points {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.cvdoc__point {
+  position: relative;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: var(--leading-normal);
+  color: var(--ink-2);
+}
+
+.cvdoc__point::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.52em;
+  width: 8px;
+  height: 8px;
+  background: var(--accent-2);
+  border: 2px solid var(--outline);
+}
+
+.cvdoc__skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.cvdoc__skill {
+  font-family: var(--font-display);
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--card-ink);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+  padding: 3px 9px;
+  line-height: 1.4;
+}
+
+.cvdoc__skill--1 {
+  background: var(--card-1);
+}
+.cvdoc__skill--2 {
+  background: var(--card-2);
+}
+.cvdoc__skill--3 {
+  background: var(--card-3);
+}
+.cvdoc__skill--4 {
+  background: var(--card-4);
+}
+
+@media (max-width: 780px) {
+  .cvdoc__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ─── Print — this is the view someone would actually send to a printer, so
+   the paper runs full length and the game chrome is gone. ─── */
+@media print {
+  .cvdoc {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    background: #fff;
+  }
+
+  .cvdoc__job {
+    break-inside: avoid;
+  }
+}

@@ -1,0 +1,89 @@
+/* ─── Game shell ───
+   The whole portfolio is one fixed viewport. Nothing here ever scrolls the
+   page: the shell is pinned with `inset: 0`, and any stage whose content is
+   taller than the screen scrolls inside its own panel instead.
+
+   Named `.shell`, not `.game` — every arcade game component already claims
+   `.game`, and Games.css sets `position: relative` on it. In the bundled
+   stylesheet that would land after this file and quietly unpin the shell.
+   ────────────────────────────────────────────────────────────────────── */
+
+.shell {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--bg);
+  background-image: var(--px-clouds);
+  background-repeat: repeat;
+  background-size: 200px 140px;
+}
+
+/* `min-height: 0` is what lets the scrolling panel inside actually scroll —
+   without it a flex child refuses to shrink below its content. */
+.shell__body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+/* ─── Drifting cloud layer, shared by screens for depth ─── */
+.shell__clouds {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.shell__cloud {
+  position: absolute;
+  background-image: var(--px-clouds);
+  background-repeat: no-repeat;
+  background-size: contain;
+  image-rendering: pixelated;
+  opacity: 0.85;
+  will-change: transform;
+}
+
+.shell__cloud--1 {
+  width: 340px;
+  height: 238px;
+  top: 4%;
+  left: -8%;
+  animation: shellCloud 52s ease-in-out infinite;
+}
+
+.shell__cloud--2 {
+  width: 240px;
+  height: 168px;
+  top: 42%;
+  right: -6%;
+  animation: shellCloud 68s ease-in-out infinite reverse;
+}
+
+.shell__cloud--3 {
+  width: 280px;
+  height: 196px;
+  bottom: -4%;
+  left: 16%;
+  opacity: 0.6;
+  animation: shellCloud 82s ease-in-out infinite;
+}
+
+@keyframes shellCloud {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(4vw, -14px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shell__cloud {
+    animation: none !important;
+  }
+}

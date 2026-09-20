@@ -1,32 +1,18 @@
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
+@keyframes pxBlink {
+  0%,
   100% {
-    background-position: 200% 0;
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
   }
 }
 
+/* Blocky, stepped blink — no shimmer gradient in a pixel theme */
 .skeleton {
-  background: linear-gradient(
-    90deg,
-    rgba(140, 140, 140, 0.08) 0%,
-    rgba(140, 140, 140, 0.15) 50%,
-    rgba(140, 140, 140, 0.08) 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 1.8s ease-in-out infinite;
-}
-
-.section--light .skeleton {
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.04) 0%,
-    rgba(0, 0, 0, 0.08) 50%,
-    rgba(0, 0, 0, 0.04) 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 1.8s ease-in-out infinite;
+  background: var(--surface-2);
+  border: 2px solid var(--outline-soft);
+  animation: pxBlink 1.2s steps(2, end) infinite;
 }
 
 .skeleton--mt-sm {

@@ -34,33 +34,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 3px solid var(--outline);
   border-radius: var(--radius-md);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  border: 1px solid var(--glass-border);
 }
 
+/* Card back — flat surface with the panel's frame look, no frosted glass. */
 .mm-card__face--back {
-  background: var(--glass-bg-strong);
-  backdrop-filter: blur(var(--glass-blur-sm));
-  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+  background: var(--surface);
 }
 
 .mm-card:hover .mm-card__face--back {
-  border-color: var(--glass-border-strong);
-  background: var(--glass-bg-hover);
+  background: var(--surface-2);
 }
 
 .mm-card__logo {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 18px;
   font-weight: 700;
   color: var(--accent);
   opacity: 0.7;
 }
 
+/* Light plate in both themes — the faces carry vendor logos drawn for a
+   light background. */
 .mm-card__face--front {
-  background: #ffffff;
+  background: var(--icon-plate);
   transform: rotateY(180deg);
   padding: 16%;
 }
@@ -75,8 +75,9 @@
   animation: mmPop 0.4s var(--ease-out);
 }
 
+/* Matched pair — hard accent ring, no bloom. */
 .mm-card.is-matched .mm-card__face--front {
-  box-shadow: 0 0 0 2px var(--accent), 0 0 24px -4px rgba(110, 168, 255, 0.7);
+  box-shadow: 0 0 0 4px var(--accent);
 }
 
 @keyframes mmPop {

@@ -1,0 +1,63 @@
+/* ─── Theme rocker ───
+   A two-position switch rather than a single button: the container carries the
+   pixel chrome, the two options sit inside it, and the active one is filled.
+   The shadow belongs to the container because the control as a whole is the
+   thing that is "there" — the halves only swap which one is lit. */
+.theme-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  padding: 3px;
+  background: var(--surface-2);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: 3px 3px 0 var(--shadow-hard);
+}
+
+.theme-switch__opt {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  /* Unlit options stay a step back from the lit one — this is a state
+     indicator first and a pair of buttons second. */
+  color: var(--ink-3);
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  padding: 5px 9px;
+  transition: background-color var(--duration-fast),
+    color var(--duration-fast);
+}
+
+.theme-switch__opt:hover {
+  color: var(--ink);
+}
+
+/* Flat fill, no outline: at this size a border on the lit half reads as a
+   second button sitting loose inside the first. */
+.theme-switch__opt[aria-pressed='true'] {
+  color: var(--accent-ink);
+  background: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .theme-switch__label {
+    display: none;
+  }
+
+  .theme-switch__opt {
+    padding: 6px 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-switch__opt {
+    transition: none;
+  }
+}

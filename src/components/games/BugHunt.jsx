@@ -158,7 +158,7 @@ const BugHunt = () => {
         </div>
       </div>
 
-      <div className="game-panel glass bughunt__field">
+      <div className="game-panel px-panel bughunt__field">
         {bugs.map((bug) => (
           <button
             key={bug.id}

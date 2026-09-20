@@ -1,17 +1,7 @@
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/layout/Navbar';
-import Footer from './components/layout/Footer';
-import ScrollProgress from './components/layout/ScrollProgress';
 import Loader from './components/ui/Loader';
-import GameNudge from './components/ui/GameNudge';
-import Hero from './components/sections/Hero';
-import About from './components/sections/About';
-import TechStack from './components/sections/TechStack';
-import AiWorkflow from './components/sections/AiWorkflow';
-import Experience from './components/sections/Experience';
-import Projects from './components/sections/Projects';
-import Contact from './components/sections/Contact';
+import Game from './components/game/Game';
 import Admin from './pages/Admin';
 import PreviewCV from './pages/PreviewCV';
 import Play from './pages/Play';
@@ -27,28 +17,12 @@ function App() {
 
   return (
     <Routes>
+      {/* The portfolio is a single fixed-viewport game shell: a title screen
+          and one stage at a time. Nothing on this route scrolls the page. */}
       <Route
         path="/"
         element={
-          loading ? (
-            <Loader onComplete={handleLoaderComplete} />
-          ) : (
-            <>
-              <ScrollProgress />
-              <Navbar />
-              <main>
-                <Hero />
-                <About />
-                <TechStack />
-                <AiWorkflow />
-                <Experience />
-                <Projects />
-                <Contact />
-              </main>
-              <Footer />
-              <GameNudge />
-            </>
-          )
+          loading ? <Loader onComplete={handleLoaderComplete} /> : <Game />
         }
       />
       <Route path="/PreviewCV" element={<PreviewCV />} />

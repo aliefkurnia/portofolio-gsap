@@ -1,65 +1,175 @@
+/* ─── AI Workflow stage ─── */
 .aiflow {
-  position: relative;
-}
-
-.aiflow__glow {
-  position: absolute;
-  inset: 0;
-  background: var(--glow-blue);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.aiflow .container {
-  position: relative;
-  z-index: 1;
+  width: 100%;
 }
 
 .aiflow__intro {
-  max-width: 62ch;
-  margin: -12px 0 32px;
-  color: var(--muted);
-  font-size: 1.02rem;
-  line-height: 1.65;
+  max-width: 66ch;
+  margin-bottom: 26px;
+  color: var(--ink-2);
+  font-size: 1rem;
+  line-height: var(--leading-relaxed);
+}
+
+/* ─── The loop ───
+   Four beats of an AI-assisted change, in order. This is the "workflow" the
+   stage is named for; the tool tiles below it are only the cast. */
+.aiflow__steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(196px, 1fr));
+  gap: 14px;
+  margin: 0 0 30px;
+  padding: 0;
+  list-style: none;
+}
+
+.aiflow__step {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 15px 16px 17px;
+  background: var(--surface);
+  border: 4px solid var(--outline);
+  border-radius: var(--radius-lg);
+  box-shadow: 4px 4px 0 var(--shadow-hard);
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) ease;
+}
+
+.aiflow__step:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 8px 8px 0 var(--shadow-hard);
+  background: var(--surface-2);
+}
+
+/* A hard chip rather than a bare number: the sequence is the point, so the
+   ordinal gets the strongest fill on the card. `--accent-ink` is the token
+   defined as "text on a solid accent fill", which flips with the theme. */
+.aiflow__step-no {
+  display: inline-block;
+  margin-bottom: 11px;
+  padding: 3px 9px;
+  background: var(--accent-2);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: var(--tracking-widest);
+  color: var(--accent-ink);
+}
+
+.aiflow__step-title {
+  margin: 0 0 6px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink);
+}
+
+.aiflow__step-body {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: var(--leading-relaxed);
+  color: var(--ink-2);
+}
+
+/* ─── Toolbox ───
+   Ruled off from the loop above so the stage reads as two blocks rather than
+   one long list of boxes. */
+.aiflow__tools {
+  padding-top: 22px;
+  border-top: 4px solid var(--outline-soft);
+}
+
+.aiflow__label {
+  margin: 0 0 14px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--ink-3);
 }
 
 .aiflow__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 14px;
+}
+
+/* ─── Ground rules ─── */
+.aiflow__rules {
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 4px solid var(--outline-soft);
+}
+
+.aiflow__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 10px 22px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* A hard square bullet rather than a glyph: `list-style` is off so the marker
+   can be a block of colour, which is the only kind of mark this system draws. */
+.aiflow__rule {
+  position: relative;
+  padding-left: 18px;
+  color: var(--ink-2);
+  font-size: 0.88rem;
+  line-height: var(--leading-relaxed);
+}
+
+.aiflow__rule::before {
+  content: '';
+  position: absolute;
+  top: 0.46em;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--accent-3);
+  border: 2px solid var(--outline);
 }
 
 .aiflow__tile {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 18px 20px;
+  gap: 13px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 4px solid var(--outline);
   border-radius: var(--radius-lg);
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(var(--glass-blur-sm)) saturate(140%);
-  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(140%);
-  transition: background var(--duration-fast) ease, border-color var(--duration-fast) ease,
-    transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) ease;
+  box-shadow: 4px 4px 0 var(--shadow-hard);
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) ease;
 }
 
 .aiflow__tile:hover {
-  transform: translateY(-4px);
-  background: var(--glass-bg-hover);
-  border-color: var(--glass-border-strong);
-  box-shadow: 0 16px 40px -20px rgba(110, 168, 255, 0.5);
+  transform: translate(-3px, -3px);
+  box-shadow: 8px 8px 0 var(--shadow-hard);
+  background: var(--surface-2);
 }
 
+/* Light plate so vendor logos stay legible in both themes */
 .aiflow__icon-box {
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 6px;
+  background: var(--icon-plate);
+  border: 3px solid var(--outline);
   border-radius: var(--radius-md);
-  background: #ffffff;
-  padding: 7px;
 }
 
 .aiflow__icon {
@@ -69,19 +179,46 @@
 }
 
 .aiflow__icon-fallback {
-  color: #1a1a1a;
+  font-family: var(--font-display);
   font-weight: 700;
-  font-size: 18px;
+  font-size: 19px;
+  color: var(--outline);
 }
 
 .aiflow__name {
+  font-family: var(--font-display);
   font-size: 14px;
-  font-weight: 500;
-  color: var(--body);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink);
+  line-height: 1.25;
 }
 
 @media (max-width: 520px) {
+  /* Two columns rather than one: the steps are short, and a single column of
+     four would push the toolbox off the first screen of the stage. */
+  .aiflow__steps {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+  }
+
+  .aiflow__step {
+    padding: 12px 12px 14px;
+  }
+
   .aiflow__grid {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+  }
+
+  .aiflow__tile {
+    padding: 11px 12px;
+    gap: 10px;
+  }
+
+  .aiflow__icon-box {
+    width: 38px;
+    height: 38px;
   }
 }

@@ -1,3 +1,13 @@
+/* ─── Admin ───
+   Full pixel restyle. Presentation only — no Supabase call, query or state
+   shape is touched, and every class name is preserved so Admin.jsx needs no
+   changes.
+
+   Unlike the public site this page is a tool, so it keeps a normal scrolling
+   document rather than the fixed game shell: long CRUD lists and a modal form
+   are miserable to use inside a locked viewport.
+   ────────────────────────────────────────────────────────────────────── */
+
 /* ── Admin Login ── */
 .admin-login {
   min-height: 100vh;
@@ -5,80 +15,94 @@
   align-items: center;
   justify-content: center;
   background-color: var(--bg);
-  background-image: var(--glow-blue);
+  background-image: var(--px-clouds);
+  background-repeat: repeat;
+  background-size: 200px 140px;
   font-family: var(--font-sans);
   padding: 1rem;
 }
 
 .admin-login-form {
-  background: var(--glass-bg-strong);
-  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
-  padding: 2.5rem;
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-2xl);
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
   min-width: 360px;
-  box-shadow: var(--glass-shadow);
+  padding: 2.5rem;
+  background: var(--surface);
+  border: 4px solid var(--outline);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-window);
 }
 
 .admin-login-form h2 {
-  color: var(--ink);
   margin: 0 0 0.5rem;
-  text-align: center;
+  font-family: var(--font-display);
   font-size: 1.6rem;
   font-weight: 700;
-  letter-spacing: -0.03em;
-  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink);
+  text-align: center;
 }
 
 .admin-login-form input {
   padding: 0.85rem 1rem;
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-md);
-  background: var(--glass-bg);
   color: var(--ink);
+  background: var(--surface-2);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: inset 3px 3px 0 var(--shadow-hard);
   font-size: 0.95rem;
   font-family: var(--font-sans);
   transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
 }
 
 .admin-login-form input::placeholder {
-  color: var(--faint);
+  color: var(--ink-3);
 }
 
 .admin-login-form input:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-soft);
+  box-shadow: 4px 4px 0 var(--accent);
 }
 
 .admin-login-form button {
   padding: 0.85rem;
-  border: none;
-  border-radius: var(--radius-full);
-  background: var(--accent);
-  color: var(--accent-ink);
+  font-family: var(--font-display);
   font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: 5px 5px 0 var(--shadow-hard);
   cursor: pointer;
-  font-weight: 600;
-  font-family: var(--font-sans);
-  transition: transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
 }
 
 .admin-login-form button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 12px 30px -12px rgba(110, 168, 255, 0.7);
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 var(--shadow-hard);
+}
+
+.admin-login-form button:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 var(--shadow-hard);
 }
 
 /* ── Admin Container ── */
 .admin-container {
   min-height: 100vh;
-  background-color: var(--bg);
-  color: var(--body);
   padding: 2.5rem;
+  background-color: var(--bg);
+  background-image: var(--px-clouds);
+  background-repeat: repeat;
+  background-size: 200px 140px;
+  color: var(--ink-2);
   font-family: var(--font-sans);
 }
 
@@ -86,75 +110,103 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
   margin-bottom: 2.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--glass-border);
+  border-bottom: 4px solid var(--outline);
 }
 
 .admin-header h1 {
-  color: var(--ink);
+  font-family: var(--font-display);
   font-size: 2rem;
   font-weight: 700;
-  letter-spacing: -0.035em;
-  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink);
 }
 
 .btn-logout {
   padding: 0.6rem 1.2rem;
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-full);
-  background: var(--glass-bg);
-  color: var(--muted);
-  cursor: pointer;
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 0.85rem;
-  font-weight: 500;
-  transition: color var(--duration-fast) ease, background var(--duration-fast) ease;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink);
+  background: var(--surface-2);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: 4px 4px 0 var(--shadow-hard);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) ease;
 }
 
 .btn-logout:hover {
-  background: var(--glass-bg-hover);
-  color: var(--ink);
+  background: var(--down);
+  color: var(--surface);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--shadow-hard);
+}
+
+.btn-logout:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 var(--shadow-hard);
 }
 
 /* ── Tabs ── */
 .admin-tabs {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 2rem;
 }
 
 .admin-tabs .tab {
   padding: 0.6rem 1.4rem;
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-full);
-  background: var(--glass-bg);
-  color: var(--muted);
-  cursor: pointer;
+  font-family: var(--font-display);
   font-size: 0.85rem;
-  font-weight: 500;
-  font-family: var(--font-sans);
-  transition: color var(--duration-fast) ease, border-color var(--duration-fast) ease, background var(--duration-fast) ease;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink-3);
+  background: var(--surface-2);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: 3px 3px 0 var(--shadow-hard);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) ease, color var(--duration-fast) ease;
 }
 
 .admin-tabs .tab:hover {
-  border-color: var(--glass-border-strong);
   color: var(--ink);
+  background: var(--surface);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--shadow-hard);
 }
 
-.admin-tabs .tab.active {
-  background: var(--accent);
+/* Active tab sits pressed into the page, like a held key. */
+.admin-tabs .tab.active,
+.admin-tabs .tab.active:hover {
   color: var(--accent-ink);
-  border-color: transparent;
+  background: var(--accent);
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--shadow-hard);
 }
 
 /* ── Loading ── */
 .admin-loading {
-  text-align: center;
   padding: 4rem;
-  color: var(--faint);
+  text-align: center;
+  font-family: var(--font-display);
   font-size: 1rem;
-  font-family: var(--font-sans);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink-3);
 }
 
 /* ── Toolbar ── */
@@ -164,20 +216,29 @@
 
 .btn-add {
   padding: 0.7rem 1.4rem;
-  border: none;
-  border-radius: var(--radius-full);
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-weight: 600;
-  cursor: pointer;
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 0.85rem;
-  transition: transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: 4px 4px 0 var(--shadow-hard);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
 }
 
 .btn-add:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 12px 30px -12px rgba(110, 168, 255, 0.7);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--shadow-hard);
+}
+
+.btn-add:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 var(--shadow-hard);
 }
 
 /* ── List ── */
@@ -192,28 +253,31 @@
   align-items: center;
   gap: 1rem;
   padding: 1.1rem 1.4rem;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
-  backdrop-filter: blur(var(--glass-blur-sm)) saturate(140%);
-  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(140%);
-  transition: border-color var(--duration-fast) ease, background var(--duration-fast) ease, transform var(--duration-fast) var(--ease-out);
+  background: var(--surface);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: 4px 4px 0 var(--shadow-hard);
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) ease;
 }
 
 .admin-item:hover {
-  transform: translateY(-2px);
-  background: var(--glass-bg-hover);
-  border-color: var(--glass-border-strong);
+  transform: translate(-2px, -2px);
+  background: var(--surface-2);
+  box-shadow: 6px 6px 0 var(--shadow-hard);
 }
 
 .admin-thumb {
   width: 44px;
   height: 44px;
   object-fit: contain;
-  border-radius: var(--radius-md);
-  background: #ffffff;
-  padding: 5px;
   flex-shrink: 0;
+  padding: 5px;
+  /* Light plate in both themes — vendor logos are drawn for light grounds. */
+  background: var(--icon-plate);
+  border: 2px solid var(--outline);
+  border-radius: var(--radius-sm);
 }
 
 .admin-thumb.project-thumb {
@@ -221,8 +285,8 @@
   height: 56px;
   object-fit: cover;
   padding: 0;
+  background: var(--surface-2);
   border-radius: var(--radius-sm);
-  background: var(--bg);
 }
 
 .item-info {
@@ -230,45 +294,47 @@
   flex-direction: column;
   gap: 0.2rem;
   flex: 1;
+  min-width: 0;
 }
 
 .item-info strong {
   color: var(--ink);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .item-info span {
-  color: var(--muted);
+  color: var(--ink-3);
   font-size: 0.85rem;
 }
 
 .admin-item > span:not(.sort-badge):not(.drag-handle) {
-  color: var(--body);
+  color: var(--ink-2);
   font-weight: 400;
 }
 
 .sort-badge {
-  color: var(--faint);
-  font-size: 0.8rem;
-  font-weight: 600;
   min-width: 30px;
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
 }
 
 /* ── Drag & Drop ── */
 .drag-handle {
-  cursor: grab;
-  color: var(--faint);
-  font-size: 1.1rem;
-  line-height: 1;
-  user-select: none;
   flex-shrink: 0;
   padding: 0 0.2rem;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: var(--ink-3);
+  cursor: grab;
+  user-select: none;
   transition: color var(--duration-fast) ease;
 }
 
 .admin-item:hover .drag-handle {
-  color: var(--body);
+  color: var(--ink);
 }
 
 .admin-item.dragging {
@@ -280,9 +346,10 @@
   cursor: grabbing;
 }
 
+/* Drop target — hard accent outline, no blurred glow. */
 .admin-item.drag-over {
   border-color: var(--accent);
-  box-shadow: inset 0 2px 0 var(--accent);
+  box-shadow: 0 0 0 3px var(--accent), 4px 4px 0 var(--shadow-hard);
 }
 
 /* ── Item Actions ── */
@@ -294,71 +361,77 @@
 
 .item-actions button {
   padding: 0.45rem 1rem;
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-full);
-  background: var(--glass-bg);
-  color: var(--muted);
-  cursor: pointer;
+  font-family: var(--font-display);
   font-size: 0.8rem;
-  font-weight: 500;
-  font-family: var(--font-sans);
-  transition: color var(--duration-fast) ease, border-color var(--duration-fast) ease, background var(--duration-fast) ease;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink-3);
+  background: var(--surface-2);
+  border: 2px solid var(--outline);
+  border-radius: var(--radius-sm);
+  box-shadow: 2px 2px 0 var(--shadow-hard);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) ease, color var(--duration-fast) ease;
 }
 
 .item-actions button:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  color: var(--accent-ink);
+  background: var(--accent);
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--shadow-hard);
+}
+
+.item-actions button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 var(--shadow-hard);
 }
 
 .item-actions .btn-del {
-  border-color: rgba(251, 113, 133, 0.4);
   color: var(--down);
+  border-color: var(--down);
 }
 
 .item-actions .btn-del:hover {
-  background: rgba(251, 113, 133, 0.1);
-  border-color: var(--down);
-  color: var(--down);
+  color: var(--surface);
+  background: var(--down);
+  border-color: var(--outline);
 }
 
 /* ── Form Overlay ── */
 .admin-form-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(5, 8, 13, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  inset: 0;
+  z-index: var(--z-loader);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: var(--z-loader);
   padding: 1rem;
+  background: var(--scrim);
 }
 
 .admin-form {
-  background: var(--glass-bg-strong);
-  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-2xl);
-  padding: 2.5rem;
-  max-width: 600px;
   width: 100%;
+  max-width: 600px;
   max-height: 85vh;
   overflow-y: auto;
-  box-shadow: var(--glass-shadow);
+  padding: 2.5rem;
+  background: var(--surface);
+  border: 4px solid var(--outline);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-window);
 }
 
 .admin-form h3 {
-  color: var(--ink);
   margin: 0 0 1.5rem;
+  font-family: var(--font-display);
   font-size: 1.3rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink);
 }
 
 /* ── Form Fields ── */
@@ -369,22 +442,24 @@
 }
 
 .form-fields label {
-  color: var(--body);
-  font-size: 0.78rem;
-  font-weight: 600;
   margin-top: 0.75rem;
-  letter-spacing: 0.02em;
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink-2);
 }
 
 .form-fields input,
 .form-fields textarea,
 .form-fields select {
   padding: 0.75rem 1rem;
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-md);
-  background: var(--glass-bg);
   color: var(--ink);
+  background: var(--surface-2);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: inset 3px 3px 0 var(--shadow-hard);
   font-size: 0.9rem;
   font-family: var(--font-sans);
   transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
@@ -392,7 +467,7 @@
 
 .form-fields input::placeholder,
 .form-fields textarea::placeholder {
-  color: var(--faint);
+  color: var(--ink-3);
 }
 
 .form-fields input:focus,
@@ -400,7 +475,7 @@
 .form-fields select:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-soft);
+  box-shadow: 4px 4px 0 var(--accent);
 }
 
 .form-fields textarea {
@@ -411,30 +486,31 @@
 
 .form-fields input[type="file"] {
   padding: 0.5rem;
-  border: 1px dashed var(--glass-border-strong);
-  border-radius: var(--radius-md);
+  color: var(--ink-3);
   background: transparent;
+  border: 3px dashed var(--outline);
+  box-shadow: none;
   cursor: pointer;
-  color: var(--muted);
 }
 
 .form-fields input[type="color"] {
-  padding: 0;
   width: 50px;
   height: 38px;
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-md);
-  cursor: pointer;
+  padding: 0;
   background: transparent;
+  border: 3px solid var(--outline);
+  box-shadow: 3px 3px 0 var(--shadow-hard);
+  cursor: pointer;
 }
 
 .form-preview {
   width: 50px;
   height: 50px;
   object-fit: contain;
-  border-radius: var(--radius-sm);
-  background: #ffffff;
   padding: 5px;
+  background: var(--icon-plate);
+  border: 2px solid var(--outline);
+  border-radius: var(--radius-sm);
 }
 
 .form-preview.project-preview {
@@ -442,8 +518,8 @@
   height: 85px;
   object-fit: cover;
   padding: 0;
-  border-radius: var(--radius-md);
-  background: var(--bg);
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
 }
 
 /* ── Points & Tags Rows ── */
@@ -457,6 +533,7 @@
 .point-row input,
 .tag-row input {
   flex: 1;
+  min-width: 0;
 }
 
 .tag-row select {
@@ -464,43 +541,48 @@
 }
 
 .btn-remove-point {
-  width: 32px;
-  height: 32px;
-  border: 1px solid rgba(251, 113, 133, 0.3);
-  border-radius: var(--radius-full);
-  background: transparent;
-  color: var(--down);
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.8rem;
   flex-shrink: 0;
-  transition: background var(--duration-fast) ease, border-color var(--duration-fast) ease;
+  width: 32px;
+  height: 32px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--down);
+  background: transparent;
+  border: 2px solid var(--down);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) ease, color var(--duration-fast) ease;
 }
 
 .btn-remove-point:hover {
-  background: rgba(251, 113, 133, 0.1);
-  border-color: var(--down);
+  color: var(--surface);
+  background: var(--down);
 }
 
 .btn-add-point {
-  padding: 0.5rem 1rem;
-  border: 1px dashed var(--glass-border-strong);
-  border-radius: var(--radius-full);
-  background: transparent;
-  color: var(--muted);
-  cursor: pointer;
-  font-size: 0.8rem;
-  font-weight: 500;
-  font-family: var(--font-sans);
   margin-top: 0.5rem;
-  transition: color var(--duration-fast) ease, border-color var(--duration-fast) ease;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink-3);
+  background: transparent;
+  border: 3px dashed var(--outline);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: color var(--duration-fast) ease, border-color var(--duration-fast) ease,
+    background-color var(--duration-fast) ease;
 }
 
 .btn-add-point:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-color: var(--outline);
 }
 
 /* ── Form Actions ── */
@@ -512,37 +594,58 @@
 
 .btn-save {
   padding: 0.75rem 2rem;
-  border: none;
-  border-radius: var(--radius-full);
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-weight: 600;
-  cursor: pointer;
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 0.9rem;
-  transition: transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 4px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: 5px 5px 0 var(--shadow-hard);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
 }
 
 .btn-save:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 12px 30px -12px rgba(110, 168, 255, 0.7);
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 var(--shadow-hard);
+}
+
+.btn-save:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 var(--shadow-hard);
 }
 
 .btn-cancel {
   padding: 0.75rem 2rem;
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-full);
-  background: var(--glass-bg);
-  color: var(--muted);
-  cursor: pointer;
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 0.9rem;
-  transition: color var(--duration-fast) ease, background var(--duration-fast) ease;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink);
+  background: var(--surface-2);
+  border: 4px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: 5px 5px 0 var(--shadow-hard);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) ease;
 }
 
 .btn-cancel:hover {
-  background: var(--glass-bg-hover);
-  color: var(--ink);
+  background: var(--surface);
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 var(--shadow-hard);
+}
+
+.btn-cancel:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 var(--shadow-hard);
 }
 
 /* ── Settings Panel ── */
@@ -553,39 +656,41 @@
 }
 
 .settings-section {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-xl);
-  backdrop-filter: blur(var(--glass-blur-sm)) saturate(140%);
-  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(140%);
   padding: 1.5rem 2rem;
+  background: var(--surface);
+  border: 4px solid var(--outline);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
 }
 
 .settings-section h3 {
   margin: 0 0 0.3rem;
+  font-family: var(--font-display);
   font-size: 1.05rem;
-  font-weight: 600;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
   color: var(--ink);
-  font-family: var(--font-sans);
 }
 
 .settings-desc {
   margin: 0 0 1rem;
   font-size: 0.85rem;
-  color: var(--muted);
+  color: var(--ink-3);
 }
 
 .settings-section input[type="text"],
 .settings-textarea {
+  box-sizing: border-box;
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-md);
-  background: var(--glass-bg);
   color: var(--ink);
+  background: var(--surface-2);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: inset 3px 3px 0 var(--shadow-hard);
   font-size: 0.9rem;
   font-family: var(--font-sans);
-  box-sizing: border-box;
   transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
 }
 
@@ -593,7 +698,7 @@
 .settings-textarea:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-soft);
+  box-shadow: 4px 4px 0 var(--accent);
 }
 
 .settings-textarea {
@@ -605,16 +710,17 @@
 .settings-section input[type="file"] {
   margin-top: 0.5rem;
   font-size: 0.85rem;
-  color: var(--muted);
+  color: var(--ink-3);
 }
 
 .settings-preview {
   width: 100px;
   height: 100px;
   object-fit: cover;
-  border-radius: var(--radius-md);
   margin-bottom: 0.75rem;
-  border: 1px solid var(--glass-border);
+  background: var(--icon-plate);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-sm);
 }
 
 .cv-upload-group {
@@ -623,20 +729,22 @@
 
 .cv-upload-group label {
   display: block;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--body);
-  letter-spacing: 0.02em;
   margin-bottom: 0.4rem;
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink-2);
 }
 
 .cv-link-preview {
   display: inline-block;
+  margin-bottom: 0.4rem;
   font-size: 0.85rem;
+  font-weight: 600;
   color: var(--accent);
   text-decoration: none;
-  margin-bottom: 0.4rem;
   font-family: var(--font-sans);
 }
 
@@ -645,29 +753,40 @@
 }
 
 .btn-save-settings {
-  padding: 0.85rem 2.5rem;
-  border: none;
-  border-radius: var(--radius-full);
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-weight: 600;
-  cursor: pointer;
-  font-family: var(--font-sans);
-  font-size: 0.95rem;
-  transition: transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
   align-self: flex-start;
+  padding: 0.85rem 2.5rem;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 4px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: 5px 5px 0 var(--shadow-hard);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
 }
 
-.btn-save-settings:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 12px 30px -12px rgba(110, 168, 255, 0.7);
+.btn-save-settings:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 var(--shadow-hard);
 }
 
+.btn-save-settings:active:not(:disabled) {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 var(--shadow-hard);
+}
+
+/* Was `box-shadow: none` on a glass button — with a hard shadow the disabled
+   state needs the lift suppressed explicitly instead. */
 .btn-save-settings:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
-  box-shadow: none;
+  box-shadow: 5px 5px 0 var(--shadow-hard);
 }
 
 /* ── Responsive ── */
@@ -678,10 +797,6 @@
 
   .admin-header h1 {
     font-size: 1.6rem;
-  }
-
-  .admin-tabs {
-    flex-wrap: wrap;
   }
 
   .admin-item {

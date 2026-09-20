@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
-import { useReveals } from '../../hooks/useScrollReveal';
+import { useReveals } from '../../hooks/useReveals';
 import './Contact.css';
 
+/** The Contact stage. The stage frame supplies the title bar. */
 const Contact = () => {
   const sectionRef = useRef(null);
   const formRef = useRef(null);
@@ -52,81 +53,78 @@ const Contact = () => {
   };
 
   return (
-    <section className="contact section" id="contact" ref={sectionRef}>
-      <div className="container container--narrow">
-        <span className="eyebrow" data-reveal>Get in touch</span>
-        <h2 className="contact__title" data-reveal>Let's build something reliable.</h2>
+    <div className="contact" ref={sectionRef}>
+      <div className="contact__intro">
+        <h3 className="contact__title" data-reveal>Let's build something reliable.</h3>
         <p className="contact__subtitle" data-reveal>
           Have a project, a role, or a question? Drop a message and I'll get back to you.
         </p>
-
-        <div className="contact__card glass" data-reveal>
-          {status === 'success' ? (
-            <div className="contact__done">
-              <div className="contact__done-check">✓</div>
-              <h3 className="contact__done-title">Message sent</h3>
-              <p className="contact__done-note">
-                Thanks — I'll reply to you soon.
-              </p>
-            </div>
-          ) : (
-            <form ref={formRef} onSubmit={handleSubmit} className="contact__form">
-              <div className="contact__field">
-                <label htmlFor="name" className="contact__label">Name</label>
-                <input
-                  id="name"
-                  type="text"
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  placeholder="Your name"
-                  required
-                  className="contact__input"
-                />
-              </div>
-
-              <div className="contact__field">
-                <label htmlFor="email" className="contact__label">Email</label>
-                <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  placeholder="your@email.com"
-                  required
-                  className="contact__input"
-                />
-              </div>
-
-              <div className="contact__field">
-                <label htmlFor="message" className="contact__label">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={form.message}
-                  onChange={handleChange}
-                  placeholder="What can I help you with?"
-                  rows="5"
-                  required
-                  className="contact__input contact__textarea"
-                />
-              </div>
-
-              <button type="submit" className="contact__submit" disabled={loading}>
-                {loading ? 'Sending…' : 'Send message'}
-              </button>
-
-              {status === 'error' && (
-                <p className="contact__error">
-                  Something went wrong. Please try again.
-                </p>
-              )}
-            </form>
-          )}
-        </div>
       </div>
-    </section>
+
+      <div className="contact__card" data-reveal>
+        {status === 'success' ? (
+          <div className="contact__done">
+            <div className="contact__done-check">✓</div>
+            <h3 className="contact__done-title">Message sent</h3>
+            <p className="contact__done-note">Thanks — I'll reply to you soon.</p>
+          </div>
+        ) : (
+          <form ref={formRef} onSubmit={handleSubmit} className="contact__form">
+            <div className="contact__field">
+              <label htmlFor="name" className="contact__label">Name</label>
+              <input
+                id="name"
+                type="text"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                placeholder="Your name"
+                required
+                className="contact__input"
+              />
+            </div>
+
+            <div className="contact__field">
+              <label htmlFor="email" className="contact__label">Email</label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                placeholder="your@email.com"
+                required
+                className="contact__input"
+              />
+            </div>
+
+            <div className="contact__field">
+              <label htmlFor="message" className="contact__label">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                value={form.message}
+                onChange={handleChange}
+                placeholder="What can I help you with?"
+                rows="5"
+                required
+                className="contact__input contact__textarea"
+              />
+            </div>
+
+            <button type="submit" className="contact__submit px-btn" disabled={loading}>
+              {loading ? 'Sending…' : 'Send message'}
+            </button>
+
+            {status === 'error' && (
+              <p className="contact__error">
+                Something went wrong. Please try again.
+              </p>
+            )}
+          </form>
+        )}
+      </div>
+    </div>
   );
 };
 

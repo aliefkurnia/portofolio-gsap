@@ -157,7 +157,7 @@ const MemoryMatch = () => {
         </button>
       </div>
 
-      <div className="game-panel glass">
+      <div className="game-panel px-panel">
         <div className="mm-grid">
           {cards.map((card, i) => {
             const show = card.flipped || card.matched;

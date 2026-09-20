@@ -30,7 +30,7 @@ const Leaderboard = ({ gameId, dir = "high", formatBest }) => {
   }, [load, gameId]);
 
   return (
-    <div className="lb glass">
+    <div className="lb px-panel">
       <div className="lb__head">
         <h3 className="lb__title">Leaderboard</h3>
         <button className="lb__refresh" onClick={load} aria-label="Refresh">

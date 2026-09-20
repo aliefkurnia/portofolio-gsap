@@ -111,7 +111,7 @@ const Simon = () => {
         </span>
       </div>
 
-      <div className="game-panel glass simon__panel">
+      <div className="game-panel px-panel simon__panel">
         <div className="simon__pads" data-locked={phase !== "input"}>
           {PADS.map((i) => (
             <button

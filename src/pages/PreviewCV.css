@@ -1,169 +1,265 @@
+/* ─── CV viewer ───
+   One fixed screen, same as the game shell: pinned header, PDF fills the
+   rest. The page itself never scrolls — the embedded viewer does.
+   ────────────────────────────────────────────────────────────────────── */
+
 .cv {
-  min-height: 100vh;
-  background: var(--bg);
+  position: fixed;
+  inset: 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  background-color: var(--bg);
+  background-image: var(--px-clouds);
+  background-repeat: repeat;
+  background-size: 200px 140px;
   font-family: var(--font-sans);
 }
 
+/* ─── Header ─── */
 .cv__header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  padding: 12px 0;
+  flex-shrink: 0;
+  padding: 14px var(--container-pad) 0;
+  z-index: var(--z-sticky);
 }
 
 .cv__header-inner {
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 8px 12px 8px 20px;
-  width: calc(100% - 32px);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* glass pill bar */
-  background: var(--glass-bg-strong);
-  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-full);
-  box-shadow: var(--glass-shadow);
+  gap: 16px;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 10px 14px;
+  background: var(--surface);
+  border: 4px solid var(--outline);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
 }
 
 .cv__back {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 9px 16px;
+  gap: 8px;
+  padding: 8px 16px;
+  font-family: var(--font-display);
   font-size: 13px;
-  font-weight: 500;
-  color: var(--body);
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  font-family: var(--font-sans);
-  transition: color var(--duration-fast) ease, background var(--duration-fast) ease;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink);
+  background: var(--surface-2);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: 3px 3px 0 var(--shadow-hard);
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) ease;
 }
 
 .cv__back:hover {
-  color: var(--ink);
-  background: var(--glass-bg-hover);
+  background: var(--accent);
+  color: var(--accent-ink);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--shadow-hard);
 }
 
+.cv__back:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--shadow-hard);
+}
+
+/* Centred title in the bar — the game HUD does the same, so the two screens
+   read as one product. Hidden on narrow widths to protect the controls. */
+.cv__title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: var(--ink);
+}
+
+/* ─── Segmented switches — chunky, not pills ─── */
 .cv__controls {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 8px;
 }
 
-.cv__lang-toggle {
+.cv__seg {
   display: flex;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-full);
+  gap: 4px;
   padding: 3px;
+  background: var(--surface-2);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
 }
 
-.cv__lang-btn {
-  padding: 6px 16px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  color: var(--muted);
+.cv__seg-btn {
+  padding: 6px 14px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink-3);
   background: none;
-  border: none;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  font-family: var(--font-sans);
-  transition: color var(--duration-fast) ease, background var(--duration-fast) ease;
+  border: 3px solid transparent;
+  border-radius: var(--radius-sm);
+  transition: color var(--duration-fast) ease, background-color var(--duration-fast) ease;
 }
 
-.cv__lang-btn:hover {
-  color: var(--body);
+.cv__seg-btn:hover {
+  color: var(--ink);
+  background: var(--surface);
 }
 
-.cv__lang-btn--active {
+.cv__seg-btn--active,
+.cv__seg-btn--active:hover {
   color: var(--accent-ink);
   background: var(--accent);
+  border-color: var(--outline);
 }
 
-.cv__lang-btn--active:hover {
-  color: var(--accent-ink);
-}
-
+/* ─── Body / viewer ─── */
 .cv__body {
   flex: 1;
+  min-height: 0;
   display: flex;
   justify-content: center;
-  padding: 24px;
+  padding: 20px var(--container-pad) var(--container-pad);
 }
 
 .cv__viewer {
   width: 100%;
-  max-width: 900px;
-  height: calc(100vh - 104px);
+  max-width: 960px;
+  /* Breathing room inside the frame so .px-panel's inner border line stays
+     visible — the iframe would otherwise sit over it and hide it. */
+  padding: 8px;
   overflow: hidden;
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-xl);
-  background: var(--panel);
-  box-shadow: var(--glass-shadow);
 }
 
 .cv__viewer iframe {
+  display: block;
   width: 100%;
   height: 100%;
   border: none;
+  background: #fff;
 }
 
+/* ─── Rendered CV ───
+   The paper is the scroller, not the page. The asymmetric padding is there to
+   clear the card's hard 6px shadow — without it the shadow would count as
+   overflow and raise a horizontal scrollbar. */
+.cv__paper {
+  width: 100%;
+  max-width: 960px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  padding: 0 10px 12px 0;
+}
+
+/* ─── Skeleton state ─── */
 .cv__viewer--skeleton {
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
+.cv__skeleton-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 2rem;
+}
+
+.cv__skeleton-gap {
+  height: 1rem;
+}
+
+/* ─── Empty state ─── */
 .cv__empty {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 14px;
+  width: 100%;
+  max-width: 960px;
   padding: 4rem 2rem;
   text-align: center;
-  color: var(--muted);
-  font-family: var(--font-sans);
 }
 
 .cv__empty svg {
-  opacity: 0.4;
-  color: var(--muted);
+  color: var(--outline-soft);
 }
 
 .cv__empty p {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--body);
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink);
 }
 
 .cv__empty span {
-  font-size: 13px;
+  font-size: 14px;
+  color: var(--ink-3);
+  max-width: 34ch;
 }
 
 @media (max-width: 768px) {
-  .cv__header-inner {
-    padding: 8px 10px 8px 16px;
+  .cv__header {
+    padding-top: 12px;
   }
 
   .cv__body {
     padding: 16px;
   }
 
-  .cv__viewer {
-    height: calc(100vh - 96px);
+  /* The title is the first thing to go — the back button and the language
+     switch are the ones that actually do something. */
+  .cv__title {
+    display: none;
   }
 }
 
 @media (max-width: 480px) {
-  .cv__back span {
+  .cv__back {
+    padding: 8px 12px;
+  }
+}
+
+/* ─── Print — the CV is the one page people will actually send to a printer,
+   so strip the game chrome and let the document run full length. ─── */
+@media print {
+  .cv {
+    position: static;
+    overflow: visible;
+    background: #fff;
+    background-image: none;
+  }
+
+  .cv__header {
     display: none;
+  }
+
+  .cv__body {
+    padding: 0;
+    display: block;
+  }
+
+  .cv__viewer {
+    max-width: none;
+    border: none;
+    box-shadow: none;
+    height: auto;
+  }
+
+  .cv__viewer iframe {
+    height: 100vh;
   }
 }

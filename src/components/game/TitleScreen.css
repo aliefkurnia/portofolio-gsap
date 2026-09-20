@@ -1,0 +1,420 @@
+/* ─── Title screen ───
+   A centred arcade start screen: one column, vertically centred on one
+   viewport. No CV card beside a name — the avatar, the wordmark (the name,
+   once), the tagline and a single START stack down the middle, with a quiet
+   contents strip and a contact/links row beneath.
+
+   Every vertical budget is expressed against the viewport *height* so the
+   column always resolves to one screen; `.title` keeps its own scroller purely
+   as a safety valve on windows too short to hold the stack (~560px), where no
+   amount of shrinking is tasteful.
+   ────────────────────────────────────────────────────────────────────── */
+
+.world {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.title {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 1.4vh, 16px);
+  padding: clamp(16px, 3vh, 34px) clamp(18px, 4vw, 40px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.title__stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 640px;
+}
+
+/* ─── Avatar ───
+   A square framed portrait, not a bio card. Sized off the viewport height so
+   it is the first thing to shrink on a short window. */
+.title__avatar {
+  width: clamp(96px, 13vh, 132px);
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--surface-2);
+  border: 4px solid var(--outline);
+  border-radius: var(--radius-lg);
+  box-shadow: 4px 4px 0 var(--shadow-hard);
+  margin-bottom: clamp(12px, 1.8vh, 20px);
+}
+
+.title__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.title__avatar-empty {
+  color: var(--outline-soft);
+}
+
+/* ─── Kicker ───
+   Frames the wordmark as *the title of a portfolio* so the big name reads as
+   the screen's title, stated once, rather than a second copy of anything. */
+.title__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 11px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--accent);
+}
+
+.title__kicker-mark {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  background: var(--accent-2);
+  border: 2px solid var(--outline);
+}
+
+/* ─── Wordmark ───
+   The extrusion is restated in `em` rather than inherited from `.px-title`,
+   which hard-codes 8px — fine on a huge glyph, but it eats the letterforms
+   once the type is small. In `em` it holds its proportion at every size. The
+   2px outline stays fixed: that is an outline, not depth. */
+.title__name {
+  font-size: clamp(1.8rem, 6vw, 3.3rem);
+  text-shadow:
+    -2px -2px 0 var(--outline),
+     2px -2px 0 var(--outline),
+    -2px  2px 0 var(--outline),
+     2px  2px 0 var(--outline),
+     0.1em  0.1em 0 var(--px-extrude-1),
+     0.19em 0.19em 0 var(--px-extrude-2);
+}
+
+.title__tagline {
+  margin-top: clamp(14px, 1.8vh, 20px);
+  max-width: 46ch;
+  font-size: 14px;
+  line-height: var(--leading-relaxed);
+  color: var(--ink-2);
+}
+
+/* ─── Meta row ─── status LED + role, on one centred line. */
+.title__meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+  font-family: var(--font-display);
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: var(--ink-2);
+}
+
+.title__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 10px;
+  background: var(--surface-2);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+}
+
+.title__status-dot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  background: var(--up);
+  border: 2px solid var(--outline);
+  animation: titleLed 1.6s steps(2, end) infinite;
+}
+
+@keyframes titleLed {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.title__meta-sep {
+  width: 5px;
+  height: 5px;
+  flex: 0 0 auto;
+  background: var(--ink-3);
+}
+
+.title__role {
+  color: var(--accent);
+}
+
+/* ─── The one action ─── */
+.title__start {
+  margin-top: clamp(16px, 2.4vh, 26px);
+  font-size: 15px;
+  padding: 14px 32px;
+}
+
+.title__start:focus-visible {
+  outline: 3px solid var(--outline);
+  outline-offset: 4px;
+}
+
+/* ─── Contents ───
+   Numbered rows laid out as one centred strip. Muted and inert — no card
+   chrome, no hover, no pointer — so it reads as a table of contents rather
+   than a second set of buttons. */
+.title__stages {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 9px 20px;
+  width: 100%;
+  max-width: 560px;
+  margin-top: clamp(16px, 2.2vh, 26px);
+  padding-top: clamp(12px, 1.6vh, 18px);
+  border-top: 3px solid var(--outline-soft);
+  list-style: none;
+}
+
+.title__stage {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-display);
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink);
+}
+
+.title__stage-num {
+  font-size: 10px;
+  letter-spacing: var(--tracking-wider);
+  color: var(--ink-3);
+}
+
+/* ─── Contacts & elsewhere ───
+   Contacts as icon plates; Arcade and Resume as labelled keys. Both leave the
+   shell, so they sit apart from the contents above. */
+.title__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: clamp(14px, 2vh, 22px);
+}
+
+.title__social {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: 3px 3px 0 var(--shadow-hard);
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.title__links-sep {
+  width: 3px;
+  height: 22px;
+  flex: 0 0 auto;
+  background: var(--outline-soft);
+  margin: 0 3px;
+}
+
+.title__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink);
+  background: var(--surface);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: 3px 3px 0 var(--shadow-hard);
+  padding: 7px 13px;
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.title__social:hover,
+.title__link:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--shadow-hard);
+}
+
+.title__social:active,
+.title__link:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--shadow-hard);
+}
+
+/* ─── Footer ───
+   Sits clear of the stack. Hint and copyright share one line; the 1px halo in
+   the surface colour keeps 11px type legible where it crosses a cloud. */
+.title__foot {
+  margin-top: clamp(10px, 2vh, 18px);
+}
+
+.title__footline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink-2);
+  text-shadow:
+    -1px -1px 0 var(--surface),
+     1px -1px 0 var(--surface),
+    -1px  1px 0 var(--surface),
+     1px  1px 0 var(--surface);
+}
+
+.title__hint {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* ─── Attract-mode prompt ───
+   A block cursor that blinks and an ENTER key that depresses on a slow beat,
+   both jumping rather than easing — a cursor is either lit or it is not. */
+.title__prompt {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 13px;
+  background: var(--accent-2);
+  border: 2px solid var(--outline);
+  animation: titleBlink 1.1s infinite;
+}
+
+@keyframes titleBlink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.title__key {
+  display: inline-block;
+  margin: 0 5px;
+  padding: 2px 6px;
+  font: inherit;
+  font-size: 10px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--outline);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 2px 0 var(--outline);
+  animation: titleKeyPress 2.4s infinite;
+}
+
+@keyframes titleKeyPress {
+  0%,
+  58%,
+  100% {
+    transform: translateY(0);
+    box-shadow: 0 2px 0 var(--outline);
+  }
+  66%,
+  72% {
+    transform: translateY(2px);
+    box-shadow: 0 0 0 var(--outline);
+  }
+}
+
+.title__dot {
+  width: 5px;
+  height: 5px;
+  flex: 0 0 auto;
+  background: var(--ink-3);
+}
+
+/* ─── Short viewports ───
+   The avatar shrinks first; below ~560px tall the gaps tighten too. */
+@media (max-height: 640px) {
+  .title {
+    gap: 6px;
+    justify-content: flex-start;
+  }
+
+  .title__avatar {
+    width: clamp(80px, 11vh, 104px);
+    margin-bottom: 12px;
+  }
+
+  .title__name {
+    font-size: clamp(1.6rem, 5vw, 2.3rem);
+  }
+
+  .title__tagline {
+    margin-top: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title__stages {
+    gap: 8px 14px;
+  }
+
+  .title__stage {
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .title__social,
+  .title__link {
+    transition: none;
+  }
+
+  /* The cursor stays lit and the key rests up — the prompt is an affordance,
+     the animation was only decoration on top of it. */
+  .title__prompt,
+  .title__key,
+  .title__status-dot {
+    animation: none;
+  }
+}

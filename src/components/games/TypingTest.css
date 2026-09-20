@@ -15,7 +15,7 @@
 }
 
 .typing__ch {
-  color: var(--faint);
+  color: var(--ink-3);
   border-radius: 3px;
   transition: color 0.08s ease, background 0.08s ease;
 }
@@ -25,8 +25,8 @@
 }
 
 .typing__ch.is-wrong {
-  color: #fff;
-  background: rgba(251, 113, 133, 0.5);
+  color: var(--surface);
+  background: var(--down);
 }
 
 .typing__ch.is-current {
@@ -46,7 +46,7 @@
   position: relative;
   z-index: 1;
   font-size: 13px;
-  color: var(--muted);
+  color: var(--ink-3);
 }
 
 .typing__actions {

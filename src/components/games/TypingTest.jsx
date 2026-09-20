@@ -113,7 +113,7 @@ const TypingTest = () => {
       </div>
 
       <div
-        className="game-panel glass typing__panel"
+        className="game-panel px-panel typing__panel"
         onClick={() => inputRef.current && inputRef.current.focus()}
       >
         <pre className="typing__snippet">

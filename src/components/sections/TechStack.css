@@ -1,37 +1,46 @@
+/* ─── Tech Stack stage ─── */
+.techstack {
+  width: 100%;
+}
+
 .techstack__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+  gap: 14px;
 }
 
 .techstack__tile {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
-  padding: 28px 16px;
+  gap: 12px;
+  padding: 22px 14px;
+  background: var(--surface);
+  border: 4px solid var(--outline);
   border-radius: var(--radius-lg);
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(var(--glass-blur-sm)) saturate(140%);
-  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(140%);
-  will-change: transform;
-  transition: background var(--duration-fast) ease, border-color var(--duration-fast) ease,
-    box-shadow var(--duration-fast) ease;
+  box-shadow: 4px 4px 0 var(--shadow-hard);
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) ease;
 }
 
 .techstack__tile:hover {
-  background: var(--glass-bg-hover);
-  border-color: var(--glass-border-strong);
-  box-shadow: 0 16px 40px -20px rgba(110, 168, 255, 0.5);
+  transform: translate(-3px, -3px);
+  box-shadow: 8px 8px 0 var(--shadow-hard);
+  background: var(--surface-2);
 }
 
+/* Light plate so vendor logos stay legible in both themes */
 .techstack__icon-box {
-  width: 52px;
-  height: 52px;
+  width: 54px;
+  height: 54px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 7px;
+  background: var(--icon-plate);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
 }
 
 .techstack__icon {
@@ -41,9 +50,29 @@
 }
 
 .techstack__name {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 13px;
-  font-weight: 500;
-  color: var(--body);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink);
   text-align: center;
+  line-height: 1.25;
+}
+
+@media (max-width: 520px) {
+  .techstack__grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+  }
+
+  .techstack__tile {
+    padding: 16px 10px;
+    gap: 9px;
+  }
+
+  .techstack__icon-box {
+    width: 44px;
+    height: 44px;
+  }
 }

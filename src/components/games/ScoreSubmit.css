@@ -10,7 +10,7 @@
 
 .ss__prompt {
   font-size: 13px;
-  color: var(--body);
+  color: var(--ink-2);
 }
 
 .ss__row {
@@ -19,29 +19,31 @@
   width: 100%;
 }
 
+/* Square input, thick outline, inset shadow — a text field carved into the
+   panel rather than a floating glass pill. */
 .ss__input {
   flex: 1;
   min-width: 0;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border-strong);
-  border-radius: var(--radius-full);
   padding: 10px 16px;
   color: var(--ink);
+  background: var(--surface-2);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: inset 3px 3px 0 var(--shadow-hard);
   font-family: var(--font-sans);
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   text-align: center;
-  transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+  transition: border-color var(--duration-fast) ease;
 }
 
 .ss__input::placeholder {
-  color: var(--faint);
+  color: var(--ink-3);
 }
 
 .ss__input:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 .ss__save {
@@ -51,12 +53,16 @@
 }
 
 .ss__done {
+  font-family: var(--font-display);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
   color: var(--up);
 }
 
 .ss__err {
-  font-size: 12px;
+  font-size: 12.5px;
+  font-weight: 600;
   color: var(--down);
 }

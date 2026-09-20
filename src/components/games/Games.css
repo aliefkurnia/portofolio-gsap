@@ -1,4 +1,4 @@
-/* ─── Shared game UI ─── */
+/* ─── Shared arcade chrome ─── */
 .game {
   position: relative;
 }
@@ -15,29 +15,30 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: 10px 18px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  min-width: 88px;
+  padding: 9px 16px;
+  background: var(--surface);
+  border: 3px solid var(--outline);
   border-radius: var(--radius-md);
-  backdrop-filter: blur(var(--glass-blur-sm));
-  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
-  min-width: 84px;
+  box-shadow: 3px 3px 0 var(--shadow-hard);
 }
 
 .game-stat__label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-family: var(--font-display);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
-  color: var(--faint);
+  color: var(--ink-3);
 }
 
 .game-stat__value {
+  font-family: var(--font-display);
   font-size: 20px;
   font-weight: 700;
-  letter-spacing: -0.02em;
   color: var(--ink);
   font-variant-numeric: tabular-nums;
+  line-height: 1.15;
 }
 
 .game-stat__value--accent {
@@ -48,14 +49,43 @@
   flex: 1;
 }
 
+/* ─── Buttons ─── */
 .game-btn {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 600;
-  padding: 11px 22px;
-  border-radius: var(--radius-full);
-  transition: transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease,
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  padding: 11px 20px;
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: 4px 4px 0 var(--shadow-hard);
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
     background var(--duration-fast) ease;
+}
+
+.game-btn:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--shadow-hard);
+}
+
+.game-btn:active:not(:disabled) {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--shadow-hard);
+}
+
+/* Without this a disabled Save button looks identical to a live one — the
+   score-submit form disables it until a name is typed. */
+.game-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 4px 4px 0 var(--shadow-hard);
 }
 
 .game-btn--solid {
@@ -64,31 +94,28 @@
 }
 
 .game-btn--solid:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 34px -12px rgba(110, 168, 255, 0.7);
+  background: var(--accent-strong);
 }
 
 .game-btn--ghost {
   color: var(--ink);
-  background: var(--glass-bg-strong);
-  border: 1px solid var(--glass-border-strong);
-  backdrop-filter: blur(var(--glass-blur-sm));
-  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+  background: var(--surface);
 }
 
 .game-btn--ghost:hover {
-  background: var(--glass-bg-hover);
+  background: var(--surface-2);
 }
 
-/* Panel that holds the board */
+/* Panel that holds the board. Wears .px-panel too — no radius override, so
+   the pixel primitive governs. */
 .game-panel {
   position: relative;
-  border-radius: var(--radius-xl);
   padding: 24px;
   overflow: hidden;
 }
 
-/* Win / game-over overlay */
+/* Win / game-over overlay. Solid surface, no blur — a frosted scrim is the
+   one thing that would break the flat pixel look. */
 .game-overlay {
   position: absolute;
   inset: 0;
@@ -99,26 +126,29 @@
   justify-content: center;
   gap: 10px;
   text-align: center;
-  background: rgba(8, 8, 11, 0.66);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: inherit;
   padding: 24px;
   overflow-y: auto;
+  background: var(--surface);
+  border-radius: inherit;
 }
 
 .game-overlay__emoji {
-  font-size: 44px;
+  font-size: 42px;
+  line-height: 1;
 }
 
 .game-overlay__title {
-  font-size: 24px;
+  font-family: var(--font-display);
+  font-size: 22px;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
   color: var(--ink);
 }
 
 .game-overlay__note {
   font-size: 14px;
-  color: var(--body);
+  color: var(--ink-2);
   margin-bottom: 8px;
+  max-width: 40ch;
 }

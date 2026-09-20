@@ -7,10 +7,12 @@
 
 .snake__hint {
   font-size: 12.5px;
-  font-weight: 500;
-  color: var(--muted);
+  font-weight: 600;
+  color: var(--ink-3);
 }
 
+/* The board is a well: flat inset ground, thick outline, square corners.
+   No gridlines — the 2px gap between cells reads as the pixel grid already. */
 .snake__board {
   position: relative;
   z-index: 1;
@@ -22,30 +24,30 @@
   max-width: 360px;
   aspect-ratio: 1 / 1;
   padding: 8px;
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
+  background: var(--surface-2);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
 }
 
 .snake__cell {
-  border-radius: 3px;
-  background: rgba(255, 255, 255, 0.03);
+  background: transparent;
 }
 
 .snake__cell.is-body {
-  background: var(--accent);
-  opacity: 0.7;
+  background: color-mix(in srgb, var(--accent) 68%, var(--surface-2));
 }
 
+/* Head gets a dark ring instead of a glow, so the player can spot it at a
+   glance without breaking the flat palette. */
 .snake__cell.is-head {
   background: var(--accent);
-  box-shadow: 0 0 10px -1px var(--accent);
+  box-shadow: 0 0 0 2px var(--outline);
 }
 
+/* Square, not a circle — pixel art has no round food. */
 .snake__cell.is-food {
-  background: var(--aurora-pink);
-  border-radius: 50%;
-  box-shadow: 0 0 12px -1px var(--aurora-pink);
+  background: var(--accent-2);
+  box-shadow: 0 0 0 2px var(--outline);
   animation: snakeFood 0.9s ease-in-out infinite;
 }
 
@@ -65,15 +67,23 @@
 }
 
 .snake__dbtn {
-  border-radius: var(--radius-md);
-  border: 1px solid var(--glass-border);
-  background: var(--glass-bg-strong);
-  color: var(--ink);
+  font-family: var(--font-display);
   font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--surface-2);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: 3px 3px 0 var(--shadow-hard);
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
 }
 
 .snake__dbtn:active {
-  background: var(--glass-bg-hover);
+  background: var(--accent);
+  color: var(--accent-ink);
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--shadow-hard);
 }
 
 .snake__dbtn--up { grid-column: 2; grid-row: 1; }
@@ -84,5 +94,11 @@
 @media (max-width: 820px) {
   .snake__dpad {
     display: grid;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .snake__cell.is-food {
+    animation: none;
   }
 }

@@ -149,7 +149,7 @@ const Snake = () => {
         <span className="snake__hint">Arrow keys / WASD</span>
       </div>
 
-      <div className="game-panel glass snake__panel">
+      <div className="game-panel px-panel snake__panel">
         <div className="snake__board">
           {Array.from({ length: GRID * GRID }, (_, i) => {
             const x = i % GRID;

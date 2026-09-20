@@ -7,6 +7,7 @@ import ReactionTime from "../components/games/ReactionTime";
 import Simon from "../components/games/Simon";
 import Snake from "../components/games/Snake";
 import Leaderboard from "../components/games/Leaderboard";
+import PixelIcon from "../components/ui/PixelIcon";
 import { getBest } from "../components/games/scores";
 import { isMuted, setMuted } from "../components/games/sfx";
 import "./Play.css";
@@ -15,7 +16,7 @@ const GAMES = [
   {
     id: "memory",
     title: "Tech Memory Match",
-    desc: "Flip the glass cards and match every tech-stack pair. Fewer moves, faster time — higher score.",
+    desc: "Flip the pixel cards and match every tech-stack pair. Fewer moves, faster time — higher score.",
     emoji: "🃏",
     tag: "Memory",
     Component: MemoryMatch,
@@ -88,21 +89,17 @@ const Play = () => {
 
   return (
     <div className="play">
-      <div className="play__mesh" aria-hidden="true">
-        <span className="play__blob play__blob--1" />
-        <span className="play__blob play__blob--2" />
-        <span className="play__blob play__blob--3" />
-      </div>
-
       <div className="play__container">
         <header className="play__header">
           {active ? (
             <button className="play__back" onClick={() => setActiveId(null)}>
-              ← Back to menu
+              <PixelIcon name="arrowLeft" size={14} />
+              Back to menu
             </button>
           ) : (
             <button className="play__back" onClick={() => navigate("/")}>
-              ← Portfolio
+              <PixelIcon name="arrowLeft" size={14} />
+              Portfolio
             </button>
           )}
           <div className="play__header-right">
@@ -137,7 +134,7 @@ const Play = () => {
                 return (
                   <button
                     key={g.id}
-                    className="play__card glass"
+                    className="play__card px-panel"
                     onClick={() => setActiveId(g.id)}
                   >
                     <div className="play__card-top">
@@ -147,7 +144,10 @@ const Play = () => {
                     <h3 className="play__card-title">{g.title}</h3>
                     <p className="play__card-desc">{g.desc}</p>
                     <div className="play__card-foot">
-                      <span className="play__card-cta">Play →</span>
+                      <span className="play__card-cta">
+                        Play
+                        <PixelIcon name="arrowRight" size={13} />
+                      </span>
                       {best != null && (
                         <span className="play__card-best">
                           <span className="play__card-best-star">★</span>

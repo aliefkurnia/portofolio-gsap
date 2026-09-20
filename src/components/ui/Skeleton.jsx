@@ -1,6 +1,15 @@
 import React from 'react';
 import './Skeleton.css';
 
+/**
+ * Loading placeholders.
+ *
+ * Each one mirrors the real markup of the section it stands in for — same
+ * grid, same row structure, same class names — so the swap to real content
+ * doesn't reflow the stage. Keep these in step when a section's markup
+ * changes.
+ */
+
 export const Skeleton = ({ width, height, radius, className = '' }) => (
   <div
     className={`skeleton ${className}`}
@@ -12,45 +21,29 @@ export const Skeleton = ({ width, height, radius, className = '' }) => (
   />
 );
 
-export const SkeletonCircle = ({ size = 44 }) => (
+/** Square stand-in — pixel art has no circles. */
+export const SkeletonSquare = ({ size = 44 }) => (
   <div
     className="skeleton"
-    style={{ width: size, height: size, borderRadius: '50%', flexShrink: 0 }}
+    style={{
+      width: size,
+      height: size,
+      borderRadius: 'var(--radius-md)',
+      flexShrink: 0,
+    }}
   />
 );
 
-export const ExperienceSkeleton = () => (
-  <div className="experience__timeline">
-    <div className="experience__line" style={{ transform: 'scaleY(1)', opacity: 0.3 }}></div>
-    {[1, 2, 3].map((i) => (
-      <div key={i} className="experience__item" style={{ opacity: 1 }}>
-        <div className="experience__dot" style={{ opacity: 0.3 }}></div>
-        <div className="experience__card">
-          <div className="experience__card-header">
-            <SkeletonCircle size={44} />
-            <div style={{ flex: 1 }}>
-              <Skeleton width="60%" height="1.1rem" />
-              <Skeleton width="40%" height="0.85rem" className="skeleton--mt-sm" />
-            </div>
-          </div>
-          <Skeleton width="100px" height="1.5rem" radius="var(--radius-full)" className="skeleton--mt-sm" />
-          <div className="skeleton--mt-md">
-            <Skeleton width="95%" height="0.85rem" />
-            <Skeleton width="80%" height="0.85rem" className="skeleton--mt-sm" />
-            <Skeleton width="88%" height="0.85rem" className="skeleton--mt-sm" />
-          </div>
-        </div>
-      </div>
-    ))}
-  </div>
+export const AboutImageSkeleton = () => (
+  <Skeleton width="100%" height="100%" radius="var(--radius-md)" />
 );
 
 export const TechStackSkeleton = () => (
   <div className="techstack__grid">
     {Array.from({ length: 8 }).map((_, i) => (
-      <div key={i} className="techstack__item">
-        <SkeletonCircle size={40} />
-        <Skeleton width="50px" height="0.7rem" />
+      <div key={i} className="techstack__tile">
+        <Skeleton width="54px" height="54px" radius="var(--radius-md)" />
+        <Skeleton width="60%" height="0.75rem" />
       </div>
     ))}
   </div>
@@ -59,23 +52,38 @@ export const TechStackSkeleton = () => (
 export const ProjectsSkeleton = () => (
   <div className="projects__grid">
     {[1, 2].map((i) => (
-      <div key={i} className="project-card" style={{ opacity: 1 }}>
-        <Skeleton height="0" className="skeleton--aspect" radius="0" />
-        <div style={{ padding: 'var(--space-xl)' }}>
-          <Skeleton width="70%" height="1.2rem" />
+      <div key={i} className="project-card">
+        <div className="project-card__media">
+          <Skeleton width="100%" height="100%" radius="0" />
+        </div>
+        <div className="project-card__body">
+          <Skeleton width="65%" height="1.15rem" />
           <Skeleton width="100%" height="0.85rem" className="skeleton--mt-sm" />
           <Skeleton width="85%" height="0.85rem" className="skeleton--mt-sm" />
-          <div style={{ display: 'flex', gap: 'var(--space-sm)', marginTop: 'var(--space-md)' }}>
-            <Skeleton width="60px" height="1.5rem" radius="var(--radius-full)" />
-            <Skeleton width="60px" height="1.5rem" radius="var(--radius-full)" />
-            <Skeleton width="60px" height="1.5rem" radius="var(--radius-full)" />
-          </div>
         </div>
       </div>
     ))}
   </div>
 );
 
-export const AboutImageSkeleton = () => (
-  <Skeleton width="100%" height="0" className="skeleton--square" radius="var(--radius-xl)" />
+export const ExperienceSkeleton = () => (
+  <div className="experience__list">
+    {[1, 2, 3].map((i) => (
+      <div key={i} className="experience__row">
+        <div className="experience__meta">
+          <Skeleton width="92px" height="0.85rem" />
+          <Skeleton width="66px" height="66px" radius="var(--radius-md)" />
+        </div>
+        <div className="experience__detail">
+          <Skeleton width="55%" height="1.2rem" />
+          <Skeleton width="35%" height="0.85rem" className="skeleton--mt-sm" />
+          <div className="skeleton--mt-md">
+            <Skeleton width="95%" height="0.8rem" />
+            <Skeleton width="88%" height="0.8rem" className="skeleton--mt-sm" />
+            <Skeleton width="70%" height="0.8rem" className="skeleton--mt-sm" />
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
 );
