@@ -37,7 +37,7 @@ const TitleScreen = ({ data, onStart }) => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-      tl.from('.title__avatar', { opacity: 0, scale: 0.85, duration: 0.5, ease: 'back.out(1.6)' })
+      tl.from('.title__portrait', { opacity: 0, scale: 0.85, duration: 0.5, ease: 'back.out(1.6)' })
         .from('.title__kicker', { opacity: 0, y: -10, duration: 0.35 }, '-=0.2')
         .from('.title__name', { opacity: 0, y: 16, duration: 0.45 }, '-=0.18')
         .from('.title__tagline', { opacity: 0, y: 10, duration: 0.35 }, '-=0.24')
@@ -60,14 +60,22 @@ const TitleScreen = ({ data, onStart }) => {
 
       <div className="title">
         <div className="title__stack px-panel">
-          <div className="title__avatar">
-            {photo ? (
-              <img src={photo} alt="Muchammad Alief Kurnia Wijaya" />
-            ) : (
-              <span className="title__avatar-empty" aria-hidden="true">
-                <PixelIcon name="person" size={40} />
-              </span>
-            )}
+          <div className="title__portrait">
+            <div className="title__avatar">
+              {photo ? (
+                <img src={photo} alt="Muchammad Alief Kurnia Wijaya" />
+              ) : (
+                <span className="title__avatar-empty" aria-hidden="true">
+                  <PixelIcon name="person" size={40} />
+                </span>
+              )}
+            </div>
+            {/* A CSS-only greeting: the hand waves on a slow loop and a speech
+                bubble pops in on its upswing, so the portrait says hi. */}
+            <span className="title__hello" aria-hidden="true">Hi!</span>
+            <span className="title__wave" aria-hidden="true">
+              <PixelIcon name="hand" size={20} />
+            </span>
           </div>
 
           <span className="title__kicker">

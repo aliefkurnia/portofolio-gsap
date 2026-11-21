@@ -43,6 +43,17 @@
   padding: clamp(26px, 3.4vh, 44px) clamp(28px, 4vw, 60px);
 }
 
+/* ─── Portrait ───
+   Wraps the avatar so the greeting (wave badge + speech bubble) can sit in the
+   margins around it without being clipped by the avatar's own overflow. The
+   bottom margin that used to live on the avatar lives here now, so the badge
+   hanging off the corner is not counted as extra height. */
+.title__portrait {
+  position: relative;
+  display: inline-flex;
+  margin-bottom: clamp(12px, 1.8vh, 20px);
+}
+
 /* ─── Avatar ───
    A square framed portrait, not a bio card. Sized off the viewport height so
    it is the first thing to shrink on a short window. */
@@ -56,7 +67,62 @@
   border: 4px solid var(--outline);
   border-radius: var(--radius-lg);
   box-shadow: 4px 4px 0 var(--shadow-hard);
-  margin-bottom: clamp(12px, 1.8vh, 20px);
+}
+
+/* ─── Greeting ───
+   The portrait waves hello. A pixel hand hangs off the lower-right corner and
+   rotates about its wrist on a slow loop; a "Hi!" bubble pops in on the
+   upswing and clears again, so the gesture reads as a greeting, not a tic. */
+.title__wave {
+  position: absolute;
+  right: -12px;
+  bottom: -12px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: 3px 3px 0 var(--shadow-hard);
+}
+
+.title__wave .px-icon {
+  transform-origin: 50% 90%;
+  animation: titleWave 2.8s ease-in-out infinite;
+}
+
+@keyframes titleWave {
+  0%, 58%, 100% { transform: rotate(0deg); }
+  66% { transform: rotate(18deg); }
+  74% { transform: rotate(-12deg); }
+  82% { transform: rotate(16deg); }
+  90% { transform: rotate(-8deg); }
+}
+
+.title__hello {
+  position: absolute;
+  top: -16px;
+  left: -18px;
+  padding: 4px 9px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink);
+  background: var(--surface);
+  border: 3px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: 3px 3px 0 var(--shadow-hard);
+  transform-origin: bottom right;
+  animation: titleHello 2.8s ease-in-out infinite;
+}
+
+@keyframes titleHello {
+  0%, 54% { opacity: 0; transform: scale(0.6) translateY(6px); }
+  62%, 92% { opacity: 1; transform: scale(1) translateY(0); }
+  100% { opacity: 0; transform: scale(0.6) translateY(6px); }
 }
 
 .title__avatar img {
@@ -411,9 +477,12 @@
     justify-content: flex-start;
   }
 
+  .title__portrait {
+    margin-bottom: 12px;
+  }
+
   .title__avatar {
     width: clamp(80px, 11vh, 104px);
-    margin-bottom: 12px;
   }
 
   .title__name {
@@ -459,6 +528,13 @@
   .title__prompt,
   .title__key,
   .title__status-dot {
+    animation: none;
+  }
+
+  /* The hand rests raised and the "Hi!" bubble stays shown — the greeting is
+     still there, just not moving. */
+  .title__wave .px-icon,
+  .title__hello {
     animation: none;
   }
 }

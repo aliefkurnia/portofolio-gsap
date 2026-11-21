@@ -264,6 +264,26 @@ export const ICONS = {
       [10, 7, 2, 6],  // n — right stem
     ],
   },
+
+  /* ── Greeting ──
+     A raised hand: four fingers, a palm, a thumb bumping off the right, and a
+     short wrist. Meant to be rotated about its wrist for a wave. */
+  hand: {
+    viewBox: GRID,
+    rects: [
+      // four fingers
+      [4, 3, 1, 4],
+      [6, 2, 1, 5],
+      [8, 2, 1, 5],
+      [10, 3, 1, 4],
+      // palm
+      [3, 6, 9, 6],
+      // thumb
+      [11, 7, 2, 2],
+      // wrist
+      [5, 12, 5, 2],
+    ],
+  },
 };
 
 const PixelIcon = ({ name, size = 24, className = '', title, ...rest }) => {
