@@ -19,8 +19,8 @@ import './TitleScreen.css';
 
 const SOCIALS = [
   { key: 'email', icon: 'envelope', href: `mailto:${socialLinks.email}`, label: 'Email' },
-  { key: 'github', icon: 'code', href: socialLinks.github, label: 'GitHub' },
-  { key: 'linkedin', icon: 'link', href: socialLinks.linkedin, label: 'LinkedIn' },
+  { key: 'github', icon: 'github', href: socialLinks.github, label: 'GitHub' },
+  { key: 'linkedin', icon: 'linkedin', href: socialLinks.linkedin, label: 'LinkedIn' },
 ];
 
 const TitleScreen = ({ data, onStart }) => {
@@ -123,7 +123,7 @@ const TitleScreen = ({ data, onStart }) => {
                 title={s.label}
                 aria-label={s.label}
               >
-                <PixelIcon name={s.icon} size={15} />
+                <PixelIcon name={s.icon} size={20} />
               </a>
             ))}
             <span className="title__links-sep" aria-hidden="true" />

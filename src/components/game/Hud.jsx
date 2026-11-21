@@ -18,7 +18,7 @@ const Hud = ({ stage, index, total, onHome }) => {
     <header className="hud">
       <div className="hud__bar">
         <button className="hud__logo" onClick={onHome} title="Title screen">
-          alief<span className="hud__logo-dot">.</span>dev
+          alief<span className="hud__logo-dot">.</span>space
         </button>
 
         {/* Only a stage has anything to report. On the title screen this is

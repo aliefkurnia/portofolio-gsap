@@ -5,6 +5,7 @@ import TitleScreen from './TitleScreen';
 import Stage from './Stage';
 import { STAGES, getStage } from './screens';
 import { usePortfolioData } from '../../hooks/usePortfolioData';
+import AiAssistant from '../ui/AiAssistant';
 import './Game.css';
 
 /**
@@ -108,6 +109,8 @@ const Game = () => {
           <TitleScreen data={data} onStart={(key) => navigate(key, null)} />
         )}
       </div>
+
+      <AiAssistant />
     </div>
   );
 };

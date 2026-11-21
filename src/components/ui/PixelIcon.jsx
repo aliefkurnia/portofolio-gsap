@@ -234,6 +234,36 @@ export const ICONS = {
       [9, 2, 6, 2],
     ],
   },
+  /* GitHub — the Octocat silhouette: two ears, a round head, a body, and the
+     signature little tail curling off to the right. */
+  github: {
+    viewBox: GRID,
+    rects: [
+      [5, 1, 1, 1], [10, 1, 1, 1],
+      [4, 2, 2, 1], [10, 2, 2, 1],
+      [4, 3, 8, 1],
+      [3, 4, 10, 1],
+      [3, 5, 10, 1],
+      [3, 6, 10, 1],
+      [3, 7, 10, 1],
+      [4, 8, 8, 1],
+      [5, 9, 6, 1], [11, 9, 2, 1],
+      [5, 10, 6, 1], [12, 10, 1, 1],
+      [5, 11, 6, 1],
+      [5, 12, 2, 1], [9, 12, 2, 1],
+    ],
+  },
+  /* LinkedIn — the lowercase "in" wordmark. */
+  linkedin: {
+    viewBox: GRID,
+    rects: [
+      [2, 3, 2, 2],   // i — dot
+      [2, 7, 2, 6],   // i — stem
+      [6, 6, 6, 1],   // n — top bar
+      [6, 7, 2, 6],   // n — left stem
+      [10, 7, 2, 6],  // n — right stem
+    ],
+  },
 };
 
 const PixelIcon = ({ name, size = 24, className = '', title, ...rest }) => {

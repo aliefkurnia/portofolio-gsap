@@ -16,12 +16,12 @@ import './ProfileCard.css';
 const contacts = [
   { icon: 'envelope', value: socialLinks.email },
   {
-    icon: 'code',
+    icon: 'github',
     value: socialLinks.github.replace(/^https?:\/\//, '').replace(/\/$/, ''),
     href: socialLinks.github,
   },
   {
-    icon: 'link',
+    icon: 'linkedin',
     value: socialLinks.linkedin.replace(/^https?:\/\//, '').replace(/\/$/, ''),
     href: socialLinks.linkedin,
   },
