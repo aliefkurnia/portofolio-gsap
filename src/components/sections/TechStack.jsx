@@ -20,12 +20,18 @@ const TechStack = () => {
           {technologies.map((tech) => (
             <div className="techstack__tile" key={tech.id}>
               <div className="techstack__icon-box">
-                <img
-                  src={tech.icon_url}
-                  alt={tech.name}
-                  className="techstack__icon"
-                  loading="lazy"
-                />
+                {tech.icon_url ? (
+                  <img
+                    src={tech.icon_url}
+                    alt={tech.name}
+                    className="techstack__icon"
+                    loading="lazy"
+                  />
+                ) : (
+                  <span className="techstack__icon-fallback">
+                    {tech.name?.replace(/[^a-zA-Z0-9]/g, '').charAt(0).toUpperCase() || '?'}
+                  </span>
+                )}
               </div>
               <span className="techstack__name">{tech.name}</span>
             </div>
