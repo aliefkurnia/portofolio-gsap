@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { usePortfolioData } from "../hooks/usePortfolioData";
 import { Skeleton } from "../components/ui/Skeleton";
 import PixelIcon from "../components/ui/PixelIcon";
-import CvDocument from "./CvDocument";
 import "./PreviewCV.css";
 
 /**
@@ -11,19 +10,14 @@ import "./PreviewCV.css";
  *
  * Like the game shell, this is a single fixed screen — the header is pinned
  * at the top and the document gets the rest of the viewport, so the page
- * itself never scrolls. Scrolling happens inside whichever view is showing.
+ * itself never scrolls. Scrolling happens inside the embedded PDF.
  *
- * Two views, because they answer different questions. `card` renders the CV
- * from the live payload and is the one that looks like the rest of the site;
- * `pdf` shows the file that was actually authored and uploaded, which is the
- * one that is complete and correct to send to an employer. Neither is a
- * fallback for the other, so both stay one click apart.
+ * It shows the resume file that was actually authored and uploaded — the one
+ * that is complete and correct to send to an employer. Two files are kept one
+ * switch apart (Indonesian / English).
  */
 
-const VIEWS = [
-  { key: "card", label: "Card" },
-  { key: "pdf", label: "PDF" },
-];
+const LANGS = ["id", "en"];
 
 const CvSkeleton = () => (
   <div className="cv__viewer cv__viewer--skeleton px-panel">
@@ -50,8 +44,7 @@ const CvSkeleton = () => (
 
 const PreviewCV = () => {
   const [language, setLanguage] = useState("id");
-  const [view, setView] = useState("card");
-  const { settings, experiences, technologies, loading } = usePortfolioData();
+  const { settings, loading } = usePortfolioData();
   const navigate = useNavigate();
 
   const pdfPaths = {
@@ -71,35 +64,18 @@ const PreviewCV = () => {
           <span className="cv__title">Resume</span>
 
           <div className="cv__controls">
-            <div className="cv__seg" role="group" aria-label="View">
-              {VIEWS.map((v) => (
+            <div className="cv__seg" role="group" aria-label="Language">
+              {LANGS.map((code) => (
                 <button
-                  key={v.key}
-                  className={`cv__seg-btn ${view === v.key ? "cv__seg-btn--active" : ""}`}
-                  onClick={() => setView(v.key)}
-                  aria-pressed={view === v.key}
+                  key={code}
+                  className={`cv__seg-btn ${language === code ? "cv__seg-btn--active" : ""}`}
+                  onClick={() => setLanguage(code)}
+                  aria-pressed={language === code}
                 >
-                  {v.label}
+                  {code.toUpperCase()}
                 </button>
               ))}
             </div>
-
-            {/* The language switch picks between two uploaded files, so it
-                has nothing to do in the rendered view. */}
-            {view === "pdf" && (
-              <div className="cv__seg" role="group" aria-label="Language">
-                {["id", "en"].map((code) => (
-                  <button
-                    key={code}
-                    className={`cv__seg-btn ${language === code ? "cv__seg-btn--active" : ""}`}
-                    onClick={() => setLanguage(code)}
-                    aria-pressed={language === code}
-                  >
-                    {code.toUpperCase()}
-                  </button>
-                ))}
-              </div>
-            )}
           </div>
         </div>
       </header>
@@ -107,14 +83,6 @@ const PreviewCV = () => {
       <main className="cv__body">
         {loading ? (
           <CvSkeleton />
-        ) : view === "card" ? (
-          <div className="cv__paper">
-            <CvDocument
-              settings={settings}
-              experiences={experiences}
-              technologies={technologies}
-            />
-          </div>
         ) : pdfPaths[language] ? (
           <div className="cv__viewer px-panel">
             <iframe src={pdfPaths[language]} title="Resume" />

@@ -147,19 +147,6 @@
   background: #fff;
 }
 
-/* ─── Rendered CV ───
-   The paper is the scroller, not the page. The asymmetric padding is there to
-   clear the card's hard 6px shadow — without it the shadow would count as
-   overflow and raise a horizontal scrollbar. */
-.cv__paper {
-  width: 100%;
-  max-width: 960px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  overscroll-behavior: contain;
-  padding: 0 10px 12px 0;
-}
-
 /* ─── Skeleton state ─── */
 .cv__viewer--skeleton {
   display: flex;
@@ -227,9 +214,8 @@
   }
 }
 
-/* Small phones: the back button plus both switches (View + Language) can't
-   share one line, and the header clips overflow — so the language switch used
-   to slide off-screen. Let the bar wrap instead, and tighten the chrome. */
+/* Small phones: let the bar wrap rather than clip, so the language switch can
+   never slide off-screen, and tighten the chrome. */
 @media (max-width: 560px) {
   .cv__header {
     padding-left: 12px;
@@ -260,8 +246,8 @@
   }
 }
 
-/* Very narrow: give the controls their own full-width row and let the two
-   switches split it evenly, so neither can ever run past the edge. */
+/* Very narrow: give the controls their own full-width row so the switch can
+   never run past the edge. */
 @media (max-width: 400px) {
   .cv__controls {
     width: 100%;

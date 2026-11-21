@@ -677,7 +677,7 @@ function SettingsPanel({ settings, uploadImage, onSaved }) {
     <div className="settings-panel">
       <div className="settings-section">
         <h3>Hero Photo</h3>
-        <p className="settings-desc">Photo displayed in the About section</p>
+        <p className="settings-desc">Your portrait, shown on the title screen</p>
         {heroPhoto && <img src={heroPhoto} alt="Hero" className="settings-preview" />}
         <input type="file" accept="image/*" onChange={handlePhotoUpload} />
       </div>
@@ -706,7 +706,7 @@ function SettingsPanel({ settings, uploadImage, onSaved }) {
 
       <div className="settings-section">
         <h3>About Bio</h3>
-        <p className="settings-desc">Your bio paragraph, shown on the Resume / CV</p>
+        <p className="settings-desc">A short bio about you — used to ground the AI assistant</p>
         <textarea
           className="settings-textarea"
           value={aboutBio}
