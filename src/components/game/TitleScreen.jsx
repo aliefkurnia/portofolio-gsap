@@ -58,6 +58,16 @@ const TitleScreen = ({ data, onStart }) => {
         <span className="shell__cloud shell__cloud--3" />
       </div>
 
+      {/* The ground beneath the sky: distant hills for depth and a pixel grass
+          line the title card stands on, so the screen reads as a spot on a
+          world map rather than a page. */}
+      <div className="world__scene" aria-hidden="true">
+        <span className="world__hill world__hill--far" />
+        <span className="world__hill world__hill--mid" />
+        <span className="world__hill world__hill--near" />
+        <span className="world__ground" />
+      </div>
+
       <div className="title">
         <div className="title__stack px-panel">
           <div className="title__portrait">

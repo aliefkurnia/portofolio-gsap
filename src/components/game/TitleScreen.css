@@ -16,6 +16,66 @@
   overflow: hidden;
 }
 
+/* ─── Scene: ground & hills ───
+   A shallow world sits under the sky. Three hills recede into the distance
+   (lighter and softer the farther back they are), and a grass-topped ground
+   band runs along the bottom; the title card overlaps its top edge, so the
+   card reads as standing on the ground rather than floating. */
+.world__scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.world__ground {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: clamp(64px, 10vh, 120px);
+  background: linear-gradient(
+    var(--up) 0,
+    var(--up) 7px,
+    var(--bg-alt) 7px
+  );
+  border-top: 4px solid var(--outline);
+}
+
+.world__hill {
+  position: absolute;
+  bottom: clamp(54px, 8.6vh, 108px);
+  background: var(--bg-alt);
+  border-radius: 50% 50% 0 0;
+}
+
+/* Farthest back: small, pale, no outline — reads as haze on the horizon. It
+   sits to the right, peeking out behind the mid hill. */
+.world__hill--far {
+  right: 12%;
+  width: clamp(160px, 26vw, 320px);
+  height: clamp(50px, 8vh, 104px);
+  opacity: 0.42;
+}
+
+.world__hill--mid {
+  right: -3%;
+  width: clamp(150px, 25vw, 300px);
+  height: clamp(56px, 8.6vh, 112px);
+  opacity: 0.62;
+}
+
+/* Nearest: full tone and a crisp outline, so it sits in front — the bold hill
+   rising through the left gutter. */
+.world__hill--near {
+  left: -6%;
+  width: clamp(230px, 38vw, 440px);
+  height: clamp(74px, 11.5vh, 156px);
+  border: 4px solid var(--outline);
+  border-bottom: none;
+}
+
 .title {
   position: relative;
   z-index: 1;
