@@ -684,7 +684,7 @@ function SettingsPanel({ settings, uploadImage, onSaved }) {
 
       <div className="settings-section">
         <h3>Job Title</h3>
-        <p className="settings-desc">Subtitle shown below your name in the hero section</p>
+        <p className="settings-desc">Shown as your role on the title screen and CV</p>
         <input
           type="text"
           value={jobTitle}
@@ -695,7 +695,7 @@ function SettingsPanel({ settings, uploadImage, onSaved }) {
 
       <div className="settings-section">
         <h3>About Headline</h3>
-        <p className="settings-desc">Short headline in the About section</p>
+        <p className="settings-desc">Tagline shown under your name on the title screen</p>
         <input
           type="text"
           value={aboutHeadline}
@@ -706,7 +706,7 @@ function SettingsPanel({ settings, uploadImage, onSaved }) {
 
       <div className="settings-section">
         <h3>About Bio</h3>
-        <p className="settings-desc">Your bio paragraph in the About section</p>
+        <p className="settings-desc">Your bio paragraph, shown on the Resume / CV</p>
         <textarea
           className="settings-textarea"
           value={aboutBio}

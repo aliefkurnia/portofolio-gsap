@@ -59,7 +59,7 @@ const TitleScreen = ({ data, onStart }) => {
       </div>
 
       <div className="title">
-        <div className="title__stack">
+        <div className="title__stack px-panel">
           <div className="title__avatar">
             {photo ? (
               <img src={photo} alt="Muchammad Alief Kurnia Wijaya" />
@@ -77,7 +77,7 @@ const TitleScreen = ({ data, onStart }) => {
 
           <h1 className="title__name px-title">Alief Kurnia</h1>
 
-          <p className="title__tagline">{aboutText.headline}</p>
+          <p className="title__tagline">{data.settings.about_headline || aboutText.headline}</p>
 
           <p className="title__meta">
             <span className="title__status">
@@ -101,15 +101,22 @@ const TitleScreen = ({ data, onStart }) => {
             start
           </button>
 
-          {/* Contents, not a stage-select: numbered, quiet, no hover state. */}
-          <ol className="title__stages" aria-label="Stages, in order">
+          {/* Stage select: each entry jumps straight into that screen, so the
+              numbered strip doubles as a menu, not just a table of contents. */}
+          <div className="title__stages" role="menu" aria-label="Jump to a stage">
             {stages.map((stage, i) => (
-              <li className="title__stage" key={stage.key}>
+              <button
+                type="button"
+                className="title__stage"
+                role="menuitem"
+                key={stage.key}
+                onClick={() => onStart(stage.key)}
+              >
                 <span className="title__stage-num">{String(i + 1).padStart(2, '0')}</span>
                 <span className="title__stage-name">{stage.label}</span>
-              </li>
+              </button>
             ))}
-          </ol>
+          </div>
 
           {/* Contacts, and the two routes that leave the shell. */}
           <nav className="title__links" aria-label="Contact and links">

@@ -30,20 +30,24 @@
   overscroll-behavior: contain;
 }
 
+/* The whole title sits inside a pixel panel (px-panel) so it reads as a
+   contained "game screen" — a cartridge inserted into the shell — rather than
+   loose type floating over the clouds. */
 .title__stack {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   width: 100%;
-  max-width: 640px;
+  max-width: 760px;
+  padding: clamp(26px, 3.4vh, 44px) clamp(28px, 4vw, 60px);
 }
 
 /* ─── Avatar ───
    A square framed portrait, not a bio card. Sized off the viewport height so
    it is the first thing to shrink on a short window. */
 .title__avatar {
-  width: clamp(96px, 13vh, 132px);
+  width: clamp(120px, 16vh, 176px);
   aspect-ratio: 1 / 1;
   display: grid;
   place-items: center;
@@ -95,7 +99,7 @@
    once the type is small. In `em` it holds its proportion at every size. The
    2px outline stays fixed: that is an outline, not depth. */
 .title__name {
-  font-size: clamp(1.8rem, 6vw, 3.3rem);
+  font-size: clamp(2.3rem, 7.2vw, 4.6rem);
   text-shadow:
     -2px -2px 0 var(--outline),
      2px -2px 0 var(--outline),
@@ -181,40 +185,67 @@
   outline-offset: 4px;
 }
 
-/* ─── Contents ───
-   Numbered rows laid out as one centred strip. Muted and inert — no card
-   chrome, no hover, no pointer — so it reads as a table of contents rather
-   than a second set of buttons. */
+/* ─── Stage select ───
+   Numbered entries laid out as one centred strip. Each is a button that jumps
+   straight into that screen, so the strip doubles as a menu: muted at rest,
+   but it lifts and lights its number on hover to show it is live. */
 .title__stages {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 9px 20px;
+  gap: 8px 10px;
   width: 100%;
   max-width: 560px;
   margin-top: clamp(16px, 2.2vh, 26px);
-  padding-top: clamp(12px, 1.6vh, 18px);
+  padding-top: clamp(14px, 1.8vh, 20px);
   border-top: 3px solid var(--outline-soft);
-  list-style: none;
 }
 
 .title__stage {
   display: inline-flex;
   align-items: center;
   gap: 7px;
+  padding: 6px 11px;
   font-family: var(--font-display);
   font-size: 11.5px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: var(--tracking-wide);
   color: var(--ink);
+  background: transparent;
+  border: 3px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.title__stage:hover {
+  background: var(--surface-2);
+  border-color: var(--outline);
+  transform: translateY(-2px);
+}
+
+.title__stage:hover .title__stage-num {
+  color: var(--accent);
+}
+
+.title__stage:active {
+  transform: translateY(1px);
+}
+
+.title__stage:focus-visible {
+  outline: 3px solid var(--outline);
+  outline-offset: 2px;
 }
 
 .title__stage-num {
   font-size: 10px;
   letter-spacing: var(--tracking-wider);
   color: var(--ink-3);
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
 /* ─── Contacts & elsewhere ───
@@ -394,13 +425,26 @@
   }
 }
 
+@media (max-width: 560px) {
+  .title__stack {
+    padding: 22px 16px;
+  }
+
+  /* The frame eats a little width, so the wordmark steps down to stay on one
+     line inside it. */
+  .title__name {
+    font-size: clamp(1.8rem, 9vw, 2.8rem);
+  }
+}
+
 @media (max-width: 480px) {
   .title__stages {
-    gap: 8px 14px;
+    gap: 8px;
   }
 
   .title__stage {
     font-size: 11px;
+    padding: 5px 9px;
   }
 }
 
@@ -416,5 +460,14 @@
   .title__key,
   .title__status-dot {
     animation: none;
+  }
+}
+
+/* Mobile has no keyboard, so drop the "press enter" prompt (START is the real
+   action) and free the vertical room. */
+@media (max-width: 560px) {
+  .title__prompt,
+  .title__hint {
+    display: none;
   }
 }
